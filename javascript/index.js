@@ -85,6 +85,38 @@ vennButtons.forEach((button) => {
   });
 });
 
+const videos = [...document.querySelectorAll('[data-scroll-video]')];
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    const video = entry.target;
+    if (!entry.isIntersecting || entry.intersectionRatio < 0.35) {
+      video.pause();
+      return;
+    }
+
+    const tryPlay = () => {
+      video.muted = true;
+      video.playsInline = true;
+      video.play().catch(() => {
+        video.dataset.autoplayBlocked = 'true';
+      });
+    };
+
+    if (video.readyState >= 1) {
+      tryPlay();
+    } else {
+      video.addEventListener('loadeddata', tryPlay, { once: true });
+    }
+  });
+}, { threshold: [0.2, 0.35, 0.6] });
+
+videos.forEach((video) => {
+  video.playsInline = true;
+  video.muted = true;
+  video.loop = true;
+  videoObserver.observe(video);
+});
+
 const questions = [...document.querySelectorAll('.question-list__item')];
 questions.forEach((question) => {
   question.addEventListener('click', () => {

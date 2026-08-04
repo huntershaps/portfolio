@@ -95,12 +95,12 @@ h1,h2,h3,p { margin-top:0; }
     position: absolute;
     z-index: 2;
     display: flex;
-    width: 15rem;
-    height: 15rem;
+    width: 14.5rem;
+    height: 14.5rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--ink);
+    border: 1px solid rgba(21, 23, 42, .72);
     border-radius: 50%;
     padding: 1.4rem;
     background: rgba(247, 241, 230, .55);
@@ -137,19 +137,19 @@ h1,h2,h3,p { margin-top:0; }
 
 .venn__circle--psychology {
     top: 0;
-    left: 0;
+    left: 1rem;
     background: rgba(241, 119, 93, .3);
 }
 
 .venn__circle--computing {
     top: 0;
-    right: 0;
+    right: 1rem;
     left: auto;
     background: rgba(89, 113, 255, .28);
 }
 
 .venn__circle--interaction {
-    top: 10rem;
+    top: 8.8rem;
     left: 50%;
     transform: translateX(-50%);
     background: rgba(216, 255, 89, .48);
@@ -164,7 +164,7 @@ h1,h2,h3,p { margin-top:0; }
 .venn__center {
     position: absolute;
     z-index: 3;
-    top: 10rem;
+    top: 8.8rem;
     left: 50%;
     display: grid;
     width: 6.5rem;
@@ -173,12 +173,14 @@ h1,h2,h3,p { margin-top:0; }
     border: 1px solid rgba(21, 23, 42, .3);
     border-radius: 50%;
     background: var(--paper);
+    background: rgba(247, 241, 230, .45);
     color: var(--ink);
     font-family: Georgia, serif;
     font-size: .85rem;
     font-style: italic;
     line-height: 1.05;
     text-align: center;
+    backdrop-filter: blur(4px);
     box-shadow: 0 .4rem 1.1rem rgba(21, 23, 42, .18);
     transform: translate(-50%, -50%);
 }
@@ -186,7 +188,7 @@ h1,h2,h3,p { margin-top:0; }
 .venn__response {
     position: relative;
     width: min(20rem, 100%);
-    margin: 26rem auto 0;
+    margin: 19.5rem auto 0;
     padding: 1rem 1.1rem;
     border: 1px solid var(--rule);
     background: rgba(247, 241, 230, .82);
@@ -228,6 +230,7 @@ h1,h2,h3,p { margin-top:0; }
   .section-shell { padding:5rem 1.5rem; }.signal__layout,.methods__intro,.contact__layout { grid-template-columns:1fr; gap:2.2rem; }.signal__annotation { font-size:.98rem; }.signal__diagram { min-height:23rem; margin:4rem .2rem 0; }.signal__point--one { top:20%; left:8%; }.signal__point--two { right:7%; bottom:18%; }.signal__point--three { top:18%; right:8%; }.signal__point--focus { bottom:16%; left:8%; }.signal__axis--y { left:-1.5rem; }.signal__diagram-note { max-width:8rem; font-size:.8rem; }
   .work__heading { grid-template-columns:1fr; }.work__heading > p:last-child { margin-top:1.4rem; }.case-study,.case-study--recrd { grid-template-columns:1fr; gap:2.5rem; }.case-study--recrd .case-study__details { grid-column:auto; grid-row:auto; }.case-study__details div { grid-template-columns:5.7rem 1fr; }.mahou-archive { min-height:22rem; }.case-study h3 { font-size:clamp(3.7rem,18vw,6rem); }.case-study--recrd .recrd-window { grid-row:2; }.case-study--recrd .case-study__details { grid-row:3; }
   .method-ledger__row { grid-template-columns:2.2rem 1fr; gap:.4rem 1rem; padding:1.25rem 0; }.method-ledger__row p { grid-column:2; }.method-ledger__row:hover { padding-left:.5rem; }.methods__ticker { margin-top:5rem; font-size:2.4rem; }.contact__form { padding:1.1rem; }.site-footer { flex-direction:column; }
+  .venn { min-height:30rem; margin-top:3.5rem; }.venn__circle { width:min(59vw,13rem); height:min(59vw,13rem); padding:1.2rem; }.venn__circle span { font-size:1.7rem; }.venn__circle small { font-size:.47rem; }.venn__circle--psychology { top:0; left:2%; }.venn__circle--computing { top:0; right:2%; left:auto; }.venn__circle--interaction { top:8rem; left:50%; transform:translateX(-50%); }.venn__circle--interaction:hover,.venn__circle--interaction:focus-visible,.venn__circle--interaction.is-selected { transform:translateX(-50%) translateY(-.35rem); }.venn__center { top:8rem; width:6.2rem; height:6.2rem; font-size:.8rem; }.venn__response { width:100%; margin:14rem auto 0; padding:1rem 0 0; border-top:1px solid var(--rule); border:0; background:transparent; backdrop-filter:none; }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } [data-reveal] { opacity:1; transform:none; } }
 

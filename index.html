@@ -3,187 +3,663 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Hunter Shapiro explores psychology, computer science, and human-centered technology." />
+    <meta
+      name="description"
+      content="Hunter Shapiro explores psychology, computer science, and human-centered technology."
+    />
     <meta property="og:title" content="Hunter Shapiro — Psychology and Technology" />
-    <meta property="og:description" content="A portfolio exploring people, systems, and the technology between them." />
+    <meta
+      property="og:description"
+      content="A portfolio exploring people, systems, and the technology between them."
+    />
     <title>Hunter Shapiro — Psychology and Technology</title>
+
     <link rel="shortcut icon" href="./assets/images/portfolio_icon.png" />
     <link rel="stylesheet" href="./styles/styles.css" />
     <script type="module" src="./javascript/index.js"></script>
   </head>
+
   <body>
     <a class="skip-link" href="#start">Skip to content</a>
 
-    <button class="system-toggle" type="button" aria-expanded="false" aria-controls="system-nav">
+    <button
+      class="system-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="system-nav"
+    >
       <span class="system-toggle__mark" aria-hidden="true"></span>
       <span class="system-toggle__label">Index</span>
     </button>
 
     <aside class="system-nav" id="system-nav" aria-label="Portfolio navigation">
-      <a class="system-nav__identity" href="#start" aria-label="Hunter Shapiro, return to start">
+      <a
+        class="system-nav__identity"
+        href="#start"
+        aria-label="Hunter Shapiro, return to start"
+      >
         <span>H<span class="system-nav__thin">S</span></span>
       </a>
+
       <div class="system-nav__rule" aria-hidden="true"></div>
+
       <nav>
-        <a class="system-nav__link is-current" href="#start"><span>00</span>Start</a>
-        <a class="system-nav__link" href="#perspective"><span>01</span>Perspective</a>
-        <a class="system-nav__link" href="#work"><span>02</span>Fieldwork</a>
-        <a class="system-nav__link" href="#methods"><span>03</span>Toolkit</a>
-        <a class="system-nav__link" href="#explore"><span>04</span>Questions</a>
-        <a class="system-nav__link" href="#contact"><span>05</span>Connect</a>
+        <a class="system-nav__link is-current" href="#start">
+          <span>00</span>Start
+        </a>
+        <a class="system-nav__link" href="#perspective">
+          <span>01</span>Perspective
+        </a>
+        <a class="system-nav__link" href="#work">
+          <span>02</span>Fieldwork
+        </a>
+        <a class="system-nav__link" href="#methods">
+          <span>03</span>Toolkit
+        </a>
+        <a class="system-nav__link" href="#explore">
+          <span>04</span>Questions
+        </a>
+        <a class="system-nav__link" href="#contact">
+          <span>05</span>Connect
+        </a>
       </nav>
+
       <div class="system-nav__external">
-        <a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
-        <a href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-        <a href="./assets/cv.pdf" target="_blank" rel="noopener noreferrer">Resume <span aria-hidden="true">↗</span></a>
+        <a
+          href="https://github.com/huntershaps"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub <span aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn <span aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          href="./assets/cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Resume <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </aside>
 
     <main>
+      <!-- =====================================================
+           START
+           ===================================================== -->
+
       <section class="opening" id="start" aria-labelledby="opening-title">
         <div class="opening__grain" aria-hidden="true"></div>
+
         <div class="opening__title-wrap">
           <h1 class="opening__title" id="opening-title">
             <span data-reveal>HUNTER</span>
             <span class="opening__title-accent" data-reveal>SHAPIRO</span>
           </h1>
+
           <p class="opening__statement" data-reveal>
-            I study <em>psychology and computer science</em> because I care about both sides of technology:
-            the people using it and the systems being built.
+            I study <em>psychology and computer science</em> because I care
+            about both sides of technology: the people using it and the
+            systems being built.
           </p>
         </div>
 
-        <div class="opening__relationship" data-reveal aria-label="The relationship between understanding people and building technology">
-          <button class="identity-pole is-selected" type="button" data-opening-thought="people" aria-pressed="true"><span>Understanding</span><strong>people</strong></button>
+        <div
+          class="opening__relationship"
+          data-reveal
+          aria-label="The relationship between understanding people and building technology"
+        >
+          <button
+            class="identity-pole is-selected"
+            type="button"
+            data-opening-thought="people"
+            aria-pressed="true"
+          >
+            <span>Understanding</span>
+            <strong>people</strong>
+          </button>
+
           <span class="opening__connector" aria-hidden="true">&amp;</span>
-          <button class="identity-pole" type="button" data-opening-thought="technology" aria-pressed="false"><span>Building</span><strong>technology</strong></button>
-          <p class="opening__response" aria-live="polite">Psychology gives me a way to notice the decisions, expectations, and mental models behind an interaction.</p>
+
+          <button
+            class="identity-pole"
+            type="button"
+            data-opening-thought="technology"
+            aria-pressed="false"
+          >
+            <span>Building</span>
+            <strong>technology</strong>
+          </button>
+
+          <p class="opening__response" aria-live="polite">
+            Psychology gives me a way to notice the decisions, expectations,
+            and mental models behind an interaction.
+          </p>
         </div>
 
-        <a class="scroll-prompt" href="#perspective"><span class="scroll-prompt__line" aria-hidden="true"></span>See how I think</a>
+        <a class="scroll-prompt" href="#perspective">
+          <span class="scroll-prompt__line" aria-hidden="true"></span>
+          See how I think
+        </a>
       </section>
 
-      <section class="perspective section-shell" id="perspective" aria-labelledby="perspective-title">
+      <!-- =====================================================
+           PERSPECTIVE
+           ===================================================== -->
+
+      <section
+        class="perspective section-shell"
+        id="perspective"
+        aria-labelledby="perspective-title"
+      >
         <div class="perspective__intro">
           <div data-reveal>
             <p class="section-number">01</p>
-            <h2 id="perspective-title">I want to understand<br /><em>both sides.</em></h2>
+
+            <h2 id="perspective-title">
+              I want to understand<br />
+              <em>both sides.</em>
+            </h2>
           </div>
-          <p class="perspective__copy" data-reveal>People bring expectations, habits, and goals to technology. Software brings structure, possibility, and constraints. I am interested in the space where those two things meet.</p>
+
+          <p class="perspective__copy" data-reveal>
+            People bring expectations, habits, and goals to technology.
+            Software brings structure, possibility, and constraints. I am
+            interested in the space where those two things meet.
+          </p>
         </div>
-        <div class="venn" data-reveal aria-label="An interactive Venn diagram showing Hunter's areas of interest">
-          <button class="venn__circle venn__circle--psychology is-selected" type="button" data-venn="psychology" aria-pressed="true"><span>Psychology</span><small>people &amp; behavior</small></button>
-          <button class="venn__circle venn__circle--computing" type="button" data-venn="computing" aria-pressed="false"><span>Computer<br />science</span><small>systems &amp; building</small></button>
-          <button class="venn__circle venn__circle--interaction" type="button" data-venn="interaction" aria-pressed="false"><span>Human<br />interaction</span><small>how it feels to use</small></button>
-          <div class="venn__center"><span>What I am<br />drawn to</span></div>
-          <div class="venn__response" aria-live="polite"><strong>Psychology</strong><p>How people learn, make sense of choices, and form expectations around an experience.</p></div>
+
+        <!-- =================================================
+             VENN DIAGRAM
+
+             Psychology + Computer Science
+                         ↓
+                 Human Interaction
+             ================================================= -->
+
+        <div
+          class="venn"
+          data-reveal
+          aria-label="An interactive Venn diagram showing Hunter's areas of interest"
+        >
+          <button
+            class="venn__circle venn__circle--psychology is-selected"
+            type="button"
+            data-venn="psychology"
+            aria-pressed="true"
+          >
+            <span>Psychology</span>
+            <small>people &amp; behavior</small>
+          </button>
+
+          <button
+            class="venn__circle venn__circle--computing"
+            type="button"
+            data-venn="computing"
+            aria-pressed="false"
+          >
+            <span>
+              Computer<br />
+              science
+            </span>
+            <small>systems &amp; building</small>
+          </button>
+
+          <button
+            class="venn__circle venn__circle--interaction"
+            type="button"
+            data-venn="interaction"
+            aria-pressed="false"
+          >
+            <span>
+              Human<br />
+              interaction
+            </span>
+            <small>how it feels to use</small>
+          </button>
+
+          <div class="venn__response" aria-live="polite">
+            <strong>Psychology</strong>
+
+            <p>
+              How people learn, make sense of choices, and form expectations
+              around an experience.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section class="work section-shell" id="work" aria-labelledby="work-title">
+      <!-- =====================================================
+           WORK
+           ===================================================== -->
+
+      <section
+        class="work section-shell"
+        id="work"
+        aria-labelledby="work-title"
+      >
         <div class="work__heading" data-reveal>
           <p class="section-number">02</p>
-          <h2 id="work-title">WHAT I<br /><em>BUILD</em></h2>
-          <p>Projects give me a way to turn a question into something people can actually use.</p>
+
+          <h2 id="work-title">
+            WHAT I<br />
+            <em>BUILD</em>
+          </h2>
+
+          <p>
+            Projects give me a way to turn a question into something people
+            can actually use.
+          </p>
         </div>
+
+        <!-- MAHOU -->
 
         <article class="case-study case-study--mahou" data-reveal>
           <div class="case-study__index" aria-hidden="true">01</div>
+
           <div class="case-study__masthead">
-            <h3>Mahou<br /><em>Learning</em></h3>
-            <p class="case-study__summary">A Japanese language learning experience centered on practice, progress, and the small moments that help studying feel rewarding.</p>
+            <h3>
+              Mahou<br />
+              <em>Learning</em>
+            </h3>
+
+            <p class="case-study__summary">
+              A Japanese language learning experience centered on practice,
+              progress, and the small moments that help studying feel
+              rewarding.
+            </p>
           </div>
+
           <div class="mahou-preview">
-            <div class="mahou-preview__bar"><span></span><span></span><span></span><p>Mahou Learning / app preview</p></div>
-            <video data-scroll-video muted loop playsinline controls preload="auto" poster="./assets/images/mahou/mahou_home.png" aria-label="Mahou Learning application preview">
-              <source src="./assets/videos/mahou_preview.mp4" type="video/mp4" />
+            <div class="mahou-preview__bar">
+              <span></span>
+              <span></span>
+              <span></span>
+              <p>Mahou Learning / app preview</p>
+            </div>
+
+            <video
+              data-scroll-video
+              muted
+              loop
+              playsinline
+              controls
+              preload="auto"
+              poster="./assets/images/mahou/mahou_home.png"
+              aria-label="Mahou Learning application preview"
+            >
+              <source
+                src="./assets/videos/mahou_preview.mp4"
+                type="video/mp4"
+              />
+
               Your browser does not support the Mahou Learning preview video.
             </video>
           </div>
+
           <div class="case-study__details">
             <dl>
-              <div><dt>The idea</dt><dd>Japanese language learning that makes practice feel approachable.</dd></div>
-              <div><dt>What I built</dt><dd>A learning interface focused on usability and engagement.</dd></div>
-              <div><dt>How I approached it</dt><dd>UI/UX, gamification, and interactive learning.</dd></div>
-              <div><dt>What I am exploring</dt><dd>How a learning interface can support retention and ease of use.</dd></div>
+              <div>
+                <dt>The idea</dt>
+                <dd>
+                  Japanese language learning that makes practice feel
+                  approachable.
+                </dd>
+              </div>
+
+              <div>
+                <dt>What I built</dt>
+                <dd>
+                  A learning interface focused on usability and engagement.
+                </dd>
+              </div>
+
+              <div>
+                <dt>How I approached it</dt>
+                <dd>
+                  UI/UX, gamification, and interactive learning.
+                </dd>
+              </div>
+
+              <div>
+                <dt>What I am exploring</dt>
+                <dd>
+                  How a learning interface can support retention and ease of
+                  use.
+                </dd>
+              </div>
             </dl>
           </div>
         </article>
+
+        <!-- RECRD -->
 
         <article class="case-study case-study--recrd" data-reveal>
           <div class="case-study__index" aria-hidden="true">02</div>
+
           <div class="case-study__masthead">
-            <h3>RECRD.<br /><em>TOP</em></h3>
-            <p class="case-study__summary">A social experience explored through wireframes and interactive prototypes, with attention to interaction and engagement.</p>
-            <a class="case-study__link" href="https://recrd.top" target="_blank" rel="noopener noreferrer">Visit project <span aria-hidden="true">↗</span></a>
+            <h3>
+              RECRD.<br />
+              <em>TOP</em>
+            </h3>
+
+            <p class="case-study__summary">
+              A social experience explored through wireframes and interactive
+              prototypes, with attention to interaction and engagement.
+            </p>
+
+            <a
+              class="case-study__link"
+              href="https://recrd.top"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Visit project <span aria-hidden="true">↗</span>
+            </a>
           </div>
+
           <div class="recrd-window">
-            <div class="recrd-window__bar"><span></span><span></span><span></span><p>recrd.top / preview</p></div>
-            <video data-scroll-video muted loop playsinline controls preload="auto" aria-label="RECRD.TOP project preview">
-              <source src="./assets/videos/recrd_demo.mp4" type="video/mp4" />
+            <div class="recrd-window__bar">
+              <span></span>
+              <span></span>
+              <span></span>
+              <p>recrd.top / preview</p>
+            </div>
+
+            <video
+              data-scroll-video
+              muted
+              loop
+              playsinline
+              controls
+              preload="auto"
+              aria-label="RECRD.TOP project preview"
+            >
+              <source
+                src="./assets/videos/recrd_demo.mp4"
+                type="video/mp4"
+              />
+
               Your browser does not support the project preview video.
             </video>
           </div>
+
           <div class="case-study__details">
             <dl>
-              <div><dt>Role</dt><dd>Designed wireframes and interactive prototypes</dd></div>
-              <div><dt>Focus</dt><dd>Social interaction and user engagement</dd></div>
-              <div><dt>Tools</dt><dd>Figma, wireframing, prototyping</dd></div>
+              <div>
+                <dt>Role</dt>
+                <dd>Designed wireframes and interactive prototypes</dd>
+              </div>
+
+              <div>
+                <dt>Focus</dt>
+                <dd>Social interaction and user engagement</dd>
+              </div>
+
+              <div>
+                <dt>Tools</dt>
+                <dd>Figma, wireframing, prototyping</dd>
+              </div>
             </dl>
           </div>
         </article>
       </section>
 
-      <section class="methods section-shell" id="methods" aria-labelledby="methods-title">
+      <!-- =====================================================
+           METHODS
+           ===================================================== -->
+
+      <section
+        class="methods section-shell"
+        id="methods"
+        aria-labelledby="methods-title"
+      >
         <div class="methods__intro" data-reveal>
-          <div><p class="section-number">03</p><h2 id="methods-title">A practice of<br /><em>translation.</em></h2></div>
-          <p>Turning observations into interaction, and interaction into useful systems.</p>
+          <div>
+            <p class="section-number">03</p>
+
+            <h2 id="methods-title">
+              A practice of<br />
+              <em>translation.</em>
+            </h2>
+          </div>
+
+          <p>
+            Turning observations into interaction, and interaction into useful
+            systems.
+          </p>
         </div>
+
         <div class="method-ledger" data-reveal>
-          <div class="method-ledger__row"><span>01</span><h3>Design &amp; UX/UI</h3><p>Figma · Wireframing · Prototyping · User research · Usability testing · Accessibility testing</p></div>
-          <div class="method-ledger__row"><span>02</span><h3>Technical</h3><p>Java · Python · C · SQL</p></div>
-          <div class="method-ledger__row"><span>03</span><h3>Working tools</h3><p>Microsoft Office Suite · Social media platforms</p></div>
+          <div class="method-ledger__row">
+            <span>01</span>
+            <h3>Design &amp; UX/UI</h3>
+            <p>
+              Figma · Wireframing · Prototyping · User research · Usability
+              testing · Accessibility testing
+            </p>
+          </div>
+
+          <div class="method-ledger__row">
+            <span>02</span>
+            <h3>Technical</h3>
+            <p>Java · Python · C · SQL</p>
+          </div>
+
+          <div class="method-ledger__row">
+            <span>03</span>
+            <h3>Working tools</h3>
+            <p>Microsoft Office Suite · Social media platforms</p>
+          </div>
         </div>
-        <div class="methods__ticker" aria-label="Areas of interest"><span>PSYCHOLOGY</span><span>COMPUTER SCIENCE</span><span>AI</span><span>HCI</span><span>DESIGN</span><span>TECHNOLOGY</span></div>
+
+        <div class="methods__ticker" aria-label="Areas of interest">
+          <span>PSYCHOLOGY</span>
+          <span>COMPUTER SCIENCE</span>
+          <span>AI</span>
+          <span>HCI</span>
+          <span>DESIGN</span>
+          <span>TECHNOLOGY</span>
+        </div>
       </section>
 
-      <section class="explore section-shell" id="explore" aria-labelledby="explore-title">
+      <!-- =====================================================
+           QUESTIONS
+           ===================================================== -->
+
+      <section
+        class="explore section-shell"
+        id="explore"
+        aria-labelledby="explore-title"
+      >
         <div class="explore__heading" data-reveal>
-          <div><p class="section-number">04</p><h2 id="explore-title">QUESTIONS I<br /><em>KEEP COMING BACK TO.</em></h2></div>
-          <p>These are the things I am curious about, not problems I claim to have solved.</p>
+          <div>
+            <p class="section-number">04</p>
+
+            <h2 id="explore-title">
+              QUESTIONS I<br />
+              <em>KEEP COMING BACK TO.</em>
+            </h2>
+          </div>
+
+          <p>
+            These are the things I am curious about, not problems I claim to
+            have solved.
+          </p>
         </div>
+
         <div class="question-list" data-reveal>
-          <button class="question-list__item is-open" type="button" aria-expanded="true"><span>01</span><strong>What makes a learning interface actually engaging?</strong><small>Mahou Learning sits inside this question.</small></button>
-          <button class="question-list__item" type="button" aria-expanded="false"><span>02</span><strong>How do people build mental models of complex systems?</strong><small>I am interested in the moments when a system starts to make sense.</small></button>
-          <button class="question-list__item" type="button" aria-expanded="false"><span>03</span><strong>How should AI adapt to the way humans think?</strong><small>A question about technology, behavior, and responsibility.</small></button>
-          <button class="question-list__item" type="button" aria-expanded="false"><span>04</span><strong>What makes an interaction feel clear, not just functional?</strong><small>Where interface decisions meet real human expectations.</small></button>
+          <button
+            class="question-list__item is-open"
+            type="button"
+            aria-expanded="true"
+          >
+            <span>01</span>
+
+            <strong>
+              What makes a learning interface actually engaging?
+            </strong>
+
+            <small>
+              Mahou Learning sits inside this question.
+            </small>
+          </button>
+
+          <button
+            class="question-list__item"
+            type="button"
+            aria-expanded="false"
+          >
+            <span>02</span>
+
+            <strong>
+              How do people build mental models of complex systems?
+            </strong>
+
+            <small>
+              I am interested in the moments when a system starts to make
+              sense.
+            </small>
+          </button>
+
+          <button
+            class="question-list__item"
+            type="button"
+            aria-expanded="false"
+          >
+            <span>03</span>
+
+            <strong>
+              How should AI adapt to the way humans think?
+            </strong>
+
+            <small>
+              A question about technology, behavior, and responsibility.
+            </small>
+          </button>
+
+          <button
+            class="question-list__item"
+            type="button"
+            aria-expanded="false"
+          >
+            <span>04</span>
+
+            <strong>
+              What makes an interaction feel clear, not just functional?
+            </strong>
+
+            <small>
+              Where interface decisions meet real human expectations.
+            </small>
+          </button>
         </div>
       </section>
 
-      <section class="contact section-shell" id="contact" aria-labelledby="contact-title">
+      <!-- =====================================================
+           CONTACT
+           ===================================================== -->
+
+      <section
+        class="contact section-shell"
+        id="contact"
+        aria-labelledby="contact-title"
+      >
         <div class="contact__layout">
           <div data-reveal>
             <p class="section-number section-number--light">05</p>
-            <h2 id="contact-title">LET’S<br /><em>TALK.</em></h2>
-            <p class="contact__invitation">If you are thinking about people, technology, or a project where the two meet, I would love to hear from you.</p>
+
+            <h2 id="contact-title">
+              LET’S<br />
+              <em>TALK.</em>
+            </h2>
+
+            <p class="contact__invitation">
+              If you are thinking about people, technology, or a project where
+              the two meet, I would love to hear from you.
+            </p>
+
             <div class="contact__direct-links">
-              <a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
-              <a href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/" target="_blank" rel="noopener noreferrer">LinkedIn <span>↗</span></a>
-              <a href="./assets/cv.pdf" target="_blank" rel="noopener noreferrer">View résumé <span>↗</span></a>
+              <a
+                href="https://github.com/huntershaps"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub <span>↗</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn <span>↗</span>
+              </a>
+
+              <a
+                href="./assets/cv.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View résumé <span>↗</span>
+              </a>
             </div>
           </div>
+
           <form class="contact__form" id="sendForm" data-reveal>
             <label for="name">Your name</label>
-            <input type="text" name="name" id="name" autocomplete="name" />
+
+            <input
+              type="text"
+              name="name"
+              id="name"
+              autocomplete="name"
+            />
+
             <label for="email">Email address</label>
-            <input type="email" name="email" id="email" autocomplete="email" required />
+
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autocomplete="email"
+              required
+            />
+
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <input type="submit" id="sendButton" class="contact__submit" value="Transmit message" />
-            <aside id="form__info" class="hide" aria-live="polite"><p id="form__popup-txt"></p></aside>
+
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              required
+            ></textarea>
+
+            <input
+              type="submit"
+              id="sendButton"
+              class="contact__submit"
+              value="Transmit message"
+            />
+
+            <aside id="form__info" class="hide" aria-live="polite">
+              <p id="form__popup-txt"></p>
+            </aside>
           </form>
         </div>
-        <footer class="site-footer"><p>Hunter Shapiro</p><a href="#start">Return to start ↑</a></footer>
+
+        <footer class="site-footer">
+          <p>Hunter Shapiro</p>
+          <a href="#start">Return to start ↑</a>
+        </footer>
       </section>
     </main>
   </body>

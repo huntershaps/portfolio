@@ -83,8 +83,131 @@ h1,h2,h3,p { margin-top:0; }
 
 /* Perspective: the overlapping interests are the point, not decoration. */
 .perspective { min-height:100svh; background:var(--mist); }.perspective__intro { display:grid; grid-template-columns:1.1fr .65fr; gap:clamp(3rem,9vw,11rem); align-items:end; }.section-number { margin:0 0 1.2rem; color:var(--coral); font-family:Georgia,serif; font-size:1.3rem; font-style:italic; }.section-number--light { color:var(--acid); }.perspective h2,.explore h2 { margin:0; font-size:clamp(3.4rem,7vw,8rem); letter-spacing:-.085em; line-height:.84; }.perspective h2 em,.explore h2 em { color:var(--blue); font-family:Georgia,serif; font-weight:400; }.perspective__copy { max-width:28rem; margin:0; color:var(--muted); font-size:1.05rem; }
-.venn { position:relative; min-height:39rem; margin-top:clamp(4rem,8vw,8rem); max-width:52rem; margin-inline:auto; }.venn__circle { position:absolute; z-index:2; display:flex; width:clamp(13rem,24vw,19.5rem); aspect-ratio:1; flex-direction:column; align-items:center; justify-content:center; border:1px solid var(--ink); border-radius:50%; padding:2rem; background:rgba(247,241,230,.5); color:var(--ink); cursor:pointer; text-align:center; transition:background .3s,transform .3s,box-shadow .3s; }.venn__circle span { font-family:Georgia,serif; font-size:clamp(1.55rem,3vw,3rem); font-style:italic; line-height:.9; }.venn__circle small { margin-top:.7rem; font-family:ui-monospace,monospace; font-size:.55rem; letter-spacing:.04em; text-transform:uppercase; }.venn__circle:hover,.venn__circle:focus-visible,.venn__circle.is-selected { z-index:4; background:var(--paper); box-shadow:0 0 0 .55rem rgba(216,255,89,.75); outline:0; transform:translateY(-.35rem); }.venn__circle--psychology { top:1rem; left:12%; background:rgba(241,119,93,.28); }.venn__circle--computing { top:1rem; right:12%; left:auto; background:rgba(89,113,255,.25); }.venn__circle--interaction { top:10rem; left:50%; transform:translateX(-50%); background:rgba(216,255,89,.44); }.venn__circle--interaction:hover,.venn__circle--interaction:focus-visible,.venn__circle--interaction.is-selected { transform:translateX(-50%) translateY(-.35rem); }.venn__center { position:absolute; z-index:3; top:49%; left:50%; display:grid; width:clamp(6.8rem,11vw,9.8rem); aspect-ratio:1; place-items:center; border:1px solid rgba(21,23,42,.28); border-radius:50%; background:rgba(247,241,230,.4); color:var(--ink); font-family:Georgia,serif; font-size:1rem; font-style:italic; line-height:1.05; text-align:center; backdrop-filter:blur(4px); box-shadow:0 .25rem 1rem rgba(21,23,42,.12); transform:translate(-50%,-50%); }.venn__response { position:relative; right:auto; bottom:auto; width:min(18rem,100%); margin:16rem auto 0; padding:1rem 1.1rem; border:1px solid var(--rule); background:rgba(247,241,230,.82); color:var(--muted); font-size:.82rem; line-height:1.5; backdrop-filter:blur(4px); }.venn__response strong { display:block; margin-bottom:.35rem; color:var(--ink); font-family:ui-monospace,monospace; font-size:.6rem; letter-spacing:.06em; text-transform:uppercase; }.venn__response p { margin:0; }
+.venn {
+    display: flow-root;
+    position: relative;
+    width: min(100%, 40rem);
+    min-height: 27rem;
+    margin: clamp(3rem, 6vw, 5rem) auto 0;
+}
 
+.venn__circle {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    width: 15rem;
+    height: 15rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    padding: 1.4rem;
+    background: rgba(247, 241, 230, .55);
+    color: var(--ink);
+    cursor: pointer;
+    text-align: center;
+    transition: background .3s, transform .3s, box-shadow .3s;
+}
+
+.venn__circle span {
+    font-family: Georgia, serif;
+    font-size: clamp(1.15rem, 1.9vw, 1.55rem);
+    font-style: italic;
+    line-height: 1.05;
+}
+
+.venn__circle small {
+    margin-top: .6rem;
+    font-family: ui-monospace, monospace;
+    font-size: .55rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.venn__circle:hover,
+.venn__circle:focus-visible,
+.venn__circle.is-selected {
+    z-index: 4;
+    background: var(--paper);
+    box-shadow: 0 0 0 .5rem rgba(216, 255, 89, .75);
+    outline: 0;
+    transform: translateY(-.35rem);
+}
+
+.venn__circle--psychology {
+    top: 0;
+    left: 0;
+    background: rgba(241, 119, 93, .3);
+}
+
+.venn__circle--computing {
+    top: 0;
+    right: 0;
+    left: auto;
+    background: rgba(89, 113, 255, .28);
+}
+
+.venn__circle--interaction {
+    top: 10rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(216, 255, 89, .48);
+}
+
+.venn__circle--interaction:hover,
+.venn__circle--interaction:focus-visible,
+.venn__circle--interaction.is-selected {
+    transform: translateX(-50%) translateY(-.35rem);
+}
+
+.venn__center {
+    position: absolute;
+    z-index: 3;
+    top: 10rem;
+    left: 50%;
+    display: grid;
+    width: 6.5rem;
+    height: 6.5rem;
+    place-items: center;
+    border: 1px solid rgba(21, 23, 42, .3);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, serif;
+    font-size: .85rem;
+    font-style: italic;
+    line-height: 1.05;
+    text-align: center;
+    box-shadow: 0 .4rem 1.1rem rgba(21, 23, 42, .18);
+    transform: translate(-50%, -50%);
+}
+
+.venn__response {
+    position: relative;
+    width: min(20rem, 100%);
+    margin: 26rem auto 0;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--rule);
+    background: rgba(247, 241, 230, .82);
+    color: var(--muted);
+    font-size: .82rem;
+    line-height: 1.5;
+}
+
+.venn__response strong {
+    display: block;
+    margin-bottom: .35rem;
+    color: var(--ink);
+    font-family: ui-monospace, monospace;
+    font-size: .6rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.venn__response p {
+    margin: 0;
+}
 /* Mahou is now shown through the actual product, not a fabricated placeholder. */
 .work__heading .section-number { grid-column:1 / -1; }.mahou-preview { width:min(100%,23rem); align-self:start; justify-self:center; overflow:hidden; border:1px solid rgba(247,241,230,.4); background:#0d1021; }.mahou-preview__bar { display:flex; align-items:center; gap:.33rem; min-height:2rem; border-bottom:1px solid rgba(247,241,230,.25); padding:0 .6rem; }.mahou-preview__bar span { width:.45rem; height:.45rem; border-radius:50%; background:var(--coral); }.mahou-preview__bar span:nth-child(2) { background:var(--acid); }.mahou-preview__bar span:nth-child(3) { background:var(--blue); }.mahou-preview__bar p { margin:0 0 0 .4rem; color:rgba(247,241,230,.5); font-family:ui-monospace,monospace; font-size:.54rem; }.mahou-preview video { display:block; width:100%; max-height:42rem; background:#0d1021; object-fit:contain; }
 
@@ -110,6 +233,6 @@ h1,h2,h3,p { margin-top:0; }
 
 @media (max-width: 54rem) {
   .opening { display:block; min-height:100svh; padding-top:6.2rem; }.opening__title-wrap { margin:0; }.opening__relationship { min-height:0; margin-top:3rem; padding:1.4rem 0; }.identity-pole strong { font-size:clamp(2.7rem,14vw,4.5rem); }.identity-pole span { font-size:1.1rem; }.opening__response { margin-top:1.1rem; }.opening__relationship::after { right:auto; left:0; bottom:-1.4rem; font-size:.51rem; }.scroll-prompt { bottom:1.4rem; }
-  .perspective__intro,.explore__heading { grid-template-columns:1fr; gap:2rem; }.perspective__copy,.explore__heading > p { font-size:.96rem; }.venn { min-height:34rem; margin-top:3.5rem; }.venn__circle { width:min(59vw,13rem); padding:1.2rem; }.venn__circle span { font-size:1.7rem; }.venn__circle small { font-size:.47rem; }.venn__circle--psychology { top:0; left:7%; }.venn__circle--computing { top:0; right:auto; left:35%; }.venn__circle--interaction { top:9.2rem; bottom:auto; left:21%; transform:none; }.venn__circle--interaction:hover,.venn__circle--interaction:focus-visible,.venn__circle--interaction.is-selected { transform:translateY(-.35rem); }.venn__center { top:37%; width:7rem; font-size:.85rem; }.venn__response { width:100%; margin:13rem auto 0; padding:1rem 0 0; border-top:1px solid var(--rule); border:0; background:transparent; backdrop-filter:none; }
+  .perspective__intro,.explore__heading { grid-template-columns:1fr; gap:2rem; }.perspective__copy,.explore__heading > p { font-size:.96rem; }.venn { width:100%; min-height:20rem; margin-top:3rem; }.venn__circle { width:10.5rem; height:10.5rem; padding:1rem; }.venn__circle span { font-size:1.15rem; }.venn__circle small { font-size:.47rem; }.venn__circle--psychology { top:0; left:50%; transform:translate(calc(-50% - 6rem)); }.venn__circle--computing { top:0; right:auto; left:50%; transform:translate(calc(-50% + 6rem)); }.venn__circle--interaction { top:8rem; left:50%; transform:translateX(-50%); }.venn__circle--psychology:hover,.venn__circle--psychology:focus-visible,.venn__circle--psychology.is-selected { transform:translate(calc(-50% - 6rem),-.35rem); }.venn__circle--computing:hover,.venn__circle--computing:focus-visible,.venn__circle--computing.is-selected { transform:translate(calc(-50% + 6rem),-.35rem); }.venn__circle--interaction:hover,.venn__circle--interaction:focus-visible,.venn__circle--interaction.is-selected { transform:translateX(-50%) translateY(-.35rem); }.venn__center { top:8rem; width:5.25rem; height:5.25rem; font-size:.72rem; }.venn__response { width:100%; margin:19rem auto 0; padding:1rem 0 0; border-top:1px solid var(--rule); border-left:0; border-right:0; border-bottom:0; background:transparent; }
   .mahou-preview { width:min(100%,21rem); }.question-list__item { grid-template-columns:2.3rem 1fr; gap:.35rem .8rem; padding:1.1rem 0; }.question-list__item:hover,.question-list__item:focus-visible,.question-list__item.is-open { padding-right:.55rem; padding-left:.55rem; }.question-list__item small { grid-column:2; }.contact__invitation { font-size:.95rem; }
 }

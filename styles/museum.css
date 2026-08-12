@@ -1,0 +1,1377 @@
+/* ==========================================================================
+   Museum of Fantasy Sports
+
+   Shares the portfolio's typefaces and structural rhythm, but inverts the
+   surface: the portfolio is paper in daylight, the museum is a gallery after
+   closing time. Brass is the only added colour, used for the things a museum
+   would actually gild — catalog numbers, plaques, the trophy case.
+   Each league then supplies one accent of its own.
+   ========================================================================== */
+
+.museum {
+  --surface: #0d0f1c;
+  --surface-raised: #141728;
+  --surface-plinth: #1a1e33;
+  --gild: var(--brass);
+  --league-accent: var(--brass);
+  --hairline: rgba(216, 178, 94, 0.22);
+  --hairline-soft: rgba(247, 241, 230, 0.13);
+
+  --focus-ring: var(--acid);
+  --focus-ring-offset: var(--surface);
+
+  background: var(--surface);
+  color: var(--on-ink);
+}
+
+.museum ::selection {
+  background: var(--gild);
+  color: var(--surface);
+}
+
+/* The museum index is longer than the portfolio's, so it scrolls if it must. */
+.system-nav--museum nav {
+  gap: 1.15rem;
+  overflow-y: auto;
+  padding-block: 1rem;
+}
+
+/* ==========================================================================
+   Entrance
+   ========================================================================== */
+.entrance {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(6rem, 14vh, 9rem) var(--gutter) var(--section-y);
+  isolation: isolate;
+}
+
+/* A lit alcove: warm pool of light above, hairline floor grid below. */
+.entrance__vault {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(90% 60% at 50% -10%, rgba(216, 178, 94, 0.16), transparent 70%),
+    linear-gradient(180deg, transparent 55%, rgba(216, 178, 94, 0.05)),
+    var(--surface);
+}
+
+.entrance__vault::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 42%;
+  background-image:
+    linear-gradient(var(--hairline-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--hairline-soft) 1px, transparent 1px);
+  background-size: 4.5rem 4.5rem;
+  content: '';
+  mask-image: linear-gradient(transparent, black);
+  opacity: 0.5;
+}
+
+.provenance {
+  display: flex;
+  max-width: 46rem;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.85rem;
+  margin-bottom: var(--space-lg);
+  border-left: 2px solid var(--gild);
+  padding: 0.75rem 1rem;
+  background: rgba(216, 178, 94, 0.08);
+  font-size: var(--text-md);
+}
+
+.provenance__tag {
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.provenance__text {
+  color: var(--on-ink);
+}
+
+.entrance__eyebrow {
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.entrance__title {
+  max-width: 14ch;
+  margin: clamp(1rem, 3vw, 1.75rem) 0 0;
+  color: var(--paper);
+  font-size: var(--display-lg);
+  font-weight: 700;
+  letter-spacing: -0.075em;
+  line-height: 0.84;
+  text-wrap: balance;
+}
+
+.entrance__subtitle {
+  max-width: 40rem;
+  margin: clamp(1.25rem, 3vw, 2rem) 0 0;
+  color: var(--on-ink);
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 0.9rem + 0.7vw, 1.5rem);
+  font-style: italic;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+/* --- Stat plinths ---------------------------------------------------------- */
+/* These hairlines are a 1px gap showing the container's background through it.
+   That means an empty cell renders as a solid block of the line colour, so the
+   layout has to be flex rather than grid: a trailing item stretches to fill its
+   row and no cell is ever left empty, whatever the number of stats. */
+.plinth-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  border: 1px solid var(--hairline);
+  background: var(--hairline);
+}
+
+.plinth {
+  display: grid;
+  flex: 1 1 7.5rem;
+  gap: 0.35rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem) clamp(0.75rem, 2vw, 1.25rem);
+  background: var(--surface-plinth);
+}
+
+.plinth__value {
+  color: var(--gild);
+  font-size: clamp(2rem, 1.4rem + 2vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.plinth__label {
+  color: var(--on-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.entrance__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: clamp(2rem, 5vw, 3rem);
+}
+
+.button--quiet {
+  border-color: var(--hairline);
+  background: transparent;
+  color: var(--on-ink);
+}
+
+.button--quiet:hover {
+  border-color: var(--gild);
+  background: transparent;
+  color: var(--gild);
+}
+
+.entrance__floor {
+  max-width: 32rem;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  color: rgba(247, 241, 230, 0.55);
+  font-size: var(--text-md);
+}
+
+/* ==========================================================================
+   Galleries — the shared frame
+   ========================================================================== */
+.gallery {
+  border-top: 1px solid var(--hairline-soft);
+  padding: var(--section-y) var(--gutter);
+}
+
+.placard {
+  max-width: 44rem;
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  border-left: 1px solid var(--gild);
+  padding-left: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+.placard__catalog {
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.placard__title {
+  margin: 0.6rem 0 0.75rem;
+  color: var(--paper);
+  font-size: var(--display-sm);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.placard__note {
+  color: var(--on-ink);
+  font-size: var(--text-base);
+  text-wrap: pretty;
+}
+
+.exhibit-empty {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  border: 1px dashed var(--hairline);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  color: rgba(247, 241, 230, 0.6);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-style: italic;
+}
+
+.exhibit-empty__mark {
+  color: var(--gild);
+}
+
+/* ==========================================================================
+   01 — Leagues
+   ========================================================================== */
+.league-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+
+.league-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 3.5rem;
+  border: 1px solid var(--hairline-soft);
+  padding: 0.7rem 1.1rem 0.7rem 0.7rem;
+  background: var(--surface-raised);
+  color: var(--on-ink);
+  text-align: left;
+  transition: border-color var(--dur), background var(--dur), color var(--dur);
+}
+
+.league-chip__monogram {
+  display: grid;
+  width: 2.4rem;
+  height: 2.4rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--league-accent, var(--gild));
+  color: var(--league-accent, var(--gild));
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.league-chip__body {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.league-chip__name {
+  color: var(--paper);
+  font-size: var(--text-md);
+  font-weight: 700;
+}
+
+.league-chip__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.league-chip:hover {
+  border-color: var(--league-accent, var(--gild));
+}
+
+.league-chip.is-active {
+  border-color: var(--league-accent, var(--gild));
+  background: var(--surface-plinth);
+  box-shadow: inset 0.2rem 0 0 var(--league-accent, var(--gild));
+}
+
+/* --- Profile --------------------------------------------------------------- */
+.league-profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  border-top: 1px solid var(--hairline-soft);
+  padding-top: clamp(2rem, 5vw, 3rem);
+}
+
+.league-profile__monogram {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  place-items: center;
+  border: 1px solid var(--league-accent);
+  margin-bottom: var(--space-sm);
+  color: var(--league-accent);
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.league-profile__name {
+  color: var(--paper);
+  font-size: var(--display-xs);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.league-profile__motto {
+  margin-top: 0.5rem;
+  color: var(--league-accent);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-style: italic;
+}
+
+.league-profile__about {
+  max-width: 34rem;
+  margin-top: var(--space-sm);
+  color: var(--on-ink);
+  text-wrap: pretty;
+}
+
+/* Flex for the same reason as .plinth-row — a league with an odd number of
+   facts must not leave a lit cell behind. */
+.league-profile__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin-top: var(--space-lg);
+  border: 1px solid var(--hairline-soft);
+  background: var(--hairline-soft);
+}
+
+.league-profile__facts > div {
+  flex: 1 1 8rem;
+  padding: 0.75rem 0.9rem;
+  background: var(--surface);
+}
+
+.league-profile__facts dt {
+  color: rgba(247, 241, 230, 0.6);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.league-profile__facts dd {
+  margin-top: 0.25rem;
+  color: var(--paper);
+  font-size: var(--text-lg);
+  font-weight: 700;
+}
+
+.league-profile__roll h4,
+.title-count h4 {
+  margin-bottom: var(--space-sm);
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.roll-call__row {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.85rem;
+  border-bottom: 1px solid var(--hairline-soft);
+  padding: 0.6rem 0;
+}
+
+.roll-call__mark {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--hairline-soft);
+  color: rgba(247, 241, 230, 0.6);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+}
+
+.roll-call__row strong {
+  display: block;
+  color: var(--paper);
+  font-size: var(--text-md);
+  font-weight: 500;
+}
+
+.roll-call__row small {
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-serif);
+  font-size: var(--text-sm);
+  font-style: italic;
+}
+
+.roll-call__since {
+  color: rgba(247, 241, 230, 0.5);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  white-space: nowrap;
+}
+
+.title-count {
+  margin-top: var(--space-lg);
+}
+
+.title-count__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  border-bottom: 1px solid var(--hairline-soft);
+  padding: 0.55rem 0;
+  color: var(--paper);
+  font-size: var(--text-md);
+}
+
+.title-count__rings {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.title-count__rings i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 2px solid var(--gild);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   02 — Season archive
+   ========================================================================== */
+.year-rail {
+  display: flex;
+  gap: 1px;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  overflow-x: auto;
+  border: 1px solid var(--hairline-soft);
+  background: var(--hairline-soft);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+}
+
+.year-plaque {
+  display: grid;
+  min-width: 8.5rem;
+  flex: 1 0 auto;
+  align-content: center;
+  gap: 0.3rem;
+  border: 0;
+  padding: 1.1rem 1rem;
+  background: var(--surface-raised);
+  color: var(--on-ink);
+  scroll-snap-align: start;
+  text-align: left;
+  transition: background var(--dur), color var(--dur);
+}
+
+.year-plaque__year {
+  color: var(--paper);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.year-plaque__champion {
+  color: rgba(247, 241, 230, 0.6);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.05em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.year-plaque:hover {
+  background: var(--surface-plinth);
+}
+
+.year-plaque.is-active {
+  background: var(--gild);
+  color: var(--surface);
+}
+
+.year-plaque.is-active .year-plaque__year {
+  color: var(--surface);
+}
+
+.year-plaque.is-active .year-plaque__champion {
+  color: rgba(13, 15, 28, 0.75);
+}
+
+/* --- Season case file ------------------------------------------------------ */
+.season {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  border: 1px solid var(--hairline);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: var(--surface-raised);
+}
+
+.season__year {
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+}
+
+.season__headline {
+  margin: 0.75rem 0 0;
+  color: var(--paper);
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 1.1rem + 1.3vw, 2.35rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+  text-wrap: pretty;
+}
+
+.season__recap {
+  margin-top: var(--space-sm);
+  color: var(--on-ink);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+.season__final {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  border: 1px solid var(--hairline-soft);
+  padding: var(--space-sm);
+  background: var(--surface);
+}
+
+.season__role {
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.season__name {
+  margin-top: 0.25rem;
+  color: var(--paper);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.season__finalist--won .season__name {
+  color: var(--gild);
+}
+
+.season__score {
+  color: rgba(247, 241, 230, 0.65);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+.season__versus {
+  color: var(--gild);
+  font-family: var(--font-serif);
+  font-size: var(--text-md);
+  font-style: italic;
+}
+
+.season__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  margin-top: var(--space-sm);
+}
+
+.season__badge {
+  display: grid;
+  gap: 0.15rem;
+  border: 1px solid var(--hairline-soft);
+  padding: 0.5rem 0.75rem;
+}
+
+.season__badge span {
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.season__badge strong {
+  color: var(--paper);
+  font-size: var(--text-md);
+  font-weight: 500;
+}
+
+/* --- Standings ------------------------------------------------------------- */
+.season__table-wrap {
+  overflow-x: auto;
+}
+
+.standings {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-md);
+}
+
+.standings caption {
+  margin-bottom: 0.75rem;
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.16em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.standings th,
+.standings td {
+  border-bottom: 1px solid var(--hairline-soft);
+  padding: 0.6rem 0.65rem 0.6rem 0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.standings thead th {
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.standings tbody th {
+  color: var(--paper);
+  font-weight: 500;
+  white-space: normal;
+}
+
+.standings td {
+  color: var(--on-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.standings__rank {
+  width: 3rem;
+  color: rgba(247, 241, 230, 0.5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.standings tr.is-champion th,
+.standings tr.is-champion td {
+  color: var(--gild);
+}
+
+.season__table-note {
+  margin-top: 0.75rem;
+  color: rgba(247, 241, 230, 0.5);
+  font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   03 — Hall of Fame
+   ========================================================================== */
+.wing + .wing {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.wing__title {
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--hairline);
+  padding-bottom: 0.6rem;
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.plaque-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: var(--space-sm);
+}
+
+/* A cast plaque: recessed frame, gilded name, engraved citation. */
+.plaque {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  border: 1px solid var(--hairline);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background: linear-gradient(160deg, var(--surface-plinth), var(--surface-raised));
+}
+
+.plaque::after {
+  position: absolute;
+  inset: 0.4rem;
+  border: 1px solid rgba(216, 178, 94, 0.16);
+  content: '';
+  pointer-events: none;
+}
+
+.plaque__monogram {
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.18em;
+}
+
+.plaque__name {
+  color: var(--paper);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.plaque__year {
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plaque__citation {
+  margin-top: 0.4rem;
+  color: var(--on-ink);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+.plaque__stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--hairline-soft);
+  padding-top: 0.6rem;
+}
+
+.plaque__stat span {
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.plaque__stat strong {
+  color: var(--gild);
+  font-size: 1.25rem;
+}
+
+/* ==========================================================================
+   04 — Trophy case
+   ========================================================================== */
+.filter-stack {
+  display: grid;
+  gap: var(--space-xs);
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+}
+
+.filter-row__label {
+  min-width: 3rem;
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  min-height: 2.25rem;
+  border: 1px solid var(--hairline-soft);
+  padding: 0.35rem 0.8rem;
+  background: transparent;
+  color: var(--on-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+  transition: border-color var(--dur-fast), background var(--dur-fast), color var(--dur-fast);
+}
+
+.chip:hover {
+  border-color: var(--gild);
+  color: var(--paper);
+}
+
+.chip.is-active {
+  border-color: var(--gild);
+  background: var(--gild);
+  color: var(--surface);
+}
+
+.trophy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: var(--space-sm);
+}
+
+.trophy {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  overflow: hidden;
+  border: 1px solid var(--hairline-soft);
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  background: var(--surface-raised);
+  transition: border-color var(--dur), transform var(--dur) var(--ease-out);
+}
+
+.trophy:hover {
+  border-color: var(--tone-colour);
+  transform: translateY(-2px);
+}
+
+.trophy--honour {
+  --tone-colour: var(--gild);
+}
+
+.trophy--infamy {
+  --tone-colour: var(--coral);
+}
+
+.trophy::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: var(--tone-colour);
+  content: '';
+}
+
+.trophy__glyph {
+  color: var(--tone-colour);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.trophy__year {
+  color: rgba(247, 241, 230, 0.5);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.12em;
+}
+
+.trophy__name {
+  color: var(--paper);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.trophy__member {
+  color: var(--tone-colour);
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-style: italic;
+}
+
+.trophy__note {
+  margin-top: 0.3rem;
+  color: var(--on-ink);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+.trophy__tone {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--hairline-soft);
+  padding-top: 0.5rem;
+  color: rgba(247, 241, 230, 0.6);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   05 — Legendary moments
+   ========================================================================== */
+.moment-list {
+  border-top: 1px solid var(--hairline-soft);
+}
+
+.moment {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--hairline-soft);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem) 0;
+  transition: background var(--dur);
+}
+
+.moment:hover {
+  background: rgba(216, 178, 94, 0.04);
+}
+
+.moment__stamp {
+  display: grid;
+  align-content: start;
+  gap: 0.2rem;
+}
+
+.moment__year {
+  color: var(--gild);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.moment__date {
+  color: rgba(247, 241, 230, 0.5);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.moment__title {
+  color: var(--paper);
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 2rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.moment__story {
+  max-width: 46rem;
+  margin-top: 0.75rem;
+  color: var(--on-ink);
+  text-wrap: pretty;
+}
+
+.moment__media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: var(--space-2xs);
+  margin-top: var(--space-sm);
+}
+
+.moment__media img {
+  width: 100%;
+  border: 1px solid var(--hairline-soft);
+}
+
+.moment__media figcaption {
+  margin-top: 0.35rem;
+  color: rgba(247, 241, 230, 0.5);
+  font-size: var(--text-xs);
+}
+
+.moment__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: var(--space-sm);
+}
+
+.moment__tags li {
+  border: 1px solid var(--hairline-soft);
+  padding: 0.25rem 0.55rem;
+  color: rgba(247, 241, 230, 0.65);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   06 — Rivalries
+   ========================================================================== */
+.rivalry-list {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.rivalry {
+  display: grid;
+  gap: 0.75rem;
+  border: 1px solid var(--hairline-soft);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--surface-raised);
+}
+
+.rivalry__names {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.rivalry__name {
+  color: var(--paper);
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.75rem);
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.rivalry__name--right {
+  text-align: right;
+}
+
+.rivalry__vs {
+  color: var(--gild);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.rivalry__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 2.1rem;
+  overflow: hidden;
+  border: 1px solid var(--hairline-soft);
+  background: rgba(241, 119, 93, 0.16);
+}
+
+.rivalry__fill {
+  height: 100%;
+  background: rgba(216, 178, 94, 0.32);
+  box-shadow: inset -1px 0 0 var(--gild);
+}
+
+.rivalry__tally {
+  position: absolute;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+}
+
+.rivalry__tally--left {
+  left: 0.7rem;
+}
+
+.rivalry__tally--right {
+  right: 0.7rem;
+}
+
+.rivalry__story {
+  color: var(--on-ink);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+.rivalry__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: var(--space-sm);
+  border-top: 1px solid var(--hairline-soft);
+  padding-top: 0.75rem;
+}
+
+.rivalry__facts dt {
+  color: rgba(247, 241, 230, 0.5);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rivalry__facts dd {
+  margin-top: 0.2rem;
+  color: var(--paper);
+  font-size: var(--text-md);
+  font-weight: 500;
+}
+
+.rivalry__heat {
+  height: 3px;
+  background: var(--hairline-soft);
+}
+
+.rivalry__heat span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--gild), var(--coral));
+}
+
+/* ==========================================================================
+   07 — Record book
+   ========================================================================== */
+/* Flex again: the number of records is whatever the league has entered, so the
+   last row has to close itself rather than leave lit cells behind. */
+.record-book {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  border: 1px solid var(--hairline-soft);
+  background: var(--hairline-soft);
+}
+
+.record {
+  display: grid;
+  flex: 1 1 14rem;
+  align-content: start;
+  gap: 0.3rem;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  background: var(--surface);
+}
+
+.record__label {
+  color: rgba(247, 241, 230, 0.6);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.record__value {
+  color: var(--kind-colour);
+  font-size: clamp(2.1rem, 1.6rem + 2vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.record--peak {
+  --kind-colour: var(--gild);
+}
+
+.record--trough {
+  --kind-colour: var(--coral);
+}
+
+.record__holder {
+  color: var(--paper);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-style: italic;
+}
+
+.record__holder span {
+  color: rgba(247, 241, 230, 0.5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-style: normal;
+}
+
+.record__note {
+  margin-top: 0.3rem;
+  color: rgba(247, 241, 230, 0.6);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+/* ==========================================================================
+   08 — Memory wall
+   ========================================================================== */
+.memory-wall {
+  columns: 3;
+  column-gap: var(--space-sm);
+}
+
+.memory {
+  display: grid;
+  gap: 0.6rem;
+  margin-bottom: var(--space-sm);
+  border: 1px solid var(--hairline-soft);
+  padding: clamp(1.1rem, 2.5vw, 1.5rem);
+  background: var(--surface-raised);
+  break-inside: avoid;
+  rotate: var(--tilt, 0deg);
+  transition: rotate var(--dur) var(--ease-out), border-color var(--dur);
+}
+
+.memory:hover {
+  border-color: var(--gild);
+  rotate: 0deg;
+}
+
+.memory__image {
+  width: 100%;
+  border: 1px solid var(--hairline-soft);
+}
+
+.memory__body {
+  margin: 0;
+  color: var(--paper);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+.memory--quote .memory__body {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.memory--quote .memory__body::before {
+  color: var(--gild);
+  content: '“';
+}
+
+.memory--quote .memory__body::after {
+  color: var(--gild);
+  content: '”';
+}
+
+.memory--artifact {
+  border-color: var(--hairline);
+  background: linear-gradient(160deg, var(--surface-plinth), var(--surface-raised));
+}
+
+.memory__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-top: 1px solid var(--hairline-soft);
+  padding-top: 0.5rem;
+  color: rgba(247, 241, 230, 0.55);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+}
+
+.memory__meta cite {
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 60rem) {
+  .league-profile,
+  .season {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .memory-wall {
+    columns: 2;
+  }
+}
+
+@media (max-width: 44rem) {
+  .moment {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .moment__stamp {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+
+  .moment__year {
+    font-size: 1.4rem;
+  }
+
+  .memory-wall {
+    columns: 1;
+  }
+
+  .league-switch {
+    display: grid;
+  }
+
+  /* Points against is the least useful column on a phone; the table still
+     scrolls, but it rarely needs to. */
+  .standings th:nth-child(5),
+  .standings td:nth-child(5) {
+    display: none;
+  }
+
+  .rivalry__names {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.15rem;
+  }
+
+  .rivalry__name--right {
+    text-align: left;
+  }
+
+  .rivalry__vs {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 30rem) {
+  .season__final {
+    grid-template-columns: minmax(0, 1fr);
+    text-align: left;
+  }
+
+  .season__versus {
+    justify-self: start;
+  }
+
+  .plinth {
+    flex-basis: 40%;
+  }
+
+  .year-plaque {
+    min-width: 7.5rem;
+  }
+}

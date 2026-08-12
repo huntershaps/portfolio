@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0d0f1c" />
+    <meta name="description" content="The Museum of Fantasy Sports — a digital archive of league history: champions, records, rivalries, awards and the moments nobody agreed to let go of." />
+    <link rel="canonical" href="https://huntershapiro.com/museum" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Museum of Fantasy Sports" />
+    <meta property="og:description" content="A digital archive of league history: champions, records, rivalries and legendary moments." />
+    <meta property="og:image" content="./assets/images/portfolio_icon.png" />
+    <meta name="twitter:card" content="summary" />
+
+    <title>Museum of Fantasy Sports — Hunter Shapiro</title>
+    <link rel="icon" href="./assets/images/portfolio_icon.png" />
+
+    <link rel="preload" href="./assets/fonts/Centra/CentraNo2-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/fonts/Centra/CentraNo2-Book.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="stylesheet" href="./styles/tokens.css" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/chrome.css" />
+    <link rel="stylesheet" href="./styles/museum.css" />
+
+    <!-- Runs before first paint. Module scripts are deferred, so without this
+         the scroll-reveal elements would flash in and then fade back out. -->
+    <script>
+      document.documentElement.classList.remove('no-js');
+    </script>
+    <script type="module" src="./javascript/museum.js"></script>
+  </head>
+
+  <body class="museum">
+    <a class="skip-link" href="#entrance">Skip to the collection</a>
+
+    <button class="system-toggle" type="button" aria-expanded="false" aria-controls="system-nav">
+      <span class="system-toggle__mark" aria-hidden="true"></span>
+      <span class="system-toggle__label">Index</span>
+    </button>
+
+    <div class="system-scrim" aria-hidden="true"></div>
+
+    <aside class="system-nav system-nav--museum" id="system-nav" aria-label="Museum index">
+      <a class="system-nav__identity" href="/" aria-label="Hunter Shapiro — back to the portfolio">
+        <span>H<span class="system-nav__thin">S</span></span>
+      </a>
+      <div class="system-nav__rule" aria-hidden="true"></div>
+
+      <nav aria-label="Galleries">
+        <a class="system-nav__link is-current" href="#entrance" aria-current="true"><span>00</span>Entrance</a>
+        <a class="system-nav__link" href="#leagues"><span>01</span>Leagues</a>
+        <a class="system-nav__link" href="#archive"><span>02</span>Seasons</a>
+        <a class="system-nav__link" href="#hall-of-fame"><span>03</span>Legends</a>
+        <a class="system-nav__link" href="#awards"><span>04</span>Trophies</a>
+        <a class="system-nav__link" href="#moments"><span>05</span>Moments</a>
+        <a class="system-nav__link" href="#rivalries"><span>06</span>Rivals</a>
+        <a class="system-nav__link" href="#records"><span>07</span>Records</a>
+        <a class="system-nav__link" href="#memories"><span>08</span>Memories</a>
+      </nav>
+
+      <div class="system-nav__external">
+        <a href="/">Back to the portfolio <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </aside>
+
+    <main id="main">
+      <!-- ================================================================
+           Entrance
+           ================================================================ -->
+      <section class="entrance" id="entrance" aria-labelledby="museum-title">
+        <div class="entrance__vault" aria-hidden="true"></div>
+
+        <p class="provenance" id="provenance" hidden></p>
+
+        <p class="entrance__eyebrow" id="museum-since">Collecting since —</p>
+        <h1 class="entrance__title" id="museum-title">Museum of Fantasy Sports</h1>
+        <p class="entrance__subtitle" id="museum-subtitle"></p>
+
+        <ul class="plinth-row" id="museum-stats" aria-label="The collection at a glance"></ul>
+
+        <div class="entrance__actions">
+          <a class="button button--accent" href="#leagues">Begin the tour <span class="button__arrow" aria-hidden="true">↓</span></a>
+          <a class="button button--quiet" href="#records">Straight to the record book</a>
+        </div>
+
+        <p class="entrance__floor">
+          Eight galleries. Walk them in order, or skip to whichever argument you are still having.
+        </p>
+      </section>
+
+      <div class="museum-galleries">
+        <!-- ==============================================================
+             01 — Leagues
+             ============================================================== -->
+        <section class="gallery" id="leagues" aria-labelledby="leagues-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 01</p>
+            <h2 class="placard__title" id="leagues-title">The collections</h2>
+            <p class="placard__note">
+              Each league keeps its own history. Choose one and every gallery below changes with it.
+            </p>
+          </header>
+
+          <div class="league-switch" id="league-switch"></div>
+          <p class="visually-hidden" id="league-announce" role="status"></p>
+          <div id="league-profile"></div>
+        </section>
+
+        <!-- ==============================================================
+             02 — Season archive
+             ============================================================== -->
+        <section class="gallery gallery--archive" id="archive" aria-labelledby="archive-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 02</p>
+            <h2 class="placard__title" id="archive-title">The season archive</h2>
+            <p class="placard__note">
+              One plaque per year, newest first. Pick a season to open its case file.
+            </p>
+          </header>
+
+          <div class="year-rail" id="season-rail"></div>
+          <div id="season-detail"></div>
+        </section>
+
+        <!-- ==============================================================
+             03 — Hall of Fame
+             ============================================================== -->
+        <section class="gallery gallery--fame" id="hall-of-fame" aria-labelledby="fame-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 03</p>
+            <h2 class="placard__title" id="fame-title">Hall of Fame</h2>
+            <p class="placard__note">
+              Inductees are grouped by the honour that got them in. New wings appear on their own as
+              new honours are added.
+            </p>
+          </header>
+
+          <div id="hall-of-fame-body"></div>
+        </section>
+
+        <!-- ==============================================================
+             04 — Awards
+             ============================================================== -->
+        <section class="gallery" id="awards" aria-labelledby="awards-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 04</p>
+            <h2 class="placard__title" id="awards-title">The trophy case</h2>
+            <p class="placard__note">
+              Honours on one shelf, infamy on the other. Both count.
+            </p>
+          </header>
+
+          <div class="filter-stack" id="award-filters"></div>
+          <div id="award-grid"></div>
+        </section>
+
+        <!-- ==============================================================
+             05 — Legendary moments
+             ============================================================== -->
+        <section class="gallery" id="moments" aria-labelledby="moments-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 05</p>
+            <h2 class="placard__title" id="moments-title">Legendary moments</h2>
+            <p class="placard__note">
+              The comebacks, the collapses, and the four-tenths of a point that people still bring up.
+            </p>
+          </header>
+
+          <div id="moment-body"></div>
+        </section>
+
+        <!-- ==============================================================
+             06 — Rivalries
+             ============================================================== -->
+        <section class="gallery" id="rivalries" aria-labelledby="rivalries-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 06</p>
+            <h2 class="placard__title" id="rivalries-title">Rivalries</h2>
+            <p class="placard__note">
+              Head-to-head records, playoff meetings, and a rivalry score that is entirely subjective
+              and entirely final.
+            </p>
+          </header>
+
+          <div id="rivalry-body"></div>
+        </section>
+
+        <!-- ==============================================================
+             07 — Records
+             ============================================================== -->
+        <section class="gallery gallery--records" id="records" aria-labelledby="records-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 07</p>
+            <h2 class="placard__title" id="records-title">The record book</h2>
+            <p class="placard__note">
+              High-water marks in one column, low-water marks in the other. Both are permanent.
+            </p>
+          </header>
+
+          <div id="record-body"></div>
+        </section>
+
+        <!-- ==============================================================
+             08 — Memory wall
+             ============================================================== -->
+        <section class="gallery gallery--memories" id="memories" aria-labelledby="memories-title">
+          <header class="placard" data-reveal>
+            <p class="placard__catalog">Gallery 08</p>
+            <h2 class="placard__title" id="memories-title">The memory wall</h2>
+            <p class="placard__note">
+              Quotes, rule changes, and the things that do not fit in a table. Screenshots and images
+              can live here too.
+            </p>
+          </header>
+
+          <div id="memory-body"></div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__grid">
+        <div>
+          <p class="site-footer__wordmark">Museum of Fantasy Sports</p>
+          <p class="site-footer__blurb">
+            A project by Hunter Shapiro. Built as an exhibition rather than a dashboard, and driven by
+            a single content schema so a new season is a data entry, not a code change.
+          </p>
+        </div>
+
+        <div>
+          <h2>Galleries</h2>
+          <ul>
+            <li><a href="#leagues">The collections</a></li>
+            <li><a href="#archive">Season archive</a></li>
+            <li><a href="#hall-of-fame">Hall of Fame</a></li>
+            <li><a href="#awards">Trophy case</a></li>
+            <li><a href="#moments">Legendary moments</a></li>
+            <li><a href="#rivalries">Rivalries</a></li>
+            <li><a href="#records">Record book</a></li>
+            <li><a href="#memories">Memory wall</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Elsewhere</h2>
+          <ul>
+            <li><a href="/">Hunter Shapiro's portfolio <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/#contact">Get in touch <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="site-footer__baseline">
+        <p>Curated by Hunter Shapiro</p>
+        <a href="#entrance">Back to the entrance ↑</a>
+      </div>
+    </footer>
+  </body>
+</html>

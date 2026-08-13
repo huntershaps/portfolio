@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#15172a" />
     <meta name="description" content="Hunter Shapiro studies psychology and computer science, and builds interfaces where the two meet." />
-    <link rel="canonical" href="https://huntershapiro.com/" />
+    <link rel="canonical" href="https://huntermshaps.com/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Hunter Shapiro — Psychology and Technology" />
@@ -57,7 +57,7 @@
         <a class="system-nav__link" href="#methods"><span>03</span>Toolkit</a>
         <a class="system-nav__link" href="#explore"><span>04</span>Questions</a>
         <a class="system-nav__link" href="#contact"><span>05</span>Connect</a>
-        <a class="system-nav__link" href="/museum"><span>06</span>Museum</a>
+        <a class="system-nav__link" href="/fantasy"><span>06</span>Museum</a>
       </nav>
 
       <div class="system-nav__external">
@@ -93,7 +93,7 @@
 
           <div class="opening__actions" data-reveal>
             <a class="button" href="#work">See the work <span class="button__arrow" aria-hidden="true">↗</span></a>
-            <a class="button button--ghost" href="/museum">Enter the museum <span class="button__arrow" aria-hidden="true">↗</span></a>
+            <a class="button button--ghost" href="/fantasy">Enter the museum <span class="button__arrow" aria-hidden="true">↗</span></a>
           </div>
         </div>
 
@@ -338,31 +338,36 @@
           <div class="case-study__masthead">
             <h3 id="case-museum">Museum of<br /><em>Fantasy Sports</em></h3>
             <p class="case-study__summary">
-              A digital museum for a fantasy league's history — champions, records, rivalries, and
-              the ridiculous moments a spreadsheet forgets. Built as an exhibition rather than a
-              dashboard, and driven entirely by a data layer so new seasons are content, not code.
+              A league history platform: champions, records, rivalries and the moments a spreadsheet
+              forgets, imported from ESPN and Yahoo and kept permanently. A full-stack app rather
+              than a page — providers, a sync that is safe to re-run, and an engine that derives
+              records from stored history.
             </p>
             <ul class="case-study__tags">
-              <li>Information architecture</li>
+              <li>Next.js 16</li>
+              <li>PostgreSQL</li>
+              <li>Prisma</li>
+              <li>Auth.js</li>
               <li>Data modelling</li>
-              <li>Editorial UI</li>
-              <li>Vanilla JS</li>
             </ul>
-            <a class="rule-link case-study__link" href="/museum">Walk through it <span aria-hidden="true">↗</span></a>
+            <div class="case-study__links">
+              <a class="rule-link case-study__link" href="/fantasy">Open the app <span aria-hidden="true">↗</span></a>
+              <a class="rule-link case-study__link" href="/museum">Read the case study <span aria-hidden="true">↗</span></a>
+            </div>
           </div>
 
-          <a class="museum-door case-study__media" href="/museum" aria-labelledby="case-museum">
-            <span class="museum-door__eyebrow">Est. collection</span>
+          <a class="museum-door case-study__media" href="/fantasy" aria-labelledby="case-museum">
+            <span class="museum-door__eyebrow">Live application</span>
             <span class="museum-door__title">Museum of Fantasy Sports</span>
             <span class="museum-door__enter" aria-hidden="true">Enter <span>↗</span></span>
           </a>
 
           <div class="case-study__details">
             <dl>
-              <div><dt>The idea</dt><dd>League history deserves an exhibition, not a leaderboard.</dd></div>
-              <div><dt>What I built</dt><dd>Eight galleries rendered from a single content schema.</dd></div>
-              <div><dt>Approach</dt><dd>Curation over completeness — one story per exhibit.</dd></div>
-              <div><dt>Status</dt><dd>Live with sample data while real league history is imported.</dd></div>
+              <div><dt>The idea</dt><dd>League history deserves an archive, not a leaderboard.</dd></div>
+              <div><dt>What I built</dt><dd>Providers for ESPN and Yahoo, a re-runnable sync, and an engine that derives records and awards.</dd></div>
+              <div><dt>Approach</dt><dd>One-way data flow, and a schema that separates a manager from the team they named that year.</dd></div>
+              <div><dt>Status</dt><dd>Built and deployed at <code>/fantasy</code>; importing real history waits on league credentials.</dd></div>
             </dl>
           </div>
         </article>
@@ -562,7 +567,8 @@
         <div>
           <h2>Elsewhere</h2>
           <ul>
-            <li><a href="/museum">Museum of Fantasy Sports <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/fantasy">Museum of Fantasy Sports <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/museum">…its case study <span aria-hidden="true">↗</span></a></li>
             <li><a href="https://recrd.top" target="_blank" rel="noopener noreferrer">RECRD.TOP <span aria-hidden="true">↗</span></a></li>
             <li><a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
             <li><a href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>

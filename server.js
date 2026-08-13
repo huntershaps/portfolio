@@ -8,6 +8,10 @@ const nodemailer = require('nodemailer');
 const PORT = process.env.PORT || 8000;
 const ROOT = __dirname;
 
+/* Where the Museum of Fantasy Sports app runs during local development. */
+const FANTASY_HOST = process.env.FANTASY_HOST || 'localhost';
+const FANTASY_PORT = process.env.FANTASY_PORT || 3000;
+
 /* Clean URLs -> files on disk. Add a line here when a page is added. */
 const ROUTES = {
   '/': 'index.html',
@@ -188,7 +192,53 @@ async function handleContact(req, res) {
   });
 }
 
+/**
+ * Mirror the production setup locally.
+ *
+ * In production Netlify rewrites /fantasy/* to the Museum of Fantasy Sports
+ * app (a separate Next.js deployment). Here we forward to it on localhost so
+ * the same links work in development. If it is not running, say so plainly
+ * rather than serving a bare 404 that looks like a broken link.
+ */
+function proxyToFantasyApp(req, res) {
+  const upstream = http.request(
+    {
+      host: FANTASY_HOST,
+      port: FANTASY_PORT,
+      path: req.url,
+      method: req.method,
+      headers: { ...req.headers, host: `${FANTASY_HOST}:${FANTASY_PORT}` }
+    },
+    (upstreamRes) => {
+      res.writeHead(upstreamRes.statusCode, upstreamRes.headers);
+      upstreamRes.pipe(res);
+    }
+  );
+
+  upstream.on('error', () => {
+    const body = `<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fantasy app not running</title>
+<style>body{margin:0;display:grid;place-items:center;min-height:100vh;background:#0d0f1c;color:#f7f1e6;
+font:400 16px/1.6 system-ui,sans-serif;text-align:center;padding:2rem}code{color:#d8b25e}a{color:#d8ff59}</style>
+</head><body><div><h1>The museum is closed locally</h1>
+<p>In production Netlify proxies <code>/fantasy</code> to the Next.js app.<br>
+To run it here, start it separately:</p>
+<p><code>cd ../../dev/fantasy_sports &amp;&amp; pnpm dev</code></p>
+<p><a href="/">Back to the portfolio</a> · <a href="/museum">Read the case study</a></p>
+</div></body></html>`;
+    res.writeHead(502, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(body);
+  });
+
+  req.pipe(upstream);
+}
+
 const server = http.createServer(async (req, res) => {
+  if (req.url === '/fantasy' || req.url.startsWith('/fantasy/') || req.url.startsWith('/fantasy?')) {
+    return proxyToFantasyApp(req, res);
+  }
+
   if (req.url === '/send-email') {
     if (req.method !== 'POST') {
       res.writeHead(405, { Allow: 'POST' });

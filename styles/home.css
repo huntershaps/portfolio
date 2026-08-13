@@ -492,10 +492,21 @@
   text-transform: uppercase;
 }
 
+.case-study__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-md);
+  margin-top: var(--space-2xs);
+}
+
 .case-study__link {
   margin-top: var(--space-md);
   border-bottom-color: var(--acid);
   color: var(--acid);
+}
+
+.case-study__links .case-study__link {
+  margin-top: var(--space-2xs);
 }
 
 .case-study__link:hover {

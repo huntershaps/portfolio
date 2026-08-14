@@ -1,16 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Hunter Shapiro explores psychology, computer science, and human-centered technology." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#15172a" />
+    <meta name="description" content="Hunter Shapiro studies psychology and computer science, and builds interfaces where the two meet." />
+    <link rel="canonical" href="https://huntershaps.netlify.app/" />
+
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="Hunter Shapiro — Psychology and Technology" />
     <meta property="og:description" content="A portfolio exploring people, systems, and the technology between them." />
+    <meta property="og:image" content="./assets/images/portfolio_icon.png" />
+    <meta name="twitter:card" content="summary" />
+
     <title>Hunter Shapiro — Psychology and Technology</title>
-    <link rel="shortcut icon" href="./assets/images/portfolio_icon.png" />
-    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="icon" href="./assets/images/portfolio_icon.png" />
+
+    <link rel="preload" href="./assets/fonts/Centra/CentraNo2-Bold.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="./assets/fonts/Centra/CentraNo2-Book.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Linked separately rather than @import-chained so they download in parallel. -->
+    <link rel="stylesheet" href="./styles/tokens.css" />
+    <link rel="stylesheet" href="./styles/base.css" />
+    <link rel="stylesheet" href="./styles/chrome.css" />
+    <link rel="stylesheet" href="./styles/home.css" />
+
+    <!-- Runs before first paint. Module scripts are deferred, so without this
+         the scroll-reveal elements would flash in and then fade back out. -->
+    <script>
+      document.documentElement.classList.remove('no-js');
+    </script>
     <script type="module" src="./javascript/index.js"></script>
   </head>
+
   <body>
     <a class="skip-link" href="#start">Skip to content</a>
 
@@ -19,172 +42,544 @@
       <span class="system-toggle__label">Index</span>
     </button>
 
-    <aside class="system-nav" id="system-nav" aria-label="Portfolio navigation">
-      <a class="system-nav__identity" href="#start" aria-label="Hunter Shapiro, return to start">
+    <div class="system-scrim" aria-hidden="true"></div>
+
+    <aside class="system-nav" id="system-nav" aria-label="Portfolio index">
+      <a class="system-nav__identity" href="#start" aria-label="Hunter Shapiro — return to the start">
         <span>H<span class="system-nav__thin">S</span></span>
       </a>
       <div class="system-nav__rule" aria-hidden="true"></div>
-      <nav>
-        <a class="system-nav__link is-current" href="#start"><span>00</span>Start</a>
+
+      <nav aria-label="Sections">
+        <a class="system-nav__link is-current" href="#start" aria-current="true"><span>00</span>Start</a>
         <a class="system-nav__link" href="#perspective"><span>01</span>Perspective</a>
         <a class="system-nav__link" href="#work"><span>02</span>Fieldwork</a>
         <a class="system-nav__link" href="#methods"><span>03</span>Toolkit</a>
         <a class="system-nav__link" href="#explore"><span>04</span>Questions</a>
         <a class="system-nav__link" href="#contact"><span>05</span>Connect</a>
+        <a class="system-nav__link" href="/fantasy"><span>06</span>Museum</a>
       </nav>
+
       <div class="system-nav__external">
         <a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
         <a href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
-        <a href="./assets/cv.pdf" target="_blank" rel="noopener noreferrer">Resume <span aria-hidden="true">↗</span></a>
+        <a href="./assets/cv.pdf" target="_blank" rel="noopener noreferrer">Résumé <span aria-hidden="true">↗</span></a>
       </div>
     </aside>
 
-    <main>
+    <main id="main">
+      <!-- ================================================================
+           00 — Opening
+           ================================================================ -->
       <section class="opening" id="start" aria-labelledby="opening-title">
         <div class="opening__grain" aria-hidden="true"></div>
+
         <div class="opening__title-wrap">
+          <ul class="opening__meta">
+            <li>Psychology &amp; Computer Science</li>
+            <li>Human–computer interaction</li>
+            <li>Open to internships</li>
+          </ul>
+
           <h1 class="opening__title" id="opening-title">
             <span data-reveal>HUNTER</span>
             <span class="opening__title-accent" data-reveal>SHAPIRO</span>
           </h1>
+
           <p class="opening__statement" data-reveal>
-            I study <em>psychology and computer science</em> because I care about both sides of technology:
-            the people using it and the systems being built.
+            I study <em>psychology and computer science</em> because I care about both sides of
+            technology: the people using it and the systems being built.
+          </p>
+
+          <div class="opening__actions" data-reveal>
+            <a class="button" href="#work">See the work <span class="button__arrow" aria-hidden="true">↗</span></a>
+            <a class="button button--ghost" href="/fantasy">Enter the museum <span class="button__arrow" aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <div class="opening__relationship" data-reveal>
+          <h2 class="visually-hidden">The two sides I work between</h2>
+
+          <button
+            class="identity-pole is-selected"
+            type="button"
+            aria-pressed="true"
+            data-response="Psychology gives me a way to notice the decisions, expectations, and mental models behind an interaction."
+          >
+            <span>Understanding</span><strong>people</strong>
+          </button>
+
+          <span class="opening__connector" aria-hidden="true">&amp;</span>
+
+          <button
+            class="identity-pole"
+            type="button"
+            aria-pressed="false"
+            data-response="Computer science gives me a way to turn an idea about people into an interface or a system."
+          >
+            <span>Building</span><strong>technology</strong>
+          </button>
+
+          <p class="opening__response" aria-live="polite">
+            Psychology gives me a way to notice the decisions, expectations, and mental models behind
+            an interaction.
           </p>
         </div>
 
-        <div class="opening__relationship" data-reveal aria-label="The relationship between understanding people and building technology">
-          <button class="identity-pole is-selected" type="button" data-opening-thought="people" aria-pressed="true"><span>Understanding</span><strong>people</strong></button>
-          <span class="opening__connector" aria-hidden="true">&amp;</span>
-          <button class="identity-pole" type="button" data-opening-thought="technology" aria-pressed="false"><span>Building</span><strong>technology</strong></button>
-          <p class="opening__response" aria-live="polite">Psychology gives me a way to notice the decisions, expectations, and mental models behind an interaction.</p>
-        </div>
-
-        <a class="scroll-prompt" href="#perspective"><span class="scroll-prompt__line" aria-hidden="true"></span>See how I think</a>
+        <a class="scroll-prompt" href="#perspective">
+          <span class="scroll-prompt__line" aria-hidden="true"></span>See how I think
+        </a>
       </section>
 
+      <!-- ================================================================
+           01 — Perspective
+           ================================================================ -->
       <section class="perspective section-shell" id="perspective" aria-labelledby="perspective-title">
         <div class="perspective__intro">
           <div data-reveal>
             <p class="section-number">01</p>
             <h2 id="perspective-title">I want to understand<br /><em>both sides.</em></h2>
           </div>
-          <p class="perspective__copy" data-reveal>People bring expectations, habits, and goals to technology. Software brings structure, possibility, and constraints. I am interested in the space where those two things meet.</p>
+          <p class="perspective__copy" data-reveal>
+            People bring expectations, habits, and goals to technology. Software brings structure,
+            possibility, and constraints. I am interested in the space where those two things meet.
+          </p>
         </div>
-        <div class="venn" data-reveal aria-label="An interactive Venn diagram showing Hunter's areas of interest">
-          <button class="venn__circle venn__circle--psychology is-selected" type="button" data-venn="psychology" aria-pressed="true"><span>Psychology</span><small>people &amp; behavior</small></button>
-          <button class="venn__circle venn__circle--computing" type="button" data-venn="computing" aria-pressed="false"><span>Computer<br />science</span><small>systems &amp; building</small></button>
-          <button class="venn__circle venn__circle--interaction" type="button" data-venn="interaction" aria-pressed="false"><span>Human<br />interaction</span><small>how it feels to use</small></button>
-          <div class="venn__center"><span>What I am<br />drawn to</span></div>
-          <div class="venn__response" aria-live="polite"><strong>Psychology</strong><p>How people learn, make sense of choices, and form expectations around an experience.</p></div>
+
+        <div class="venn" data-venn-active="psychology" data-reveal>
+          <h3 class="visually-hidden">Three overlapping interests</h3>
+
+          <!-- Small-screen diagram. Decorative: the list below carries the meaning. -->
+          <div class="venn__glyph" aria-hidden="true">
+            <span></span><span></span><span></span>
+            <span class="venn__glyph-core"></span>
+          </div>
+
+          <div class="venn__stage">
+            <button
+              class="venn__key venn__key--psychology is-selected"
+              type="button"
+              aria-pressed="true"
+              data-venn="psychology"
+              data-venn-detail="How people learn, make sense of choices, and form expectations around an experience."
+            >
+              <span class="venn__key-title">Psychology</span>
+              <span class="venn__key-note">People &amp; behaviour</span>
+            </button>
+
+            <button
+              class="venn__key venn__key--computing"
+              type="button"
+              aria-pressed="false"
+              data-venn="computing"
+              data-venn-detail="The systems behind an experience — from structure to interaction — and the work of building them."
+            >
+              <span class="venn__key-title">Computer science</span>
+              <span class="venn__key-note">Systems &amp; building</span>
+            </button>
+
+            <button
+              class="venn__key venn__key--interaction"
+              type="button"
+              aria-pressed="false"
+              data-venn="interaction"
+              data-venn-detail="The point where technology has to feel clear, useful, and worth returning to."
+            >
+              <span class="venn__key-title">Human interaction</span>
+              <span class="venn__key-note">How it feels to use</span>
+            </button>
+
+            <p class="venn__core" aria-hidden="true">What I am<br />drawn to</p>
+          </div>
+
+          <p class="venn__readout" aria-live="polite">
+            <strong>Psychology</strong>
+            <span>How people learn, make sense of choices, and form expectations around an experience.</span>
+          </p>
         </div>
       </section>
 
-      <section class="work section-shell" id="work" aria-labelledby="work-title">
+      <!-- ================================================================
+           02 — Fieldwork
+           ================================================================ -->
+      <section class="work section-shell on-dark" id="work" aria-labelledby="work-title">
         <div class="work__heading" data-reveal>
           <p class="section-number">02</p>
           <h2 id="work-title">WHAT I<br /><em>BUILD</em></h2>
           <p>Projects give me a way to turn a question into something people can actually use.</p>
         </div>
 
-        <article class="case-study case-study--mahou" data-reveal>
-          <div class="case-study__index" aria-hidden="true">01</div>
+        <!-- 01 — Mahou -->
+        <article class="case-study" data-reveal aria-labelledby="case-mahou">
+          <p class="case-study__index" aria-hidden="true">01</p>
+
           <div class="case-study__masthead">
-            <h3>Mahou<br /><em>Learning</em></h3>
-            <p class="case-study__summary">A Japanese language learning experience centered on practice, progress, and the small moments that help studying feel rewarding.</p>
+            <h3 id="case-mahou">Mahou<br /><em>Learning</em></h3>
+            <p class="case-study__summary">
+              A Japanese language learning experience centred on practice, progress, and the small
+              moments that make studying feel rewarding.
+            </p>
+            <ul class="case-study__tags">
+              <li>UI/UX</li>
+              <li>Gamification</li>
+              <li>Prototyping</li>
+              <li>Learning design</li>
+            </ul>
           </div>
-          <div class="mahou-preview">
-            <div class="mahou-preview__bar"><span></span><span></span><span></span><p>Mahou Learning / app preview</p></div>
-            <video muted autoplay loop playsinline controls preload="metadata" poster="./assets/images/mahou/mahou_home.png" aria-label="Mahou Learning application preview">
-              <source src="./assets/videos/mahou_preview.mov" />
-              Your browser does not support the Mahou Learning preview video.
-            </video>
-          </div>
+
+          <figure
+            class="media-frame media-frame--tall case-study__media"
+            data-media-frame
+            style="--media-ratio: 1206 / 2473"
+          >
+            <div class="media-frame__bar" aria-hidden="true">
+              <i></i><i></i><i></i>
+              <p>Mahou Learning / app preview</p>
+            </div>
+            <div class="media-frame__stage">
+              <img
+                class="media-frame__poster"
+                src="./assets/images/mahou/mahou_home.png"
+                alt=""
+                width="1206"
+                height="2473"
+                loading="lazy"
+                decoding="async"
+              />
+              <button class="media-frame__play" type="button">
+                <span class="media-frame__play-mark" aria-hidden="true"></span>
+                <span class="media-frame__play-label">Play the walkthrough</span>
+                <span class="media-frame__play-hint">52 MB · starts on tap</span>
+              </button>
+              <video
+                class="media-frame__video"
+                data-src="./assets/videos/mahou_preview.mov"
+                preload="none"
+                playsinline
+                loop
+                muted
+                aria-label="Mahou Learning application walkthrough"
+              ></video>
+            </div>
+          </figure>
+
           <div class="case-study__details">
             <dl>
               <div><dt>The idea</dt><dd>Japanese language learning that makes practice feel approachable.</dd></div>
               <div><dt>What I built</dt><dd>A learning interface focused on usability and engagement.</dd></div>
-              <div><dt>How I approached it</dt><dd>UI/UX, gamification, and interactive learning.</dd></div>
-              <div><dt>What I am exploring</dt><dd>How a learning interface can support retention and ease of use.</dd></div>
+              <div><dt>Approach</dt><dd>UI/UX, gamification, and interactive learning loops.</dd></div>
+              <div><dt>Exploring</dt><dd>How a learning interface can support retention and ease of use.</dd></div>
             </dl>
           </div>
         </article>
 
-        <article class="case-study case-study--recrd" data-reveal>
-          <div class="case-study__index" aria-hidden="true">02</div>
+        <!-- 02 — RECRD.TOP -->
+        <article class="case-study" data-reveal aria-labelledby="case-recrd">
+          <p class="case-study__index" aria-hidden="true">02</p>
+
           <div class="case-study__masthead">
-            <h3>RECRD.<br /><em>TOP</em></h3>
-            <p class="case-study__summary">A social experience explored through wireframes and interactive prototypes, with attention to interaction and engagement.</p>
-            <a class="case-study__link" href="https://recrd.top" target="_blank" rel="noopener noreferrer">Visit project <span aria-hidden="true">↗</span></a>
+            <h3 id="case-recrd">RECRD.<br /><em>TOP</em></h3>
+            <p class="case-study__summary">
+              A social experience explored through wireframes and interactive prototypes, with
+              attention to how interaction shapes engagement.
+            </p>
+            <ul class="case-study__tags">
+              <li>Figma</li>
+              <li>Wireframing</li>
+              <li>Prototyping</li>
+              <li>Social UX</li>
+            </ul>
+            <a class="rule-link case-study__link" href="https://recrd.top" target="_blank" rel="noopener noreferrer">
+              Visit project <span aria-hidden="true">↗</span>
+            </a>
           </div>
-          <div class="recrd-window">
-            <div class="recrd-window__bar"><span></span><span></span><span></span><p>recrd.top / preview</p></div>
-            <video muted autoplay loop playsinline controls aria-label="RECRD.TOP project preview">
-              <source src="./assets/videos/recrd_demo.mp4" type="video/mp4" />
-              Your browser does not support the project preview video.
-            </video>
-          </div>
+
+          <figure
+            class="media-frame case-study__media"
+            data-media-frame
+            data-media-fallback-href="https://recrd.top"
+            style="--media-ratio: 16 / 10"
+          >
+            <div class="media-frame__bar" aria-hidden="true">
+              <i></i><i></i><i></i>
+              <p>recrd.top / preview</p>
+            </div>
+            <div class="media-frame__stage">
+              <button class="media-frame__play" type="button">
+                <span class="media-frame__play-mark" aria-hidden="true"></span>
+                <span class="media-frame__play-label">Play the demo</span>
+                <span class="media-frame__play-hint">42 MB · starts on tap</span>
+              </button>
+              <video
+                class="media-frame__video"
+                data-src="./assets/videos/recrd_demo.mp4"
+                preload="none"
+                playsinline
+                loop
+                muted
+                aria-label="RECRD.TOP project demo"
+              ></video>
+            </div>
+          </figure>
+
           <div class="case-study__details">
             <dl>
-              <div><dt>Role</dt><dd>Designed wireframes and interactive prototypes</dd></div>
+              <div><dt>Role</dt><dd>Wireframes and interactive prototypes</dd></div>
               <div><dt>Focus</dt><dd>Social interaction and user engagement</dd></div>
               <div><dt>Tools</dt><dd>Figma, wireframing, prototyping</dd></div>
             </dl>
           </div>
         </article>
+
+        <!-- 03 — Museum of Fantasy Sports -->
+        <article class="case-study case-study--museum" data-reveal aria-labelledby="case-museum">
+          <p class="case-study__index" aria-hidden="true">03</p>
+
+          <div class="case-study__masthead">
+            <h3 id="case-museum">Museum of<br /><em>Fantasy Sports</em></h3>
+            <p class="case-study__summary">
+              A league history platform: champions, records, rivalries and the moments a spreadsheet
+              forgets, imported from ESPN and Yahoo and kept permanently. A full-stack app rather
+              than a page — providers, a sync that is safe to re-run, and an engine that derives
+              records from stored history.
+            </p>
+            <ul class="case-study__tags">
+              <li>Next.js 16</li>
+              <li>PostgreSQL</li>
+              <li>Prisma</li>
+              <li>Auth.js</li>
+              <li>Data modelling</li>
+            </ul>
+            <div class="case-study__links">
+              <a class="rule-link case-study__link" href="/fantasy">Open the app <span aria-hidden="true">↗</span></a>
+              <a class="rule-link case-study__link" href="/museum">Read the case study <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+
+          <a class="museum-door case-study__media" href="/fantasy" aria-labelledby="case-museum">
+            <span class="museum-door__eyebrow">Live application</span>
+            <span class="museum-door__title">Museum of Fantasy Sports</span>
+            <span class="museum-door__enter" aria-hidden="true">Enter <span>↗</span></span>
+          </a>
+
+          <div class="case-study__details">
+            <dl>
+              <div><dt>The idea</dt><dd>League history deserves an archive, not a leaderboard.</dd></div>
+              <div><dt>What I built</dt><dd>Providers for ESPN and Yahoo, a re-runnable sync, and an engine that derives records and awards.</dd></div>
+              <div><dt>Approach</dt><dd>One-way data flow, and a schema that separates a manager from the team they named that year.</dd></div>
+              <div><dt>Status</dt><dd>Built and deployed at <code>/fantasy</code>; importing real history waits on league credentials.</dd></div>
+            </dl>
+          </div>
+        </article>
       </section>
 
+      <!-- ================================================================
+           03 — Toolkit
+           ================================================================ -->
       <section class="methods section-shell" id="methods" aria-labelledby="methods-title">
         <div class="methods__intro" data-reveal>
-          <div><p class="section-number">03</p><h2 id="methods-title">A practice of<br /><em>translation.</em></h2></div>
+          <div>
+            <p class="section-number">03</p>
+            <h2 id="methods-title">A practice of<br /><em>translation.</em></h2>
+          </div>
           <p>Turning observations into interaction, and interaction into useful systems.</p>
         </div>
+
         <div class="method-ledger" data-reveal>
-          <div class="method-ledger__row"><span>01</span><h3>Design &amp; UX/UI</h3><p>Figma · Wireframing · Prototyping · User research · Usability testing · Accessibility testing</p></div>
-          <div class="method-ledger__row"><span>02</span><h3>Technical</h3><p>Java · Python · C · SQL</p></div>
-          <div class="method-ledger__row"><span>03</span><h3>Working tools</h3><p>Microsoft Office Suite · Social media platforms</p></div>
+          <div class="method-ledger__row">
+            <span aria-hidden="true">01</span>
+            <h3>Design &amp; UX/UI</h3>
+            <ul>
+              <li>Figma</li><li>Wireframing</li><li>Prototyping</li>
+              <li>User research</li><li>Usability testing</li><li>Accessibility testing</li>
+            </ul>
+          </div>
+          <div class="method-ledger__row">
+            <span aria-hidden="true">02</span>
+            <h3>Technical</h3>
+            <ul><li>Java</li><li>Python</li><li>C</li><li>SQL</li><li>JavaScript</li><li>HTML &amp; CSS</li></ul>
+          </div>
+          <div class="method-ledger__row">
+            <span aria-hidden="true">03</span>
+            <h3>Working tools</h3>
+            <ul><li>Microsoft Office Suite</li><li>Git</li><li>Social platforms</li></ul>
+          </div>
         </div>
-        <div class="methods__ticker" aria-label="Areas of interest"><span>PSYCHOLOGY</span><span>COMPUTER SCIENCE</span><span>AI</span><span>HCI</span><span>DESIGN</span><span>TECHNOLOGY</span></div>
+
+        <div class="methods__marquee" aria-hidden="true">
+          <ul class="methods__ticker">
+            <li>Psychology</li><li>Computer science</li><li>AI</li><li>HCI</li><li>Design</li><li>Technology</li>
+            <li>Psychology</li><li>Computer science</li><li>AI</li><li>HCI</li><li>Design</li><li>Technology</li>
+          </ul>
+        </div>
       </section>
 
+      <!-- ================================================================
+           04 — Questions
+           ================================================================ -->
       <section class="explore section-shell" id="explore" aria-labelledby="explore-title">
         <div class="explore__heading" data-reveal>
-          <div><p class="section-number">04</p><h2 id="explore-title">QUESTIONS I<br /><em>KEEP COMING BACK TO.</em></h2></div>
+          <div>
+            <p class="section-number">04</p>
+            <h2 id="explore-title">QUESTIONS I<br /><em>KEEP COMING BACK TO.</em></h2>
+          </div>
           <p>These are the things I am curious about, not problems I claim to have solved.</p>
         </div>
+
         <div class="question-list" data-reveal>
-          <button class="question-list__item is-open" type="button" aria-expanded="true"><span>01</span><strong>What makes a learning interface actually engaging?</strong><small>Mahou Learning sits inside this question.</small></button>
-          <button class="question-list__item" type="button" aria-expanded="false"><span>02</span><strong>How do people build mental models of complex systems?</strong><small>I am interested in the moments when a system starts to make sense.</small></button>
-          <button class="question-list__item" type="button" aria-expanded="false"><span>03</span><strong>How should AI adapt to the way humans think?</strong><small>A question about technology, behavior, and responsibility.</small></button>
-          <button class="question-list__item" type="button" aria-expanded="false"><span>04</span><strong>What makes an interaction feel clear, not just functional?</strong><small>Where interface decisions meet real human expectations.</small></button>
+          <div class="question-list__item is-open">
+            <h3>
+              <button class="question-list__trigger" type="button" aria-expanded="true" aria-controls="answer-1">
+                <span aria-hidden="true">01</span>
+                <strong>What makes a learning interface actually engaging?</strong>
+                <span class="question-list__sign" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="question-list__panel" id="answer-1" role="region">
+              <div><p>Mahou Learning sits inside this question — the difference between a lesson someone finishes and one they come back to.</p></div>
+            </div>
+          </div>
+
+          <div class="question-list__item">
+            <h3>
+              <button class="question-list__trigger" type="button" aria-expanded="false" aria-controls="answer-2">
+                <span aria-hidden="true">02</span>
+                <strong>How do people build mental models of complex systems?</strong>
+                <span class="question-list__sign" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="question-list__panel" id="answer-2" role="region">
+              <div><p>I am interested in the exact moment a system stops feeling arbitrary and starts making sense — and what an interface did to get someone there.</p></div>
+            </div>
+          </div>
+
+          <div class="question-list__item">
+            <h3>
+              <button class="question-list__trigger" type="button" aria-expanded="false" aria-controls="answer-3">
+                <span aria-hidden="true">03</span>
+                <strong>How should AI adapt to the way humans think?</strong>
+                <span class="question-list__sign" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="question-list__panel" id="answer-3" role="region">
+              <div><p>A question about technology, behaviour, and responsibility — and about who is expected to do the adapting.</p></div>
+            </div>
+          </div>
+
+          <div class="question-list__item">
+            <h3>
+              <button class="question-list__trigger" type="button" aria-expanded="false" aria-controls="answer-4">
+                <span aria-hidden="true">04</span>
+                <strong>What makes an interaction feel clear, not just functional?</strong>
+                <span class="question-list__sign" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="question-list__panel" id="answer-4" role="region">
+              <div><p>Plenty of interfaces work. Fewer of them tell you what just happened, what will happen next, and what to do if you were wrong.</p></div>
+            </div>
+          </div>
         </div>
       </section>
 
+      <!-- ================================================================
+           05 — Connect
+           ================================================================ -->
       <section class="contact section-shell" id="contact" aria-labelledby="contact-title">
         <div class="contact__layout">
           <div data-reveal>
             <p class="section-number section-number--light">05</p>
-            <h2 id="contact-title">LET’S<br /><em>TALK.</em></h2>
-            <p class="contact__invitation">If you are thinking about people, technology, or a project where the two meet, I would love to hear from you.</p>
+            <h2 id="contact-title">LET'S<br /><em>TALK.</em></h2>
+            <p class="contact__invitation">
+              If you are thinking about people, technology, or a project where the two meet, I would
+              love to hear from you.
+            </p>
+
             <div class="contact__direct-links">
-              <a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span>↗</span></a>
-              <a href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/" target="_blank" rel="noopener noreferrer">LinkedIn <span>↗</span></a>
-              <a href="./assets/cv.pdf" target="_blank" rel="noopener noreferrer">View résumé <span>↗</span></a>
+              <a href="mailto:hunter@sflinsider.com">hunter@sflinsider.com <span aria-hidden="true">↗</span></a>
+              <a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+              <a href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+              <a href="./assets/cv.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF) <span aria-hidden="true">↗</span></a>
             </div>
           </div>
-          <form class="contact__form" id="sendForm" data-reveal>
+
+          <form class="contact__form" id="sendForm" novalidate data-reveal>
+            <h3 class="visually-hidden">Send me a message</h3>
+
             <label for="name">Your name</label>
             <input type="text" name="name" id="name" autocomplete="name" />
-            <label for="email">Email address</label>
-            <input type="email" name="email" id="email" autocomplete="email" required />
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <input type="submit" id="sendButton" class="contact__submit" value="Transmit message" />
-            <aside id="form__info" class="hide" aria-live="polite"><p id="form__popup-txt"></p></aside>
+
+            <label for="email">Email address <span aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="email-error"
+            />
+            <p class="contact__error" id="email-error"></p>
+
+            <label for="message">Message <span aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="5" required aria-required="true" aria-describedby="message-error"></textarea>
+            <p class="contact__error" id="message-error"></p>
+
+            <div class="contact__trap" aria-hidden="true">
+              <label for="company">Company (leave this empty)</label>
+              <input type="text" name="company" id="company" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <button class="contact__submit" type="submit" id="sendButton">
+              <span class="contact__spinner" aria-hidden="true"></span>
+              <span class="contact__submit-label">Transmit message</span>
+            </button>
+
+            <p class="contact__status hide" id="form__info" role="status">
+              <span id="form__popup-txt"></span>
+            </p>
           </form>
         </div>
-        <footer class="site-footer"><p>Hunter Shapiro</p><a href="#start">Return to start ↑</a></footer>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__grid">
+        <div>
+          <p class="site-footer__wordmark">Hunter Shapiro</p>
+          <p class="site-footer__blurb">
+            Psychology and computer science, and the interfaces where they meet. Currently studying,
+            building, and open to internships.
+          </p>
+        </div>
+
+        <div>
+          <h2>Index</h2>
+          <ul>
+            <li><a href="#start">Start</a></li>
+            <li><a href="#perspective">Perspective</a></li>
+            <li><a href="#work">Fieldwork</a></li>
+            <li><a href="#methods">Toolkit</a></li>
+            <li><a href="#explore">Questions</a></li>
+            <li><a href="#contact">Connect</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Elsewhere</h2>
+          <ul>
+            <li><a href="/fantasy">Museum of Fantasy Sports <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/museum">…its case study <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://recrd.top" target="_blank" rel="noopener noreferrer">RECRD.TOP <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/huntershaps" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.linkedin.com/in/hunter-shapiro-4192b52a9/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="site-footer__baseline">
+        <p>Written by hand · No framework</p>
+        <a href="#start">Return to start ↑</a>
+      </div>
+    </footer>
   </body>
 </html>

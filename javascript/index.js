@@ -1,101 +1,90 @@
-import './sendEmail.js';
+import { qs, qsa } from './lib/dom.js';
+import { initNavigation } from './lib/nav.js';
+import { initReveal } from './lib/reveal.js';
+import { initMediaFrames } from './lib/mediaFrame.js';
+import { initContactForm } from './contactForm.js';
 
-const nav = document.querySelector('.system-nav');
-const toggle = document.querySelector('.system-toggle');
-const navLinks = [...document.querySelectorAll('.system-nav__link')];
-const sections = navLinks
-  .map((link) => document.querySelector(link.getAttribute('href')))
-  .filter(Boolean);
+initNavigation();
+initReveal();
+initMediaFrames();
+initContactForm();
+initOpeningPoles();
+initVenn();
+initQuestions();
 
-function setNavigation(open) {
-  nav.classList.toggle('is-open', open);
-  toggle.setAttribute('aria-expanded', String(open));
-  toggle.querySelector('.system-toggle__label').textContent = open ? 'Close' : 'Index';
+/**
+ * Generic single-select toggle group. Reads its copy from the DOM rather than
+ * from a parallel object in this file, so the text lives in exactly one place
+ * and cannot drift out of sync with the markup.
+ */
+function initToggleGroup(buttons, onSelect) {
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      buttons.forEach((candidate) => {
+        const selected = candidate === button;
+        candidate.classList.toggle('is-selected', selected);
+        candidate.setAttribute('aria-pressed', String(selected));
+      });
+      onSelect(button);
+    });
+  });
 }
 
-toggle?.addEventListener('click', () => setNavigation(!nav.classList.contains('is-open')));
-navLinks.forEach((link) => link.addEventListener('click', () => setNavigation(false)));
+/* 00 — the two poles in the opening. */
+function initOpeningPoles() {
+  const response = qs('.opening__response');
+  const poles = qsa('.identity-pole');
+  if (!response || !poles.length) return;
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('is-revealed');
-      revealObserver.unobserve(entry.target);
-    }
+  initToggleGroup(poles, (button) => {
+    response.textContent = button.dataset.response;
   });
-}, { threshold: 0.16 });
+}
 
-document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element));
+/* 01 — the Venn. One set of controls drives both the desktop diagram and the
+   small-screen list; the container's data attribute drives the mobile glyph. */
+function initVenn() {
+  const venn = qs('.venn');
+  const readout = qs('.venn__readout');
+  const keys = qsa('[data-venn]');
+  if (!venn || !readout || !keys.length) return;
 
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    const current = navLinks.find((link) => link.getAttribute('href') === `#${entry.target.id}`);
-    navLinks.forEach((link) => link.classList.toggle('is-current', link === current));
+  const title = qs('strong', readout);
+  const body = qs('span', readout);
+
+  initToggleGroup(keys, (button) => {
+    venn.dataset.vennActive = button.dataset.venn;
+    title.textContent = qs('.venn__key-title', button).textContent;
+    body.textContent = button.dataset.vennDetail;
   });
-}, { rootMargin: '-42% 0px -45% 0px', threshold: 0 });
+}
 
-sections.forEach((section) => sectionObserver.observe(section));
+/* 04 — questions, as a proper disclosure group. */
+function initQuestions() {
+  const items = qsa('.question-list__item');
 
-const openingThoughts = {
-  people: 'Psychology gives me a way to notice the decisions, expectations, and mental models behind an interaction.',
-  technology: 'Computer science gives me a way to turn an idea about people into an interface or system.'
-};
-const openingResponse = document.querySelector('.opening__response');
-const openingPoles = [...document.querySelectorAll('[data-opening-thought]')];
-
-openingPoles.forEach((pole) => {
-  pole.addEventListener('click', () => {
-    const thought = pole.dataset.openingThought;
-    openingPoles.forEach((item) => {
-      const selected = item === pole;
-      item.classList.toggle('is-selected', selected);
-      item.setAttribute('aria-pressed', String(selected));
+  const sync = () => {
+    items.forEach((item) => {
+      const open = item.classList.contains('is-open');
+      qs('.question-list__trigger', item)?.setAttribute('aria-expanded', String(open));
+      // Collapsed answers must not be tabbable or announced, whatever the
+      // height animation happens to be doing at that instant.
+      const panel = qs('.question-list__panel', item);
+      if (panel) panel.inert = !open;
     });
-    openingResponse.textContent = openingThoughts[thought];
-  });
-});
+  };
 
-const vennContent = {
-  psychology: {
-    title: 'Psychology',
-    text: 'How people learn, make sense of choices, and form expectations around an experience.'
-  },
-  computing: {
-    title: 'Computer science',
-    text: 'The systems behind an experience - from structure to interaction - and the work of building them.'
-  },
-  interaction: {
-    title: 'Human interaction',
-    text: 'The point where technology has to feel clear, useful, and worth returning to.'
-  }
-};
-const vennButtons = [...document.querySelectorAll('[data-venn]')];
-const vennResponse = document.querySelector('.venn__response');
+  items.forEach((item) => {
+    const trigger = qs('.question-list__trigger', item);
+    if (!trigger) return;
 
-vennButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    const selected = button.dataset.venn;
-    vennButtons.forEach((item) => {
-      const active = item === button;
-      item.classList.toggle('is-selected', active);
-      item.setAttribute('aria-pressed', String(active));
+    trigger.addEventListener('click', () => {
+      const willOpen = !item.classList.contains('is-open');
+      items.forEach((candidate) => candidate.classList.remove('is-open'));
+      if (willOpen) item.classList.add('is-open');
+      sync();
     });
-    vennResponse.innerHTML = `<strong>${vennContent[selected].title}</strong><p>${vennContent[selected].text}</p>`;
   });
-});
 
-const questions = [...document.querySelectorAll('.question-list__item')];
-questions.forEach((question) => {
-  question.addEventListener('click', () => {
-    const willOpen = !question.classList.contains('is-open');
-    questions.forEach((item) => {
-      item.classList.remove('is-open');
-      item.setAttribute('aria-expanded', 'false');
-    });
-    if (willOpen) {
-      question.classList.add('is-open');
-      question.setAttribute('aria-expanded', 'true');
-    }
-  });
-});
+  sync();
+}

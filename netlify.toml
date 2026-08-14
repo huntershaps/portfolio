@@ -1,0 +1,78 @@
+# Netlify configuration for the portfolio site.
+#
+# Served at huntershaps.netlify.app. huntermshaps.com currently redirects here
+# rather than serving the site, so the netlify.app origin is the one browsers
+# actually land on.
+#
+# The portfolio is plain static files, so there is nothing to build — Netlify
+# publishes this directory as-is. `server.js` is only used for local
+# development; in production Netlify serves the static files itself, which is
+# why the contact form needs the function below rather than that server.
+
+[build]
+  publish = "."
+  command = ""
+
+# --------------------------------------------------------------------------
+# The Museum of Fantasy Sports app.
+#
+# It is a separate Next.js deployment with `basePath: "/fantasy"`, proxied in
+# here so it shares this domain instead of needing one of its own. Status 200
+# (rather than 301) makes this a proxy: the URL in the address bar stays on
+# this origin, so the auth cookies Auth.js sets belong to this domain.
+#
+# Replace the target host with the fantasy app's own Netlify URL once it is
+# deployed. The /fantasy prefix appears on BOTH sides because the app is built
+# with that basePath and expects to receive it.
+# --------------------------------------------------------------------------
+[[redirects]]
+  from = "/fantasy"
+  to = "https://fantasy-sports-museum.netlify.app/fantasy"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/fantasy/*"
+  to = "https://fantasy-sports-museum.netlify.app/fantasy/:splat"
+  status = 200
+  force = true
+
+# --------------------------------------------------------------------------
+# Clean URLs for the portfolio's own pages.
+# --------------------------------------------------------------------------
+[[redirects]]
+  from = "/museum"
+  to = "/museum.html"
+  status = 200
+
+# Requested implicitly by browsers; without these each page load logs a 404.
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/assets/images/portfolio_icon.png"
+  status = 200
+
+[[redirects]]
+  from = "/apple-touch-icon.png"
+  to = "/assets/images/portfolio_icon.png"
+  status = 200
+
+[[redirects]]
+  from = "/apple-touch-icon-precomposed.png"
+  to = "/assets/images/portfolio_icon.png"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

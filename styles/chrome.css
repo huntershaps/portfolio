@@ -1,0 +1,353 @@
+/* ==========================================================================
+   Site chrome — the fixed index rail, its mobile drawer, and the footer.
+   Shared by every page.
+   ========================================================================== */
+
+/* --- Desktop rail ---------------------------------------------------------
+   A slim vertical index pinned to the left edge. Content is offset by
+   --rail, which collapses to 0 at the drawer breakpoint. */
+.system-nav {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  display: flex;
+  width: var(--rail);
+  flex-direction: column;
+  padding: 1.25rem 0 1rem;
+  background: var(--ink);
+  color: var(--paper);
+  --focus-ring: var(--acid);
+}
+
+.system-nav__identity {
+  display: grid;
+  padding: 1rem 0 1.15rem;
+  place-items: center;
+  color: var(--paper);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.13em;
+  text-decoration: none;
+}
+
+.system-nav__thin {
+  color: var(--acid);
+}
+
+.system-nav__rule {
+  height: 1px;
+  background: var(--rule-light);
+}
+
+.system-nav nav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.7rem;
+}
+
+.system-nav__link {
+  position: relative;
+  /* The rail runs vertically, so the block axis is the visual horizontal one.
+     This padding is what gives a rotated label a large enough hit area. */
+  padding-block: 0.55rem;
+  color: rgba(247, 241, 230, 0.62);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  transition: color var(--dur);
+}
+
+.system-nav__link span {
+  color: var(--acid);
+  font-size: 0.55rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+
+.system-nav__link::before {
+  position: absolute;
+  top: -0.65rem;
+  right: 50%;
+  width: 0.22rem;
+  height: 0.22rem;
+  border-radius: 50%;
+  background: var(--acid);
+  content: '';
+  opacity: 0;
+  transition: opacity var(--dur);
+}
+
+.system-nav__link:hover,
+.system-nav__link.is-current {
+  color: var(--paper);
+}
+
+.system-nav__link.is-current::before {
+  opacity: 1;
+}
+
+.system-nav__external {
+  display: none;
+}
+
+/* --- Mobile drawer toggle -------------------------------------------------- */
+.system-toggle {
+  display: none;
+}
+
+.system-scrim {
+  display: none;
+}
+
+main {
+  margin-left: var(--rail);
+}
+
+/* --- Footer ---------------------------------------------------------------- */
+.site-footer {
+  margin-left: var(--rail);
+  padding: var(--space-2xl) var(--gutter) var(--space-xl);
+  background: var(--ink);
+  color: var(--on-ink);
+  --focus-ring: var(--acid);
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(0, 0.7fr));
+  gap: var(--space-xl) var(--space-lg);
+}
+
+.site-footer__wordmark {
+  margin: 0 0 var(--space-sm);
+  color: var(--paper);
+  font-size: var(--display-xs);
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.site-footer__blurb {
+  max-width: 22rem;
+  color: var(--on-ink);
+  font-size: var(--text-md);
+}
+
+.site-footer h2 {
+  margin: 0 0 var(--space-sm);
+  color: var(--acid);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.site-footer ul {
+  display: grid;
+  gap: 0.15rem;
+}
+
+/* 2.5rem keeps these comfortably thumb-sized. At the previous padding they
+   measured 32px tall — over the 24px WCAG minimum, but tight in a stacked
+   list where the next link is a few pixels away. */
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0.3rem 0;
+  color: var(--on-ink);
+  font-size: var(--text-md);
+  text-decoration: none;
+  transition: color var(--dur-fast);
+}
+
+.site-footer a:hover {
+  color: var(--acid);
+}
+
+.site-footer__baseline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-top: var(--space-2xl);
+  border-top: 1px solid var(--rule-light);
+  padding-top: var(--space-sm);
+  color: rgba(247, 241, 230, 0.66);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.site-footer__baseline a {
+  color: rgba(247, 241, 230, 0.66);
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+/* ==========================================================================
+   Drawer breakpoint — tablet and below get a real drawer instead of a rail.
+   ========================================================================== */
+@media (max-width: 60rem) {
+  .system-toggle {
+    position: fixed;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 55;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.75rem;
+    border: 1px solid var(--ink);
+    padding: 0.55rem 0.8rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .system-toggle__mark {
+    width: 0.48rem;
+    height: 0.48rem;
+    border-radius: 50%;
+    background: var(--coral);
+  }
+
+  .system-toggle[aria-expanded='true'] {
+    border-color: var(--paper);
+    background: var(--ink);
+    color: var(--paper);
+    --focus-ring: var(--acid);
+  }
+
+  .system-toggle[aria-expanded='true'] .system-toggle__mark {
+    background: var(--acid);
+  }
+
+  .system-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 44;
+    display: block;
+    border: 0;
+    padding: 0;
+    background: rgba(13, 15, 28, 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur) var(--ease-out);
+  }
+
+  .system-scrim.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .system-nav {
+    z-index: 50;
+    width: min(20rem, 86vw);
+    padding: 1.2rem;
+    /* `visibility` keeps the closed drawer out of the tab order even before
+       the `inert` attribute is applied by script. */
+    visibility: hidden;
+    transform: translateX(-102%);
+    box-shadow: 8px 0 34px rgba(21, 23, 42, 0.28);
+    transition:
+      transform var(--dur) var(--ease-out),
+      visibility 0s linear var(--dur);
+  }
+
+  .system-nav.is-open {
+    visibility: visible;
+    transform: translateX(0);
+    transition-delay: 0s;
+  }
+
+  .system-nav__identity {
+    grid-template-columns: auto auto;
+    justify-content: start;
+    padding-bottom: 1.2rem;
+  }
+
+  .system-nav__rule {
+    margin: 0 -1.2rem;
+  }
+
+  .system-nav nav {
+    align-items: stretch;
+    justify-content: start;
+    gap: 0.1rem;
+    padding: 1.75rem 0;
+    overflow-y: auto;
+  }
+
+  .system-nav__link {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    min-height: 2.75rem;
+    padding: 0.55rem 0;
+    color: var(--paper);
+    font-size: 1rem;
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+
+  .system-nav__link::before {
+    display: none;
+  }
+
+  .system-nav__link.is-current {
+    color: var(--acid);
+  }
+
+  .system-nav__external {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    border-top: 1px solid var(--rule-light);
+    padding-top: var(--space-sm);
+  }
+
+  .system-nav__external a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 2.75rem;
+    color: rgba(247, 241, 230, 0.78);
+    font-size: var(--text-md);
+    text-decoration: none;
+  }
+
+  .system-nav__external span {
+    color: var(--acid);
+  }
+
+  main,
+  .site-footer {
+    margin-left: 0;
+  }
+
+  .site-footer__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+/* Locks the page behind an open drawer without the scroll position jumping. */
+body.is-nav-open {
+  overflow: hidden;
+}

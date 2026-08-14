@@ -11,6 +11,7 @@ const ROOT = __dirname;
 /* Where the Museum of Fantasy Sports app runs during local development. */
 const FANTASY_HOST = process.env.FANTASY_HOST || 'localhost';
 const FANTASY_PORT = process.env.FANTASY_PORT || 3000;
+const FANTASY_TIMEOUT_MS = Number(process.env.FANTASY_TIMEOUT_MS || 10000);
 
 /* Clean URLs -> files on disk. Add a line here when a page is added. */
 const ROUTES = {
@@ -206,21 +207,35 @@ async function handleContact(req, res) {
  * rather than serving a bare 404 that looks like a broken link.
  */
 function proxyToFantasyApp(req, res) {
+  let settled = false;
+
   const upstream = http.request(
     {
       host: FANTASY_HOST,
       port: FANTASY_PORT,
       path: req.url,
       method: req.method,
+      // A dev server that has had its build replaced underneath it will accept
+      // the connection and then never answer. Without a deadline the request
+      // hangs here too and the page just spins, which says nothing useful.
+      timeout: FANTASY_TIMEOUT_MS,
       headers: { ...req.headers, host: `${FANTASY_HOST}:${FANTASY_PORT}` }
     },
     (upstreamRes) => {
+      settled = true;
       res.writeHead(upstreamRes.statusCode, upstreamRes.headers);
       upstreamRes.pipe(res);
     }
   );
 
+  upstream.on('timeout', () => {
+    upstream.destroy();
+  });
+
   upstream.on('error', () => {
+    // If the response already began, the only honest thing left is to cut it.
+    if (settled || res.headersSent) return res.destroy();
+    settled = true;
     const body = `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fantasy app not running</title>

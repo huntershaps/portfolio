@@ -21,9 +21,18 @@
 # (rather than 301) makes this a proxy: the URL in the address bar stays on
 # this origin, so the auth cookies Auth.js sets belong to this domain.
 #
-# Replace the target host with the fantasy app's own Netlify URL once it is
-# deployed. The /fantasy prefix appears on BOTH sides because the app is built
-# with that basePath and expects to receive it.
+# !!! MUST EDIT BEFORE THIS WORKS !!!
+# `fantasy-sports-museum.netlify.app` below is a placeholder and does not
+# exist. Deploy the fantasy_sports repo as its own Netlify site first, then
+# replace that host in BOTH rules with the URL Netlify gives it. Until then
+# /fantasy returns a Netlify error page rather than the app.
+#
+# Netlify does not interpolate environment variables into netlify.toml
+# redirects, so this genuinely has to be edited here — there is no way to
+# supply it as a build variable.
+#
+# The /fantasy prefix appears on BOTH sides because the app is built with that
+# basePath and expects to receive it. Keep it on both.
 # --------------------------------------------------------------------------
 [[redirects]]
   from = "/fantasy"

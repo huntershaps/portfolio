@@ -58,9 +58,11 @@ Copy `.env.example` to `.env` to configure it. `.env` is gitignored.
 
 ## Notes
 
-- The two project videos (`assets/videos/recrd_demo.mp4`,
-  `assets/videos/mahou_preview.mov`) are tracked with Git LFS and are 42 MB and
-  52 MB. Run `git lfs pull` to fetch them. Both are behind click-to-play posters,
-  so the pages stay fast — and stay presentable — whether or not LFS is fetched.
+- Project videos are tracked with Git LFS; run `git lfs pull` to fetch them.
+  `mahou_preview.mp4` is 2.6 MB. `recrd_demo.mp4` is 42 MB and is the one worth
+  compressing next — the Mahou clip went from a 52 MB QuickTime file, which
+  browsers other than Safari would not play at all, to this.
+- Both sit behind click-to-play posters, so the page stays fast and stays
+  presentable whether or not LFS has been fetched.
 - The Museum ships with clearly-labelled **sample data**. See
   [`data/museum/README.md`](data/museum/README.md) for the shape of the real thing.

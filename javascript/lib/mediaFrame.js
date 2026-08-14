@@ -1,42 +1,76 @@
-import { qs, qsa, el } from './dom.js';
+import { qs, qsa, el, prefersReducedMotion } from './dom.js';
 
 /**
- * Click-to-play video windows.
+ * Project preview windows.
  *
- * The project previews are 40–50 MB and tracked with Git LFS. Autoplaying them
- * cost every visitor — especially on a phone — the whole download before they
- * had decided they wanted it, and left an empty black box whenever LFS had not
- * been fetched. Each frame now shows a designed poster until it is asked to
- * play, and states plainly what happened if the source will not load.
+ * A frame starts as a designed poster and begins playing when it scrolls into
+ * view, pausing again once it leaves. Nothing is fetched until that first
+ * intersection — the sources are large and `preload="none"` keeps them off the
+ * critical path — so a visitor who never reaches the case study never pays for
+ * the video.
+ *
+ * The play button is not decoration: autoplay is refused by some browsers and
+ * deliberately skipped for reduced-motion visitors, and in both cases the
+ * poster stays put and the button is the way in.
  */
 export function initMediaFrames(scope = document) {
   qsa('[data-media-frame]', scope).forEach(setupFrame);
 }
 
+const VISIBLE_ENOUGH = 0.35;
+
 function setupFrame(frame) {
   const trigger = qs('.media-frame__play', frame);
   const video = qs('video', frame);
-  if (!trigger || !video) return;
+  if (!video) return;
 
   const source = video.dataset.src;
+  let failed = false;
 
-  trigger.addEventListener('click', () => {
+  // Ambient playback: muted and looping is what makes autoplay permissible at
+  // all, and playsinline stops iOS taking the video fullscreen.
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+
+  const start = () => {
+    if (failed) return;
     if (!video.src && source) video.src = source;
     frame.classList.add('is-playing');
     video.controls = true;
     video.play().catch(() => {
-      /* Autoplay refusal is fine — the controls are visible. */
+      // Autoplay refused — fall back to the poster so there is still a way in.
+      if (!failed) frame.classList.remove('is-playing');
     });
-  });
+  };
+
+  trigger?.addEventListener('click', start);
 
   video.addEventListener(
     'error',
     () => {
+      failed = true;
       frame.classList.remove('is-playing');
       showFallback(frame, video);
     },
-    { once: true }
+    { once: true },
   );
+
+  // Reduced-motion visitors get the poster and the button, never motion they
+  // did not ask for.
+  if (prefersReducedMotion() || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio >= VISIBLE_ENOUGH) start();
+        else if (!video.paused) video.pause();
+      });
+    },
+    { threshold: [0, VISIBLE_ENOUGH] },
+  );
+
+  observer.observe(frame);
 }
 
 function showFallback(frame, video) {
@@ -52,7 +86,7 @@ function showFallback(frame, video) {
       el('p', {}, el('code', {}, 'git lfs pull'), ' fetches the source video.'),
       link
         ? el('p', {}, el('a', { href: link, target: '_blank', rel: 'noopener noreferrer' }, 'Visit the live project ↗'))
-        : null
-    )
+        : null,
+    ),
   );
 }

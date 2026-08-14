@@ -155,10 +155,14 @@ main {
   gap: 0.15rem;
 }
 
+/* 2.5rem keeps these comfortably thumb-sized. At the previous padding they
+   measured 32px tall — over the 24px WCAG minimum, but tight in a stacked
+   list where the next link is a few pixels away. */
 .site-footer a {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  min-height: 2.5rem;
   padding: 0.3rem 0;
   color: var(--on-ink);
   font-size: var(--text-md);

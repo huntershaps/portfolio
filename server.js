@@ -15,7 +15,12 @@ const FANTASY_PORT = process.env.FANTASY_PORT || 3000;
 /* Clean URLs -> files on disk. Add a line here when a page is added. */
 const ROUTES = {
   '/': 'index.html',
-  '/museum': 'museum.html'
+  '/museum': 'museum.html',
+  // Browsers request these regardless of what <link rel="icon"> says, and a
+  // 404 for each shows up as a console error on every page load.
+  '/favicon.ico': 'assets/images/portfolio_icon.png',
+  '/apple-touch-icon.png': 'assets/images/portfolio_icon.png',
+  '/apple-touch-icon-precomposed.png': 'assets/images/portfolio_icon.png'
 };
 
 const MIME_TYPES = {

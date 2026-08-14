@@ -41,6 +41,22 @@
   to = "/museum.html"
   status = 200
 
+# Requested implicitly by browsers; without these each page load logs a 404.
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/assets/images/portfolio_icon.png"
+  status = 200
+
+[[redirects]]
+  from = "/apple-touch-icon.png"
+  to = "/assets/images/portfolio_icon.png"
+  status = 200
+
+[[redirects]]
+  from = "/apple-touch-icon-precomposed.png"
+  to = "/assets/images/portfolio_icon.png"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]

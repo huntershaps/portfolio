@@ -58,11 +58,24 @@ Copy `.env.example` to `.env` to configure it. `.env` is gitignored.
 
 ## Notes
 
-- Project videos are tracked with Git LFS; run `git lfs pull` to fetch them.
-  `mahou_preview.mp4` is 2.6 MB. `recrd_demo.mp4` is 42 MB and is the one worth
-  compressing next — the Mahou clip went from a 52 MB QuickTime file, which
-  browsers other than Safari would not play at all, to this.
-- Both sit behind click-to-play posters, so the page stays fast and stays
-  presentable whether or not LFS has been fetched.
+- The project videos are stored in git directly — no Git LFS, so a plain
+  `git clone` gives you working files. They used to be LFS-tracked at 42 MB and
+  52 MB, which meant a clone without `git lfs pull` produced 133-byte pointers
+  and both previews silently failed.
+- `recrd_demo.mp4` is 1.1 MB (from 42 MB) and `mahou_preview.mp4` is 2.6 MB
+  (from a 52 MB QuickTime file that browsers other than Safari would not play
+  at all). Both were re-encoded with:
+
+  ```bash
+  ffmpeg -i in.mp4 -an -vf scale=1280:-2 -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart out.mp4
+  ```
+
+  `-an` drops the audio track, which a muted looping preview never uses, and
+  `+faststart` moves the index to the front so playback can begin before the
+  file has finished downloading.
+- Each preview starts when it scrolls into view and pauses when it leaves.
+  Nothing is fetched until that first intersection, and the poster with its
+  play button remains the way in when autoplay is refused or the visitor
+  prefers reduced motion.
 - The Museum ships with clearly-labelled **sample data**. See
   [`data/museum/README.md`](data/museum/README.md) for the shape of the real thing.

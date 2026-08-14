@@ -1,3 +1,8 @@
-*.mp4 filter=lfs diff=lfs merge=lfs -text
-*.mov filter=lfs diff=lfs merge=lfs -text
-*.webm filter=lfs diff=lfs merge=lfs -text
+# The project videos are small enough to live in git directly (1.1 MB and
+# 2.6 MB after compression). They were tracked with Git LFS when they were
+# 42 MB and 52 MB, which meant a plain `git clone` produced 133-byte pointer
+# files and the previews silently failed for anyone who had not run
+# `git lfs pull`. Storing them normally removes that failure mode.
+*.mp4 -text
+*.mov -text
+*.webm -text

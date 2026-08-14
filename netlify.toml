@@ -1,4 +1,8 @@
-# Netlify configuration for the portfolio site (huntermshaps.com).
+# Netlify configuration for the portfolio site.
+#
+# Served at huntershaps.netlify.app. huntermshaps.com currently redirects here
+# rather than serving the site, so the netlify.app origin is the one browsers
+# actually land on.
 #
 # The portfolio is plain static files, so there is nothing to build — Netlify
 # publishes this directory as-is. `server.js` is only used for local
@@ -15,7 +19,7 @@
 # It is a separate Next.js deployment with `basePath: "/fantasy"`, proxied in
 # here so it shares this domain instead of needing one of its own. Status 200
 # (rather than 301) makes this a proxy: the URL in the address bar stays on
-# huntermshaps.com, so the auth cookies Auth.js sets belong to this domain.
+# this origin, so the auth cookies Auth.js sets belong to this domain.
 #
 # Replace the target host with the fantasy app's own Netlify URL once it is
 # deployed. The /fantasy prefix appears on BOTH sides because the app is built

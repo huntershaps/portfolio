@@ -1,17 +1,17 @@
 # Netlify configuration for the portfolio site.
 #
-# Served at huntershaps.netlify.app. huntermshaps.com currently redirects here
-# rather than serving the site, so the netlify.app origin is the one browsers
-# actually land on.
+# Served at huntermshaps.com, which is the site's custom domain — the
+# *.netlify.app URL redirects to it, not the reverse.
 #
-# The portfolio is plain static files, so there is nothing to build — Netlify
-# publishes this directory as-is. `server.js` is only used for local
-# development; in production Netlify serves the static files itself, which is
-# why the contact form needs the function below rather than that server.
+# `server.js` runs the site in local development only. In production Netlify
+# serves the static files in dist/ directly, so the contact form has no backend
+# there yet.
 
 [build]
-  publish = "."
-  command = ""
+  # dist/ is assembled by build.js from an explicit allowlist. Publishing the
+  # repository root would put .env and .git on a public CDN.
+  publish = "dist"
+  command = "node build.js"
 
 # --------------------------------------------------------------------------
 # The Museum of Fantasy Sports app.

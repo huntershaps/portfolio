@@ -1,6 +1,6 @@
 /* ==========================================================================
    Design tokens
-   The single source of truth for colour, type, space and motion.
+   The single source of truth for colour, type, space, shape and motion.
    Every other stylesheet consumes these — no raw hex outside this file.
    ========================================================================== */
 
@@ -41,15 +41,24 @@
   --blue-deep: #3b4bd8;
   --coral: #f1775d;
   --brass: #d8b25e;
+  --violet: #8f7ce6;
+
+  /* Surfaces. Cards sit a shade above the paper rather than being outlined
+     twice; the sunken tone is for wells and inset panels. */
+  --surface: #fffdf7;
+  --surface-sunken: #efe8da;
+  --surface-dark: #1b1e33;
 
   /* Foreground colours, chosen so body copy clears WCAG AA on its surface.
      --coral and --blue are the brand colours and stay as they are on dark
-     surfaces and in non-text roles; the deepened pair below is what gets used
+     surfaces and in non-text roles; the deepened set below is what gets used
      for type on paper, where the originals only reach ~2.5:1 and ~3.5:1. */
   --muted: #5a5d69;              /* on --paper / --mist            5.4:1 */
   --coral-ink: #ad3f26;          /* coral, small text on paper/mist 4.7:1 */
   --coral-display: #cf5334;      /* coral, display text on paper    3.7:1 */
   --blue-ink: #3b4bd8;           /* blue, as text on paper          5.7:1 */
+  --violet-ink: #5b46ba;         /* violet, as text on paper        5.9:1 */
+  --brass-ink: #7a5a12;          /* brass, as text on paper         5.3:1 */
   --on-ink: rgba(247, 241, 230, 0.82);
   --on-ink-strong: var(--paper);
   --on-blue: #dfe2f5;            /* on --blue-deep                 5.1:1 */
@@ -61,20 +70,29 @@
   --rule-light: rgba(247, 241, 230, 0.24);
   --rule-light-strong: rgba(247, 241, 230, 0.45);
 
+  /* Per-project accent. Components read --accent / --accent-ink; the
+     [data-accent] rules below set them. */
+  --accent: var(--ink);
+  --accent-ink: var(--ink);
+
   /* --- Typography ------------------------------------------------------- */
   --font-sans: Centra, 'Helvetica Neue', Arial, sans-serif;
   --font-serif: Georgia, 'Times New Roman', serif;
   --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, monospace;
 
-  --text-2xs: 0.625rem;
-  --text-xs: 0.7rem;
-  --text-sm: 0.8125rem;
-  --text-md: 0.9rem;
-  --text-base: clamp(0.95rem, 0.91rem + 0.2vw, 1.0625rem);
-  --text-lg: clamp(1rem, 0.94rem + 0.3vw, 1.15rem);
+  /* Nothing on the page is smaller than --text-2xs, and at 12px it is still
+     comfortably readable. The previous scale bottomed out at 10px, which was
+     too small for the metadata that carries most of the site's detail. */
+  --text-2xs: 0.875rem;    /* 14px — the floor; nothing is smaller */
+  --text-xs: 0.9375rem;    /* 15px */
+  --text-sm: 1rem;         /* 16px */
+  --text-md: 1.0625rem;    /* 17px */
+  --text-base: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-lg: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
 
   /* Display sizes. Minimums are tuned to fit a 320px viewport without
      hyphenation or overflow; maximums hold the editorial scale on desktop. */
+  --display-2xs: clamp(1.25rem, 1.1rem + 0.7vw, 1.6rem);
   --display-xs: clamp(1.5rem, 1.2rem + 1.5vw, 2.1rem);
   --display-sm: clamp(2rem, 1.5rem + 2.4vw, 3.2rem);
   --display-md: clamp(2.6rem, 1.55rem + 5.2vw, 6.4rem);
@@ -82,7 +100,7 @@
   --display-xl: clamp(3.5rem, 1.5rem + 10vw, 11rem);
 
   --tracking-display: -0.055em;
-  --tracking-label: 0.1em;
+  --tracking-label: 0.03em;
   --leading-display: 0.86;
   --leading-body: 1.55;
 
@@ -98,12 +116,24 @@
   --space-3xl: clamp(4rem, 9vw, 9rem);
 
   --gutter: clamp(1.25rem, 5vw, 6rem);
-  --section-y: clamp(4.5rem, 9vw, 9rem);
+  --section-y: clamp(3.25rem, 5.5vw, 5.5rem);
   --measure: 34rem;
 
   /* --- Structure -------------------------------------------------------- */
   --rail: 5.45rem;               /* width of the fixed desktop index rail */
   --border-hair: 1px;
+
+  /* Shape. Deliberately small: this is an editorial layout, and heavily
+     rounded cards are the house style of every template it should not
+     resemble. */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(21, 23, 42, 0.06);
+  --shadow-md: 0 12px 30px -18px rgba(21, 23, 42, 0.45);
+  --shadow-lg: 0 30px 60px -32px rgba(21, 23, 42, 0.55);
 
   /* --- Motion ----------------------------------------------------------- */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -116,6 +146,14 @@
   --focus-ring-offset: var(--paper);
 }
 
+/* Per-project accents. Set on a card or a page so every accented detail
+   inside it — rules, chips, hovers — moves together. */
+[data-accent='blue']   { --accent: var(--blue);   --accent-ink: var(--blue-ink); }
+[data-accent='coral']  { --accent: var(--coral);  --accent-ink: var(--coral-ink); }
+[data-accent='violet'] { --accent: var(--violet); --accent-ink: var(--violet-ink); }
+[data-accent='brass']  { --accent: var(--brass);  --accent-ink: var(--brass-ink); }
+[data-accent='acid']   { --accent: var(--acid);   --accent-ink: #4d5a12; }
+
 /* Dark sections opt in by redefining these variables rather than restyling
    every control inside them: the focus ring needs a light colour, and the
    accent mark can go back to full-strength coral, which only needs deepening
@@ -124,7 +162,20 @@
   --focus-ring: var(--acid);
   --focus-ring-offset: var(--ink);
   --accent-mark: var(--coral);
+  --surface: var(--ink-raised);
+  --surface-sunken: var(--ink-sunken);
+  --rule: var(--rule-light);
+  --rule-strong: var(--rule-light-strong);
+  --muted: rgba(247, 241, 230, 0.68);
 }
+
+/* On a dark surface the deepened inks lose their contrast, so each accent
+   goes back to a light tint. */
+.on-dark[data-accent='blue']   { --accent-ink: #aab5ff; }
+.on-dark[data-accent='coral']  { --accent-ink: #ffab95; }
+.on-dark[data-accent='violet'] { --accent-ink: #c3b6ff; }
+.on-dark[data-accent='brass']  { --accent-ink: #ecc978; }
+.on-dark[data-accent='acid']   { --accent-ink: var(--acid); }
 
 @media (max-width: 60rem) {
   :root {

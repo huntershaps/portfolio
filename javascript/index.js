@@ -3,12 +3,15 @@ import { initNavigation } from './lib/nav.js';
 import { initReveal } from './lib/reveal.js';
 import { initMediaFrames } from './lib/mediaFrame.js';
 import { initContactForm } from './contactForm.js';
+import { initPalette } from './lib/palette.js';
+import { initMode } from './lib/mode.js';
 
 initNavigation();
 initReveal();
 initMediaFrames();
 initContactForm();
-initOpeningPoles();
+initPalette();
+initMode();
 initVenn();
 initQuestions();
 
@@ -30,18 +33,7 @@ function initToggleGroup(buttons, onSelect) {
   });
 }
 
-/* 00 — the two poles in the opening. */
-function initOpeningPoles() {
-  const response = qs('.opening__response');
-  const poles = qsa('.identity-pole');
-  if (!response || !poles.length) return;
-
-  initToggleGroup(poles, (button) => {
-    response.textContent = button.dataset.response;
-  });
-}
-
-/* 01 — the Venn. One set of controls drives both the desktop diagram and the
+/* 05 — the Venn. One set of controls drives both the desktop diagram and the
    small-screen list; the container's data attribute drives the mobile glyph. */
 function initVenn() {
   const venn = qs('.venn');
@@ -59,7 +51,7 @@ function initVenn() {
   });
 }
 
-/* 04 — questions, as a proper disclosure group. */
+/* 05 — questions, as a proper disclosure group. */
 function initQuestions() {
   const items = qsa('.question-list__item');
 

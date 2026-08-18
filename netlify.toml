@@ -47,12 +47,23 @@
   force = true
 
 # --------------------------------------------------------------------------
-# Clean URLs for the portfolio's own pages.
+# The portfolio's own pages.
+#
+# build.js emits every route as a real directory with an index.html, so
+# /work/<slug> is served directly and needs no rule here.
+#
+# /museum was a hand-written case study. Its content now lives on the generated
+# project page, so the old URL is redirected rather than broken.
 # --------------------------------------------------------------------------
 [[redirects]]
   from = "/museum"
-  to = "/museum.html"
-  status = 200
+  to = "/work/museum-of-fantasy-sports"
+  status = 301
+
+[[redirects]]
+  from = "/museum.html"
+  to = "/work/museum-of-fantasy-sports"
+  status = 301
 
 # Requested implicitly by browsers; without these each page load logs a 404.
 [[redirects]]

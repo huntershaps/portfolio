@@ -1,0 +1,715 @@
+/* ==========================================================================
+   Components shared by the homepage and the case-study pages.
+   Anything used on exactly one page lives in that page's stylesheet instead.
+   ========================================================================== */
+
+/* --- Tag row --------------------------------------------------------------
+   The technology list. Reads as data, not as decoration. */
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.tag-row li {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.6rem;
+  color: var(--muted);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.tag-row--quiet li {
+  border-color: transparent;
+  padding-inline: 0;
+  font-size: var(--text-sm);
+}
+
+.tag-row--quiet li + li::before {
+  margin-right: 0.6rem;
+  color: var(--rule-strong);
+  content: '·';
+}
+
+.tag-row__more {
+  color: var(--accent-ink);
+}
+
+/* --- Status chip ---------------------------------------------------------- */
+/* A plain labelled dot. It was a bordered pill, which read as a badge stuck on
+   the card rather than a fact about the project. */
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-chip__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status-chip[data-status='live'],
+.status-chip[data-status='in-development'] {
+  color: var(--accent-ink);
+}
+
+/* Only the two genuinely active states pulse, and only if motion is wanted. */
+@media (prefers-reduced-motion: no-preference) {
+  .status-chip[data-status='in-development'] .status-chip__dot,
+  .status-chip[data-status='live'] .status-chip__dot {
+    animation: chip-pulse 2.6s var(--ease-out) infinite;
+  }
+}
+
+@keyframes chip-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.status-chip[data-status='completed'] {
+  color: var(--muted);
+}
+
+.status-chip[data-status='prototype'],
+.status-chip[data-status='concept'] {
+  color: var(--muted);
+}
+
+/* --- Media frame ----------------------------------------------------------
+   A project preview dressed as a small application window. The poster is
+   what loads; the video is fetched only when the frame is reached. */
+.media-frame {
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--surface-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.media-frame--tall {
+  max-width: 20rem;
+  margin-inline: auto;
+}
+
+.media-frame__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-bottom: 1px solid rgba(247, 241, 230, 0.12);
+  padding: 0.55rem 0.7rem;
+  background: rgba(13, 15, 28, 0.85);
+}
+
+.media-frame__bar i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgba(247, 241, 230, 0.26);
+}
+
+.media-frame__bar p {
+  margin-left: 0.5rem;
+  overflow: hidden;
+  color: rgba(247, 241, 230, 0.6);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.04em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media-frame__stage {
+  position: relative;
+  aspect-ratio: var(--media-ratio, 16 / 10);
+  background: var(--ink-sunken);
+}
+
+.media-frame__poster,
+.media-frame__poster picture,
+.media-frame__poster img,
+.media-frame__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.media-frame__video {
+  opacity: 0;
+  transition: opacity var(--dur);
+}
+
+.media-frame.is-playing .media-frame__video {
+  position: relative;
+  opacity: 1;
+}
+
+.media-frame.is-playing .media-frame__poster,
+.media-frame.is-playing .media-frame__play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.media-frame__play {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 0;
+  padding: 1rem;
+  background: linear-gradient(180deg, rgba(13, 15, 28, 0.55), rgba(13, 15, 28, 0.88));
+  color: var(--paper);
+  text-align: center;
+  transition: opacity var(--dur), background var(--dur);
+}
+
+.media-frame__play-mark {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(247, 241, 230, 0.55);
+  border-radius: 50%;
+  place-items: center;
+  transition: transform var(--dur) var(--ease-out), border-color var(--dur);
+}
+
+.media-frame__play-mark::before {
+  border-top: 0.42rem solid transparent;
+  border-bottom: 0.42rem solid transparent;
+  border-left: 0.68rem solid currentColor;
+  content: '';
+  transform: translateX(0.1rem);
+}
+
+.media-frame__play:hover {
+  background: linear-gradient(180deg, rgba(13, 15, 28, 0.45), rgba(13, 15, 28, 0.8));
+}
+
+.media-frame__play:hover .media-frame__play-mark {
+  border-color: var(--acid);
+  transform: scale(1.06);
+}
+
+.media-frame__play-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.media-frame__play-hint {
+  color: rgba(247, 241, 230, 0.66);
+  font-size: var(--text-2xs);
+}
+
+.media-frame__fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  color: var(--on-ink);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+.media-frame__fallback a {
+  color: var(--acid);
+}
+
+/* --- Empty preview --------------------------------------------------------
+   A designed absence, for a project with nothing public to show yet. */
+.media-empty {
+  display: grid;
+  min-height: 12rem;
+  align-content: center;
+  justify-items: center;
+  gap: 0.75rem;
+  border: 1px dashed var(--rule-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0 8px,
+      color-mix(in srgb, var(--ink) 4%, transparent) 8px 9px
+    );
+}
+
+.media-empty__mark {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+}
+
+.media-empty__text {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.06em;
+}
+
+/* --- Museum door ----------------------------------------------------------
+   The Museum has no screenshot to show, so its card is a doorway instead of
+   a fake preview. */
+.museum-door {
+  position: relative;
+  display: grid;
+  min-height: 14rem;
+  align-content: center;
+  justify-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(89, 113, 255, 0.28), transparent 70%),
+    var(--ink-sunken);
+  color: var(--paper);
+  text-align: center;
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur);
+}
+
+.museum-door::after {
+  position: absolute;
+  inset: 0.6rem;
+  border: 1px solid rgba(247, 241, 230, 0.18);
+  border-radius: var(--radius-sm);
+  content: '';
+  pointer-events: none;
+  transition: inset var(--dur) var(--ease-out), border-color var(--dur);
+}
+
+.museum-door:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.museum-door:hover::after {
+  inset: 0.35rem;
+  border-color: rgba(89, 113, 255, 0.6);
+}
+
+.museum-door__eyebrow {
+  color: var(--blue);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.02em;
+}
+
+.museum-door__title {
+  max-width: 14rem;
+  font-size: var(--display-2xs);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.museum-door__enter {
+  margin-top: 0.35rem;
+  color: rgba(247, 241, 230, 0.72);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+}
+
+.museum-door__enter span {
+  color: var(--acid);
+}
+
+/* --- Prose ---------------------------------------------------------------- */
+.prose {
+  max-width: var(--measure);
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.prose__lead {
+  font-size: var(--text-lg);
+}
+
+.prose--lead > p:first-child {
+  color: var(--ink);
+  font-size: var(--display-2xs);
+  line-height: 1.35;
+  text-wrap: pretty;
+}
+
+.work-page .prose--lead > p:first-child {
+  color: inherit;
+}
+
+.prose p {
+  color: var(--muted);
+}
+
+.prose--lead > p:first-child,
+.prose__lead {
+  color: inherit;
+}
+
+.prose__note {
+  border-left: 2px solid var(--accent);
+  padding-left: var(--space-sm);
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+/* --- Bullet list ---------------------------------------------------------- */
+.bullet-list {
+  max-width: var(--measure);
+  display: grid;
+  gap: 0.6rem;
+}
+
+.bullet-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  color: var(--muted);
+}
+
+.bullet-list li::before {
+  position: absolute;
+  top: 0.65em;
+  left: 0.15rem;
+  width: 0.4rem;
+  height: 1px;
+  background: var(--accent);
+  content: '';
+}
+
+/* --- Flow ----------------------------------------------------------------- */
+.flow {
+  display: grid;
+  gap: 1px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--rule);
+  overflow: hidden;
+}
+
+@media (min-width: 48rem) {
+  .flow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.flow__step {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  padding: var(--space-md);
+  background: var(--surface);
+}
+
+.flow__index {
+  color: var(--accent-ink);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+}
+
+.flow__step h4 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.flow__step p {
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+/* --- Tenets --------------------------------------------------------------- */
+.tenets {
+  display: grid;
+  gap: var(--space-md);
+}
+
+@media (min-width: 52rem) {
+  .tenets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tenet {
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  border: 1px solid var(--rule);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  background: var(--surface);
+}
+
+.tenet__title {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.tenet p {
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+.tenet__why {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.6rem;
+}
+
+.tenet__why strong {
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+
+/* --- Spec list ------------------------------------------------------------ */
+.spec-list {
+  border-top: 1px solid var(--rule);
+}
+
+.spec-list__row {
+  display: grid;
+  gap: 0.15rem var(--space-md);
+  border-bottom: 1px solid var(--rule);
+  padding: 0.85rem 0;
+}
+
+@media (min-width: 40rem) {
+  .spec-list__row {
+    grid-template-columns: 10rem minmax(0, 1fr);
+    align-items: baseline;
+  }
+}
+
+.spec-list dt {
+  color: var(--muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+}
+
+.spec-list dd {
+  font-size: var(--text-md);
+}
+
+/* --- Placard (case-study section heading) --------------------------------- */
+.placard {
+  max-width: 42rem;
+  margin-bottom: var(--space-lg);
+}
+
+.placard__catalog {
+  color: var(--accent-ink);
+  font-size: var(--text-xs);
+  letter-spacing: 0.02em;
+}
+
+.placard__title {
+  margin-top: 0.35rem;
+  font-size: var(--display-xs);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.placard__note {
+  margin-top: var(--space-xs);
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+/* --- Gallery -------------------------------------------------------------- */
+.gallery {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+}
+
+.gallery__item {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.gallery__open {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: 0;
+  background: var(--surface-dark);
+  transition: transform var(--dur) var(--ease-out), box-shadow var(--dur);
+}
+
+.gallery__open img {
+  width: 100%;
+  height: auto;
+}
+
+.gallery__open:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.gallery__zoom {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.6rem;
+  background: rgba(13, 15, 28, 0.78);
+  color: var(--paper);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transition: opacity var(--dur);
+}
+
+.gallery__open:hover .gallery__zoom,
+.gallery__open:focus-visible .gallery__zoom {
+  opacity: 1;
+}
+
+.gallery figcaption {
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+/* --- Lightbox ------------------------------------------------------------- */
+.lightbox {
+  width: min(92vw, 60rem);
+  max-width: none;
+  max-height: 92vh;
+  border: 1px solid var(--rule-light);
+  border-radius: var(--radius-md);
+  padding: 0;
+  background: var(--ink-sunken);
+  color: var(--paper);
+}
+
+.lightbox::backdrop {
+  background: rgba(13, 15, 28, 0.82);
+}
+
+.lightbox__image {
+  width: 100%;
+  max-height: 88vh;
+  object-fit: contain;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--rule-light);
+  border-radius: 50%;
+  background: rgba(13, 15, 28, 0.7);
+  color: var(--paper);
+  font-size: 1.4rem;
+  line-height: 1;
+  place-items: center;
+  --focus-ring: var(--acid);
+}
+
+.lightbox__close:hover {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* --- Design evolution ----------------------------------------------------- */
+.evolution {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.evolution__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.evolution__tab {
+  display: grid;
+  gap: 0.1rem;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.9rem;
+  background: transparent;
+  text-align: left;
+  transition: border-color var(--dur-fast), background var(--dur-fast);
+}
+
+.evolution__tab:hover {
+  border-color: var(--accent);
+}
+
+.evolution__tab.is-active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.evolution__tab-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.evolution__tab-when {
+  color: var(--muted);
+  font-size: var(--text-2xs);
+}
+
+.evolution__stage {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  background: var(--surface-sunken);
+}
+
+.evolution__panel img {
+  width: 100%;
+  height: auto;
+}
+
+.evolution__caption {
+  display: grid;
+  gap: 0.2rem;
+  border-top: 1px solid var(--rule);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+.evolution__caption-label {
+  color: var(--accent-ink);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .evolution__panel:not([hidden]) {
+    animation: evolution-in var(--dur) var(--ease-out) both;
+  }
+}
+
+@keyframes evolution-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

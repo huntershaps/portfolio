@@ -1,0 +1,303 @@
+/* ==========================================================================
+   Case-study pages (/work/<slug>)
+   The chrome and every content block are shared; this file is only the page's
+   own layout.
+   ========================================================================== */
+
+.work-page {
+  display: block;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.work-hero {
+  position: relative;
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  padding: clamp(4.5rem, 9vh, 6.5rem) var(--gutter) clamp(2.5rem, 5vh, 3.5rem);
+  background:
+    radial-gradient(90% 70% at 12% 0%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 70%),
+    var(--ink);
+  color: var(--on-ink);
+  isolation: isolate;
+  --focus-ring: var(--acid);
+  --muted: rgba(247, 241, 230, 0.68);
+  --rule: var(--rule-light);
+  --rule-strong: var(--rule-light-strong);
+}
+
+@media (min-width: 62rem) {
+  .work-hero {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+}
+
+.work-hero__grain {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(247, 241, 230, 0.16) 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.35;
+  mask-image: radial-gradient(120% 90% at 20% 10%, #000 20%, transparent 75%);
+}
+
+.work-hero__text {
+  display: grid;
+  align-content: start;
+  gap: var(--space-sm);
+}
+
+.work-hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.02em;
+}
+
+.work-hero__eyebrow a {
+  color: var(--accent-ink);
+  text-decoration: none;
+  text-underline-offset: 0.3em;
+}
+
+.work-hero__eyebrow a:hover {
+  text-decoration: underline;
+}
+
+.work-hero__title {
+  max-width: 16ch;
+  color: var(--paper);
+  font-size: var(--display-md);
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.work-hero__tagline {
+  max-width: 36rem;
+  color: var(--on-ink);
+  font-size: var(--text-lg);
+  text-wrap: pretty;
+}
+
+.work-hero__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-top: 0.25rem;
+}
+
+.work-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: var(--space-xs);
+}
+
+.work-hero__meta {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--rule-light);
+  padding-top: var(--space-md);
+}
+
+@media (min-width: 42rem) {
+  .work-hero__meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+}
+
+.work-hero__meta dt {
+  color: var(--accent-ink);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.1em;
+}
+
+.work-hero__meta dd {
+  margin-top: 0.2rem;
+  color: var(--on-ink);
+  font-size: var(--text-md);
+  text-wrap: pretty;
+}
+
+.work-hero__media {
+  position: relative;
+}
+
+/* ==========================================================================
+   On this page
+   ========================================================================== */
+.work-index {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.25rem;
+  border-bottom: 1px solid var(--rule);
+  /* Full-bleed bar, but its contents line up with the centred article. */
+  padding: 0.75rem max(var(--gutter), calc((100% - 82rem) / 2 + var(--gutter)));
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.work-index__label {
+  color: var(--muted);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.02em;
+}
+
+.work-index ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+}
+
+.work-index a {
+  display: inline-block;
+  padding: 0.25rem 0;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  text-underline-offset: 0.35em;
+  transition: color var(--dur-fast);
+}
+
+.work-index a:hover {
+  color: var(--accent-ink);
+  text-decoration: underline;
+}
+
+/* The sticky index would otherwise cover the heading it just scrolled to. */
+.work-section {
+  scroll-margin-top: 4.5rem;
+}
+
+/* ==========================================================================
+   Body
+   ========================================================================== */
+.work-body {
+  display: grid;
+  gap: clamp(2.25rem, 4.5vw, 3.75rem);
+  max-width: 82rem;
+  margin-inline: auto;
+  padding: clamp(2.25rem, 4.5vw, 3.5rem) var(--gutter);
+}
+
+.work-section {
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* Above this width the heading moves beside the content instead of sitting on
+   top of it. Prose stays at a readable measure either way — this is what stops
+   the right half of the page reading as empty. */
+@media (min-width: 64rem) {
+  .work-section {
+    grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+    gap: var(--space-lg) clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+
+  .work-section .placard {
+    margin-bottom: 0;
+  }
+}
+
+.work-section__blocks {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+/* ==========================================================================
+   Next project
+   ========================================================================== */
+.work-next {
+  display: grid;
+  gap: var(--space-md);
+  align-items: end;
+  border-top: 1px solid var(--rule);
+  padding: var(--space-lg) max(var(--gutter), calc((100% - 82rem) / 2 + var(--gutter)))
+    var(--space-xl);
+}
+
+@media (min-width: 48rem) {
+  .work-next {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+.work-next__link {
+  display: grid;
+  gap: 0.3rem;
+  text-decoration: none;
+}
+
+.work-next__label {
+  color: var(--muted);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.02em;
+}
+
+.work-next__title {
+  font-size: var(--display-xs);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  transition: color var(--dur-fast);
+}
+
+.work-next__link:hover .work-next__title {
+  color: var(--accent-ink);
+}
+
+.work-next__tagline {
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: var(--text-md);
+}
+
+.work-next__all {
+  justify-self: start;
+  font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 62rem) {
+  .work-hero__media {
+    max-width: 34rem;
+  }
+}
+
+@media (max-width: 40rem) {
+  .work-index {
+    /* A sticky bar that wraps to three lines is a nuisance on a phone. */
+    position: static;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .work-hero__actions .button {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+/* A case study is read start to finish, so the measure can be a touch wider
+   than the site default without becoming tiring. */
+.work-page .prose {
+  max-width: 40rem;
+}

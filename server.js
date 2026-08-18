@@ -1,27 +1,51 @@
-const http = require('http');
-const fs = require('fs');
-const fsp = require('fs/promises');
-const path = require('path');
-require('dotenv').config();
-const nodemailer = require('nodemailer');
+/**
+ * Development server.
+ *
+ * In production Netlify serves the static output of `node build.js`. This
+ * server exists so local development needs no build step: it renders the same
+ * routes from the same content files, in memory, on every request.
+ *
+ * Run `npm run dev` to have Node restart it when a content or render file
+ * changes; `npm start` runs it once.
+ *
+ * It also handles the contact form, which the static deploy has no backend for.
+ */
+
+import http from 'node:http';
+import fs from 'node:fs';
+import fsp from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import dotenv from 'dotenv';
+import nodemailer from 'nodemailer';
+import { routes } from './scripts/render/site.js';
+
+dotenv.config();
 
 const PORT = process.env.PORT || 8000;
-const ROOT = __dirname;
+const ROOT = path.dirname(fileURLToPath(import.meta.url));
 
 /* Where the Museum of Fantasy Sports app runs during local development. */
 const FANTASY_HOST = process.env.FANTASY_HOST || 'localhost';
 const FANTASY_PORT = process.env.FANTASY_PORT || 3000;
 const FANTASY_TIMEOUT_MS = Number(process.env.FANTASY_TIMEOUT_MS || 10000);
 
-/* Clean URLs -> files on disk. Add a line here when a page is added. */
-const ROUTES = {
-  '/': 'index.html',
-  '/museum': 'museum.html',
-  // Browsers request these regardless of what <link rel="icon"> says, and a
-  // 404 for each shows up as a console error on every page load.
+/**
+ * URLs that used to be pages and must keep working. /museum was a hand-written
+ * case study; its content now lives on the generated project page, so the old
+ * link redirects there rather than 404ing.
+ */
+const REDIRECTS = {
+  '/museum': '/work/museum-of-fantasy-sports',
+  '/museum.html': '/work/museum-of-fantasy-sports',
+  '/index.html': '/',
+};
+
+/* Files browsers request whether or not the HTML asks for them. */
+const FILE_ROUTES = {
   '/favicon.ico': 'assets/images/portfolio_icon.png',
   '/apple-touch-icon.png': 'assets/images/portfolio_icon.png',
-  '/apple-touch-icon-precomposed.png': 'assets/images/portfolio_icon.png'
+  '/apple-touch-icon-precomposed.png': 'assets/images/portfolio_icon.png',
 };
 
 const MIME_TYPES = {
@@ -42,20 +66,22 @@ const MIME_TYPES = {
   '.webm': 'video/webm',
   '.mp4': 'video/mp4',
   '.mov': 'video/quicktime',
-  '.pdf': 'application/pdf'
+  '.pdf': 'application/pdf',
 };
 
-const IMMUTABLE = new Set(['.woff', '.woff2', '.ttf', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.mp4', '.webm', '.mov']);
+const IMMUTABLE = new Set([
+  '.woff', '.woff2', '.ttf', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.mp4', '.webm', '.mov',
+]);
 
 const MAX_FIELD = { name: 120, email: 200, message: 5000 };
 
-/* Server-side files that live in the web root but are not part of the site. */
-const DENIED = new Set(['server.js', 'package.json', 'package-lock.json']);
-const DENIED_DIRS = ['node_modules'];
+/* Source that lives in the web root but is not part of the served site. */
+const DENIED = new Set(['server.js', 'build.js', 'package.json', 'package-lock.json']);
+const DENIED_DIRS = ['node_modules', 'content', 'scripts', 'dist'];
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({
-    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
   })[char]);
 }
 
@@ -63,24 +89,27 @@ function sendJson(res, status, payload) {
   const body = JSON.stringify(payload);
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
-    'Content-Length': Buffer.byteLength(body)
+    'Content-Length': Buffer.byteLength(body),
   });
   res.end(body);
+}
+
+function sendHtml(res, method, status, body) {
+  res.writeHead(status, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Length': Buffer.byteLength(body),
+    'Cache-Control': 'no-cache',
+    'X-Content-Type-Options': 'nosniff',
+  });
+  res.end(method === 'HEAD' ? undefined : body);
 }
 
 /**
  * Map a request URL to a real file inside ROOT, or null if it escapes the
  * root, points at a dotfile, or does not resolve to a readable file.
  */
-async function resolveRequest(requestUrl) {
-  let pathname;
-  try {
-    pathname = decodeURIComponent(new URL(requestUrl, 'http://localhost').pathname);
-  } catch {
-    return null;
-  }
-
-  const routed = ROUTES[pathname.replace(/\/+$/, '') || '/'];
+async function resolveFile(pathname) {
+  const routed = FILE_ROUTES[pathname];
   const relative = routed || pathname.replace(/^\/+/, '');
 
   const segments = relative.split(/[\\/]/).filter(Boolean);
@@ -90,19 +119,15 @@ async function resolveRequest(requestUrl) {
   if (segments.some((segment) => DENIED_DIRS.includes(segment))) return null;
   if (DENIED.has(segments[segments.length - 1])) return null;
 
-  const candidates = [path.resolve(ROOT, relative)];
-  // Allow extensionless URLs like /museum even if they are not in ROUTES.
-  if (!routed && !path.extname(relative)) candidates.push(path.resolve(ROOT, `${relative}.html`));
+  const candidate = path.resolve(ROOT, relative);
+  // path.resolve normalises `..`; confirm the result is still under ROOT.
+  if (candidate !== ROOT && !candidate.startsWith(ROOT + path.sep)) return null;
 
-  for (const candidate of candidates) {
-    // path.resolve normalises `..`; confirm the result is still under ROOT.
-    if (candidate !== ROOT && !candidate.startsWith(ROOT + path.sep)) continue;
-    try {
-      const stats = await fsp.stat(candidate);
-      if (stats.isFile()) return { filePath: candidate, stats };
-    } catch {
-      /* try the next candidate */
-    }
+  try {
+    const stats = await fsp.stat(candidate);
+    if (stats.isFile()) return { filePath: candidate, stats };
+  } catch {
+    /* falls through to null */
   }
   return null;
 }
@@ -115,12 +140,8 @@ function notFound(res, method) {
 font:400 16px/1.5 system-ui,sans-serif;text-align:center;padding:2rem}h1{font-size:clamp(3rem,12vw,6rem);
 margin:0;letter-spacing:-.06em}a{color:#d8ff59}</style></head>
 <body><div><h1>404</h1><p>That page is not part of the collection.</p>
-<p><a href="/">Return to the start</a> · <a href="/museum">Visit the museum</a></p></div></body></html>`;
-  res.writeHead(404, {
-    'Content-Type': 'text/html; charset=utf-8',
-    'Content-Length': Buffer.byteLength(body)
-  });
-  res.end(method === 'HEAD' ? undefined : body);
+<p><a href="/">Return to the start</a> · <a href="/#work">See the work</a></p></div></body></html>`;
+  sendHtml(res, method, 404, body);
 }
 
 async function handleContact(req, res) {
@@ -164,7 +185,7 @@ async function handleContact(req, res) {
           host: smtpHost,
           port: parseInt(process.env.SMTP_PORT || '587', 10),
           secure: process.env.SMTP_SECURE === 'true',
-          auth: { user: smtpUser, pass: process.env.SMTP_PASS }
+          auth: { user: smtpUser, pass: process.env.SMTP_PASS },
         });
       } else {
         // No SMTP configured: fall back to an Ethereal inbox for local testing.
@@ -173,7 +194,7 @@ async function handleContact(req, res) {
           host: 'smtp.ethereal.email',
           port: 587,
           secure: false,
-          auth: { user: testAccount.user, pass: testAccount.pass }
+          auth: { user: testAccount.user, pass: testAccount.pass },
         });
         console.log('SMTP is not configured — using an Ethereal test inbox.');
       }
@@ -186,7 +207,7 @@ async function handleContact(req, res) {
         html: `<p><strong>Name:</strong> ${escapeHtml(name)}</p>
 <p><strong>Email:</strong> ${escapeHtml(fromEmail)}</p>
 <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>`,
-        replyTo: fromEmail
+        replyTo: fromEmail,
       });
 
       sendJson(res, 200, { success: true, previewUrl: nodemailer.getTestMessageUrl(info) || null });
@@ -219,18 +240,16 @@ function proxyToFantasyApp(req, res) {
       // the connection and then never answer. Without a deadline the request
       // hangs here too and the page just spins, which says nothing useful.
       timeout: FANTASY_TIMEOUT_MS,
-      headers: { ...req.headers, host: `${FANTASY_HOST}:${FANTASY_PORT}` }
+      headers: { ...req.headers, host: `${FANTASY_HOST}:${FANTASY_PORT}` },
     },
     (upstreamRes) => {
       settled = true;
       res.writeHead(upstreamRes.statusCode, upstreamRes.headers);
       upstreamRes.pipe(res);
-    }
+    },
   );
 
-  upstream.on('timeout', () => {
-    upstream.destroy();
-  });
+  upstream.on('timeout', () => upstream.destroy());
 
   upstream.on('error', () => {
     // If the response already began, the only honest thing left is to cut it.
@@ -245,7 +264,7 @@ font:400 16px/1.6 system-ui,sans-serif;text-align:center;padding:2rem}code{color
 <p>In production Netlify proxies <code>/fantasy</code> to the Next.js app.<br>
 To run it here, start it separately:</p>
 <p><code>cd ../../dev/fantasy_sports &amp;&amp; pnpm dev</code></p>
-<p><a href="/">Back to the portfolio</a> · <a href="/museum">Read the case study</a></p>
+<p><a href="/">Back to the portfolio</a> · <a href="/work/museum-of-fantasy-sports">Read the case study</a></p>
 </div></body></html>`;
     res.writeHead(502, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(body);
@@ -272,7 +291,27 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
 
-  const resolved = await resolveRequest(req.url);
+  let pathname;
+  try {
+    pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
+  } catch {
+    return notFound(res, req.method);
+  }
+
+  const redirect = REDIRECTS[pathname];
+  if (redirect) {
+    res.writeHead(301, { Location: redirect });
+    return res.end();
+  }
+
+  // Rendered pages come first: '/work/x' is a route, not a directory on disk.
+  const normalised = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+  const pages = routes();
+  if (Object.hasOwn(pages, normalised)) {
+    return sendHtml(res, req.method, 200, pages[normalised]);
+  }
+
+  const resolved = await resolveFile(pathname);
   if (!resolved) return notFound(res, req.method);
 
   const ext = path.extname(resolved.filePath).toLowerCase();
@@ -280,7 +319,7 @@ const server = http.createServer(async (req, res) => {
     'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
     'Content-Length': resolved.stats.size,
     'Cache-Control': IMMUTABLE.has(ext) ? 'public, max-age=604800' : 'no-cache',
-    'X-Content-Type-Options': 'nosniff'
+    'X-Content-Type-Options': 'nosniff',
   });
 
   if (req.method === 'HEAD') return res.end();

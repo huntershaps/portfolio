@@ -42,11 +42,29 @@
 .system-nav nav {
   display: flex;
   flex: 1;
+  /* Without min-height:0 a flex child refuses to shrink below its content, so
+     the last links were pushed off the bottom of the rail instead of the list
+     becoming scrollable. This is what was clipping "Archive" and "Contact". */
+  min-height: 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  /* `safe` keeps the first item reachable when the list is taller than the
+     rail — centred overflow otherwise clips the top with no way to scroll to it. */
+  justify-content: safe center;
+  gap: clamp(0.35rem, 1.4vh, 1.5rem);
+  padding-block: 0.35rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* The rail is chrome; a scrollbar inside it would read as a second page. */
+  scrollbar-width: none;
 }
+
+.system-nav nav::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
 
 .system-nav__link {
   position: relative;
@@ -727,4 +745,21 @@ body.is-palette-open {
 /* Locks the page behind an open drawer without the scroll position jumping. */
 body.is-nav-open {
   overflow: hidden;
+}
+
+/* A short desktop window cannot fit eight rotated labels at full size. The
+   catalogue numbers carry the least meaning, so they are what goes — the rail
+   still reads, and scrolling stays the last resort rather than the first. */
+@media (min-width: 60.0625rem) and (max-height: 56rem) {
+  /* Note: padding-block does NOT shorten these. The labels are
+     writing-mode: vertical-rl, so their block axis runs horizontally and
+     padding-block sets the rail's width. Only the font size, the gap and the
+     hidden numbers reduce the height the list actually needs. */
+  .system-nav__link {
+    font-size: var(--text-xs);
+  }
+
+  .system-nav__link span {
+    display: none;
+  }
 }

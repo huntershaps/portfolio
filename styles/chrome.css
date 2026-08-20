@@ -671,6 +671,26 @@ body.is-palette-open {
     transition-delay: 0s;
   }
 
+  /* The drawer slides out from *under* the fixed chrome, so the toggle used to
+     land on top of the drawer’s own identity row and the utility cluster
+     covered its right-hand edge. Two halves to the fix: start the drawer’s
+     content below the controls, and take the utility cluster out of the way
+     while it is open. The toggle itself stays — it is what closes the drawer. */
+  .system-nav {
+    padding-top: var(--chrome-clear);
+  }
+
+  body.is-nav-open .utility {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .utility {
+      transition: opacity var(--dur) var(--ease-out);
+    }
+  }
+
   .system-nav__identity {
     grid-template-columns: auto auto;
     justify-content: start;

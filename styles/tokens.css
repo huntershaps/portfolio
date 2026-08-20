@@ -119,6 +119,12 @@
 
   --gutter: clamp(1.25rem, 5vw, 6rem);
   --section-y: clamp(3.25rem, 5.5vw, 5.5rem);
+  /* The utility cluster and the drawer toggle are position:fixed over the top
+     of every page: they sit at this inset and are 2.75rem tall. Anything whose
+     first line starts at the top of the viewport has to clear them, so the
+     measurement lives here rather than being re-guessed per component. */
+  --chrome-inset: clamp(0.75rem, 1.4vw, 1.25rem);
+  --chrome-clear: calc(var(--chrome-inset) + 2.75rem + 0.9rem);
   --measure: 34rem;
 
   /* --- Structure -------------------------------------------------------- */

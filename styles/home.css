@@ -765,7 +765,10 @@
    Recruiter dossier
    ========================================================================== */
 .dossier {
-  padding: calc(var(--section-y) * 0.7) var(--gutter) var(--section-y);
+  /* Recruiter mode replaces the hero, and the hero is what used to hold the
+     page clear of the fixed controls. Without the max() the name rendered
+     underneath the Index and Full-site buttons on a phone. */
+  padding: max(calc(var(--section-y) * 0.7), var(--chrome-clear)) var(--gutter) var(--section-y);
 }
 
 .dossier__head {

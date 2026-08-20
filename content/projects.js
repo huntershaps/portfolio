@@ -69,7 +69,7 @@ export const projects = [
     featured: true,
     role: 'Solo, design and build',
     team: null,
-    stack: ['Next.js 16', 'React 19', 'TypeScript', 'PostgreSQL', 'Prisma 7', 'Auth.js v5', 'Tailwind v4'],
+    stack: ['Next.js', 'React.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Auth.js', 'Tailwind CSS'],
     links: [
       { label: 'Open the live app', href: '/fantasy', primary: true },
       { label: 'Source on GitHub', href: 'https://github.com/huntershaps/fantasy_sports', external: true },
@@ -190,10 +190,10 @@ export const projects = [
           {
             type: 'spec',
             rows: [
-              { label: 'Framework', value: 'Next.js 16 · React 19 · TypeScript' },
-              { label: 'Styling', value: 'Tailwind v4 · Motion' },
-              { label: 'Data', value: 'PostgreSQL · Prisma 7' },
-              { label: 'Auth', value: 'Auth.js v5, role-based, with an admin surface' },
+              { label: 'Framework', value: 'Next.js · React.js · TypeScript' },
+              { label: 'Styling', value: 'Tailwind CSS · Motion' },
+              { label: 'Data', value: 'PostgreSQL · Prisma' },
+              { label: 'Auth', value: 'Auth.js, role-based, with an admin surface' },
               { label: 'Charts', value: 'Recharts' },
               { label: 'Hosting', value: 'Netlify, mounted at /fantasy' },
             ],
@@ -235,7 +235,7 @@ export const projects = [
     featured: true,
     role: 'Solo, design and build',
     team: null,
-    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind v4', 'SQLite', 'Playwright'],
+    stack: ['Next.js', 'React.js', 'TypeScript', 'Tailwind CSS', 'SQLite', 'Playwright'],
     links: [
       {
         label: 'Read the source',
@@ -411,8 +411,8 @@ export const projects = [
           {
             type: 'spec',
             rows: [
-              { label: 'Framework', value: 'Next.js 16 · React 19 · TypeScript' },
-              { label: 'Styling', value: 'Tailwind v4, on a two-ground token system' },
+              { label: 'Framework', value: 'Next.js · React.js · TypeScript' },
+              { label: 'Styling', value: 'Tailwind CSS, on a two-ground token system' },
               { label: 'Data', value: 'SQLite via better-sqlite3, reached only through server actions' },
               { label: 'Media', value: 'Local uploads, plus short video notes generated with ffmpeg' },
               { label: 'Verification', value: 'Four Playwright suites: reservation guarantees, the gift flow, a whole-application sweep, and axe' },
@@ -587,21 +587,24 @@ export const projects = [
   /* ====================================================================
      RECRD.TOP
      Source: the résumé, the existing site, and Hunter directly.
-     A TEAM project; his involvement was the design work, not the build.
+     A five-person team project that Hunter LED. He designed it in Figma and
+     built the Spotify ingest, the auth and the performance work himself.
+     Rewritten 2026-08-20 at his direction: this page previously described the
+     design contribution only, which he has since corrected.
      No dates are recorded anywhere, so none are shown.
      ==================================================================== */
   {
     slug: 'recrd-top',
     name: 'RECRD.TOP',
     shortName: 'RECRD',
-    tagline: 'A social space for rating and ranking albums, designed in Figma before it was built.',
-    status: 'Prototype',
+    tagline: 'A social space for rating and ranking albums: designed in Figma, then built by the five of us.',
+    status: 'Live',
     statusNote: null,
     building: false,
     featured: true,
-    role: 'Wireframes and interactive prototypes in Figma',
-    team: 'Team project, design contributor',
-    stack: ['Figma', 'Wireframing', 'Prototyping'],
+    role: 'Team lead, design and build',
+    team: 'Five-person team, led by me',
+    stack: ['Figma', 'React.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Spotify Web API'],
     links: [{ label: 'Visit the project', href: 'https://recrd.top', external: true, primary: true }],
     // No start date exists for this project, so it is deliberately absent from
     // the timeline rather than given a guessed one.
@@ -632,7 +635,7 @@ export const projects = [
             type: 'prose',
             lead: true,
             paragraphs: [
-              'A social product, worked through in Figma: wireframes first, then interactive prototypes, with the focus on how interaction shapes engagement.',
+              'A social product for ranking music albums, worked through in Figma first — wireframes, then interactive prototypes — and then built by a team of five that I led, with the focus on how interaction shapes engagement.',
             ],
           },
         ],
@@ -644,8 +647,11 @@ export const projects = [
           {
             type: 'list',
             items: [
-              'Designed wireframes and interactive prototypes in Figma',
-              'Focused on improving social interaction and user engagement',
+              'Led a 5-person team to create recrd.top, a social media platform for ranking music albums',
+              'Designed the wireframes and interactive prototypes in Figma before any of it was built',
+              'Developed a web-scraping script to ingest 10,000+ music albums from the Spotify Web API into MongoDB',
+              'Implemented user authentication with email verification using JWT tokens, bcrypt hashing, and SendGrid',
+              'Reduced LCP by ~63% (3s to 1.1s) by minifying and deferring non-critical JS',
             ],
           },
         ],
@@ -659,8 +665,6 @@ export const projects = [
             paragraphs: [
               'The demo on this page moves through album search, a ten-point rating, a personal ranking list, a leaderboard for both top albums and top users, and a profile carrying favourite albums, follower counts and an activity feed.',
             ],
-            note:
-              'Described from the demo recording above, which is the record of it I have. My own contribution was the design work listed above, not the implementation.',
           },
         ],
       },
@@ -699,7 +703,7 @@ export const projects = [
     featured: false,
     role: 'Solo, design and build',
     team: null,
-    stack: ['Next.js 16', 'React 19', 'TypeScript', 'PostgreSQL', 'Prisma 7', 'Auth.js v5', 'Tailwind v4'],
+    stack: ['Next.js', 'React.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Auth.js', 'Tailwind CSS'],
     links: [],
     timeline: {
       start: '2026-08',

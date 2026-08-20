@@ -36,13 +36,13 @@ export const profile = {
   // is omitted rather than guessed.
   location: null,
 
-  email: 'hunter@sflinsider.com',
+  email: 'huntershaps@gmail.com',
 
   links: {
     github: { label: 'GitHub', href: 'https://github.com/huntershaps' },
     linkedin: { label: 'LinkedIn', href: 'https://www.linkedin.com/in/hunter-shapiro-4192b52a9/' },
     resume: { label: 'Résumé', href: '/assets/cv.pdf', note: 'PDF' },
-    email: { label: 'Email', href: 'mailto:hunter@sflinsider.com' },
+    email: { label: 'Email', href: 'mailto:huntershaps@gmail.com' },
   },
 
   /**
@@ -134,7 +134,7 @@ export const profile = {
       id: 'languages',
       title: 'Languages',
       skills: [
-        { name: 'TypeScript', projects: ['mahou-learning', 'museum-of-fantasy-sports', 'cardhouse'] },
+        { name: 'TypeScript', projects: ['recrd-top', 'mahou-learning', 'museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'JavaScript', projects: ['portfolio'] },
         { name: 'SQL', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'HTML & CSS', projects: ['portfolio'] },
@@ -147,10 +147,11 @@ export const profile = {
       id: 'frameworks',
       title: 'Frameworks',
       skills: [
-        { name: 'React', projects: ['mahou-learning', 'museum-of-fantasy-sports', 'cardhouse'] },
+        { name: 'React', projects: ['recrd-top', 'mahou-learning', 'museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'Next.js', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'React Native · Expo', projects: ['mahou-learning'] },
-        { name: 'Node.js', projects: ['portfolio'] },
+        { name: 'Node.js', projects: ['recrd-top', 'portfolio'] },
+        { name: 'Express', projects: ['recrd-top'] },
       ],
     },
     {
@@ -160,6 +161,7 @@ export const profile = {
         { name: 'PostgreSQL', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'Prisma', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'SQLite', projects: ['mahou-learning'] },
+        { name: 'MongoDB', projects: ['recrd-top'] },
       ],
     },
     {
@@ -170,7 +172,7 @@ export const profile = {
         { name: 'Wireframing', projects: ['recrd-top'] },
         { name: 'Prototyping', projects: ['recrd-top'] },
         { name: 'Accessibility testing', projects: ['portfolio'] },
-        { name: 'User research', projects: [] },
+        { name: 'User research', projects: ['mahou-learning'] },
         { name: 'Usability testing', projects: [] },
       ],
     },
@@ -179,7 +181,7 @@ export const profile = {
       title: 'Tools',
       skills: [
         { name: 'Git', projects: [] },
-        { name: 'Tailwind CSS', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
+        { name: 'Tailwind CSS', projects: ['recrd-top', 'museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'Auth.js', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'Netlify', projects: ['portfolio', 'museum-of-fantasy-sports'] },
         { name: 'Microsoft Office Suite', projects: [] },

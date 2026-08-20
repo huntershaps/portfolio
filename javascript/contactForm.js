@@ -102,13 +102,13 @@ export function initContactForm() {
             'ok'
           );
         } else {
-          announce('Thank you. Your message is on its way. I will reply from hunter@sflinsider.com.', 'ok');
+          announce('Thank you. Your message is on its way. I will reply from huntershaps@gmail.com.', 'ok');
         }
       } else {
-        announce(result.error || 'Something went wrong. Please email me directly at hunter@sflinsider.com.', 'error');
+        announce(result.error || 'Something went wrong. Please email me directly at huntershaps@gmail.com.', 'error');
       }
     } catch {
-      announce('No connection to the server. Please email me directly at hunter@sflinsider.com.', 'error');
+      announce('No connection to the server. Please email me directly at huntershaps@gmail.com.', 'error');
     } finally {
       setBusy(false);
     }

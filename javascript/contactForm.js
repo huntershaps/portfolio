@@ -98,11 +98,11 @@ export function initContactForm() {
           link.rel = 'noopener noreferrer';
           link.textContent = 'Open the preview';
           announce(
-            [document.createTextNode('Sent in test mode — no SMTP is configured. '), link],
+            [document.createTextNode('Sent in test mode. No SMTP is configured. '), link],
             'ok'
           );
         } else {
-          announce('Thank you — your message is on its way. I will reply from hunter@sflinsider.com.', 'ok');
+          announce('Thank you. Your message is on its way. I will reply from hunter@sflinsider.com.', 'ok');
         }
       } else {
         announce(result.error || 'Something went wrong. Please email me directly at hunter@sflinsider.com.', 'error');

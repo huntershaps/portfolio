@@ -9,7 +9,7 @@
  *
  * There are no invented metrics, user counts, dates, awards or outcomes
  * anywhere in this file, and there must not be. A missing section is `null`
- * and is skipped by the renderer — an unfinished case study renders as a
+ * and is skipped by the renderer, so an unfinished case study renders as a
  * shorter page, never as a fabricated one.
  *
  * ---------------------------- HOW TO ADD ONE ----------------------------
@@ -25,7 +25,7 @@
  *     building: true,                // show under "Currently building"
  *     featured: true,                // show in the main work grid
  *     role: 'What you personally did.',
- *     team: null,                    // or 'Team project — N contributors'
+ *     team: null,                    // or 'Team project, N contributors'
  *     stack: ['Thing', 'Other thing'],
  *     links: [{ label: 'Live', href: 'https://…' }],
  *     timeline: { start: '2026-08', when: 'August 2026', current: true, points: [] },
@@ -67,7 +67,7 @@ export const projects = [
     statusNote: 'Deployed at /fantasy · real league import waiting on credentials',
     building: true,
     featured: true,
-    role: 'Solo — design and build',
+    role: 'Solo, design and build',
     team: null,
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'PostgreSQL', 'Prisma 7', 'Auth.js v5', 'Tailwind v4'],
     links: [
@@ -76,7 +76,7 @@ export const projects = [
     ],
     timeline: {
       start: '2026-08',
-      when: 'Aug 2026 — Present',
+      when: 'Aug 2026 to Present',
       current: true,
       points: ['Providers for ESPN and Yahoo, a re-runnable sync, and an engine that derives records'],
     },
@@ -93,7 +93,7 @@ export const projects = [
             lead: true,
             paragraphs: [
               'Fantasy platforms are built for the season you are in. Last year’s standings are three clicks deep, the year before that is a dead link, and the trade everyone still argues about exists only in a group chat nobody can search.',
-              'The interesting part of a long-running league is not this week’s matchup. It is the decade of context around it — who has never won, who wins constantly, which rivalry has a real record behind it and which one is just noise. None of that survives on the platforms themselves.',
+              'The interesting part of a long-running league is not this week’s matchup. It is the decade of context around it: who has never won, who wins constantly, which rivalry has a real record behind it and which one is just noise. None of that survives on the platforms themselves.',
               'So the goal was not another stats dashboard. It was somewhere a league’s history is kept deliberately, and served back in a way that means something to whoever is reading it.',
             ],
           },
@@ -106,7 +106,7 @@ export const projects = [
           {
             type: 'prose',
             paragraphs: [
-              'League history deserves an archive, not a leaderboard. Champions, records, rivalries and the moments a spreadsheet forgets — imported from ESPN and Yahoo, and kept permanently.',
+              'League history deserves an archive, not a leaderboard. Champions, records, rivalries and the moments a spreadsheet forgets, imported from ESPN and Yahoo, and kept permanently.',
             ],
           },
         ],
@@ -122,7 +122,7 @@ export const projects = [
             steps: [
               { title: 'External platform', text: 'ESPN and Yahoo, each behind its own provider with its own authentication story.' },
               { title: 'FantasyProvider', text: 'One interface per platform. Adding a third source means writing a provider, not touching the app.' },
-              { title: 'Normalisation', text: 'Platform quirks are resolved here — bench slots, placeholder draft picks, differing season shapes.' },
+              { title: 'Normalisation', text: 'Platform quirks are resolved here: bench slots, placeholder draft picks, differing season shapes.' },
               { title: 'Database', text: 'One schema, provider-agnostic. Re-importing a season updates in place rather than duplicating it.' },
               { title: 'Event engine', text: 'Derives records, awards and memories from stored history instead of storing them by hand.' },
               { title: 'Personalised UI', text: 'The same row reads differently depending on who is signed in.' },
@@ -155,7 +155,7 @@ export const projects = [
               },
               {
                 title: 'Records remember their own lineage',
-                text: 'Each record keeps `previousRecordId`, so the app can say a mark stood for three years before it fell — which is the part that actually makes a record interesting.',
+                text: 'Each record keeps `previousRecordId`, so the app can say a mark stood for three years before it fell, which is the part that actually makes a record interesting.',
                 why: null,
               },
             ],
@@ -170,7 +170,7 @@ export const projects = [
             type: 'prose',
             paragraphs: [
               'Importing real league history is the remaining gate, and it is an access problem rather than a code one. ESPN needs session cookies for private leagues and prior seasons; Yahoo needs a registered developer app for OAuth. Both have to come from the league owner, so the archive fills up as those land.',
-              'The two platforms also disagree about shape. ESPN serves the active season and earlier seasons from two different controllers that return different types, and answers 401 rather than 404 for a private season that exists — so a naive fallback would quietly mask a real permission error.',
+              'The two platforms also disagree about shape. ESPN serves the active season and earlier seasons from two different controllers that return different types, and answers 401 rather than 404 for a private season that exists, so a naive fallback would quietly mask a real permission error.',
             ],
           },
         ],
@@ -182,7 +182,7 @@ export const projects = [
           {
             type: 'prose',
             paragraphs: [
-              'The app is built and running: providers, sync, the event engine, auth and the admin surface all work. It is deployed under this domain rather than its own, which is a deliberate constraint — one domain, one certificate, one thing to maintain.',
+              'The app is built and running: providers, sync, the event engine, auth and the admin surface all work. It is deployed under this domain rather than its own, which is a deliberate constraint: one domain, one certificate, one thing to maintain.',
             ],
             note:
               'The live build shows the real interface. It does not present invented league history as though it were real.',
@@ -220,8 +220,8 @@ export const projects = [
      Wishwell
      Source: the application itself, in claude_projects/wishwell, and its
      README. The screenshots are captured from the running app rather than
-     mocked up. There is deliberately no "What I Learned" section — that one
-     is Hunter's to write.
+     mocked up. Hunter dictated the "What I Learned" section himself, so leave
+     its wording alone.
      ==================================================================== */
   {
     slug: 'wishwell',
@@ -233,7 +233,7 @@ export const projects = [
     statusNote: 'Source on GitHub · runs locally, not deployed yet',
     building: true,
     featured: true,
-    role: 'Solo — design and build',
+    role: 'Solo, design and build',
     team: null,
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind v4', 'SQLite', 'Playwright'],
     links: [
@@ -440,7 +440,7 @@ export const projects = [
   /* ====================================================================
      Mahou Learning
      Source: the résumé, the project repository (elprogramadora/mahou-learning)
-     and its commit history. This is a TEAM project — the repo has several
+     and its commit history. This is a TEAM project. The repo has several
      contributors, and `role` describes only what Hunter's own commits touch.
      ==================================================================== */
   {
@@ -455,14 +455,14 @@ export const projects = [
     featured: true,
     role:
       'Interface and interaction work: the app’s theming system, its move to NativeWind, the home screen, the Mahou companion screen, the memory minigame, and the settings and cards screens.',
-    team: 'Team project — one of several contributors',
+    team: 'Team project, one of several contributors',
     stack: ['React Native', 'Expo', 'TypeScript', 'NativeWind', 'SQLite', 'Reanimated', 'Skia'],
     links: [
       { label: 'Source on GitHub', href: 'https://github.com/elprogramadora/mahou-learning', external: true },
     ],
     timeline: {
       start: '2026-05',
-      when: 'May 2026 — Jul 2026',
+      when: 'May 2026 to Jul 2026',
       current: false,
       points: ['Interface work on a team-built Japanese learning app'],
     },
@@ -490,7 +490,7 @@ export const projects = [
             type: 'prose',
             lead: true,
             paragraphs: [
-              'Japanese is hard to start because the writing system comes first. Mahou Learning is a flashcard app aimed squarely at that wall — learn the alphabet faster, practise writing it by hand, and pick up grammar once the characters stop being noise.',
+              'Japanese is hard to start because the writing system comes first. Mahou Learning is a flashcard app aimed squarely at that wall: learn the alphabet faster, practise writing it by hand, and pick up grammar once the characters stop being noise.',
             ],
           },
         ],
@@ -507,14 +507,14 @@ export const projects = [
               {
                 src: '/assets/images/mahou/mahou_home',
                 alt: 'Mahou Learning home screen showing the companion character, currency and study entry points',
-                caption: 'Home — the companion, your currency, and the way into a study session.',
+                caption: 'Home: the companion, your currency, and the way into a study session.',
                 width: 840,
                 height: 1722,
               },
               {
                 src: '/assets/images/mahou/mahou_minigame',
                 alt: 'The Kanji Memory minigame: a four-by-four grid of face-down cards with moves, matches and remaining counters',
-                caption: 'Kanji Memory — match each English word to its kanji. Moves, matches and pairs left stay visible.',
+                caption: 'Kanji Memory: match each English word to its kanji. Moves, matches and pairs left stay visible.',
                 width: 840,
                 height: 1719,
               },
@@ -538,7 +538,7 @@ export const projects = [
             type: 'spec',
             rows: [
               { label: 'Platform', value: 'React Native via Expo, file-based routing with expo-router' },
-              { label: 'Styling', value: 'NativeWind — Tailwind syntax in React Native' },
+              { label: 'Styling', value: 'NativeWind, Tailwind syntax in React Native' },
               { label: 'Storage', value: 'expo-sqlite, on device' },
               { label: 'Motion & drawing', value: 'Reanimated, Gesture Handler, Skia canvas for stroke practice' },
               { label: 'Scheduling', value: 'An SM-2 spaced-repetition schedule drives when a card comes back' },
@@ -562,8 +562,8 @@ export const projects = [
           {
             type: 'prose',
             paragraphs: [
-              'Getting theme switching to hold across the whole app was the harder of the two. A theme is only real if every screen reads its colours from the same place — one hard-coded value and the app half-changes, which looks worse than not having themes at all. That is what the theme provider exists to prevent, and it meant going back through screens that already worked.',
-              'The other was the home page. It is the screen that has to earn attention in the first few seconds and give someone a reason to come back tomorrow, so what it leads with — the companion, progress, the way straight into a session — went through several passes before it felt right.',
+              'Getting theme switching to hold across the whole app was the harder of the two. A theme is only real if every screen reads its colours from the same place. One hard-coded value and the app half-changes, which looks worse than not having themes at all. That is what the theme provider exists to prevent, and it meant going back through screens that already worked.',
+              'The other was the home page. It is the screen that has to earn attention in the first few seconds and give someone a reason to come back tomorrow, so what it leads with (the companion, progress, the way straight into a session) went through several passes before it felt right.',
             ],
           },
         ],
@@ -600,7 +600,7 @@ export const projects = [
     building: false,
     featured: true,
     role: 'Wireframes and interactive prototypes in Figma',
-    team: 'Team project — design contributor',
+    team: 'Team project, design contributor',
     stack: ['Figma', 'Wireframing', 'Prototyping'],
     links: [{ label: 'Visit the project', href: 'https://recrd.top', external: true, primary: true }],
     // No start date exists for this project, so it is deliberately absent from
@@ -671,14 +671,14 @@ export const projects = [
           {
             type: 'prose',
             paragraphs: [
-              'RECRD is where accessibility and usability stopped being a checklist for me. Designing the same flows for a phone and for a browser makes the differences impossible to ignore — touch targets that are fine under a cursor are not fine under a thumb, reading order matters more than visual order, and the amount of screen you can actually rely on is much smaller than the one you design on.',
+              'RECRD is where accessibility and usability stopped being a checklist for me. Designing the same flows for a phone and for a browser makes the differences impossible to ignore: touch targets that are fine under a cursor are not fine under a thumb, reading order matters more than visual order, and the amount of screen you can actually rely on is much smaller than the one you design on.',
               'Working through it on both at once was the useful part: it is easier to design something usable on a wide screen and discover later that it does not survive contact with a phone.',
             ],
           },
         ],
       },
       // TODO(hunter): if you still have the Figma file, a few screens here
-      // would turn the design section into a real case study — add a
+      // would turn the design section into a real case study. Add a
       // { type: 'gallery', images: [...] } block to the section above.
     ],
   },
@@ -692,18 +692,18 @@ export const projects = [
     slug: 'cardhouse',
     name: 'Cardhouse',
     shortName: 'Cardhouse',
-    tagline: 'A sports card portfolio tracker — what a collection holds, and what it is worth.',
+    tagline: 'A sports card portfolio tracker: what a collection holds, and what it is worth.',
     status: 'In development',
     statusNote: 'Private repository · no public link yet',
     building: true,
     featured: false,
-    role: 'Solo — design and build',
+    role: 'Solo, design and build',
     team: null,
     stack: ['Next.js 16', 'React 19', 'TypeScript', 'PostgreSQL', 'Prisma 7', 'Auth.js v5', 'Tailwind v4'],
     links: [],
     timeline: {
       start: '2026-08',
-      when: 'Aug 2026 — Present',
+      when: 'Aug 2026 to Present',
       current: true,
       points: ['A valuation engine built on comparable sales'],
     },
@@ -776,13 +776,13 @@ export const projects = [
     statusNote: 'huntermshaps.com · revised continuously',
     building: true,
     featured: false,
-    role: 'Solo — design and build',
+    role: 'Solo, design and build',
     team: null,
     stack: ['HTML', 'CSS', 'JavaScript (ES modules)', 'Node.js', 'Netlify'],
     links: [{ label: 'Source on GitHub', href: 'https://github.com/huntershaps/portfolio', external: true }],
     timeline: {
       start: '2026-08',
-      when: 'Aug 2026 — Present',
+      when: 'Aug 2026 to Present',
       current: true,
       points: ['Hand-written, dependency-light, rebuilt in the open'],
     },
@@ -818,7 +818,7 @@ export const projects = [
                 src: '/assets/images/archive/portfolio_v1',
                 alt: 'The first published version of the portfolio: a dark navigation rail, a large HUNTER SHAPIRO wordmark, and the two-poles panel on the right',
                 caption:
-                  'The first published version. The editorial identity is already here — the rail, the wordmark, the serif italic accent.',
+                  'The first published version. The editorial identity is already here: the rail, the wordmark, the serif italic accent.',
                 width: 1200,
                 height: 833,
               },
@@ -890,7 +890,7 @@ export const projects = [
  */
 export const archive = [
   {
-    title: 'Portfolio — V2',
+    title: 'Portfolio V2',
     when: '17 August 2026',
     ref: '66c6d28',
     summary:
@@ -905,7 +905,7 @@ export const archive = [
     href: '/work/portfolio#design',
   },
   {
-    title: 'Portfolio — V1',
+    title: 'Portfolio V1',
     when: '4 August 2026',
     ref: 'c701a28',
     summary:
@@ -922,7 +922,7 @@ export const archive = [
 ];
 
 /**
- * The Lab — smaller experiments, prototypes and technical explorations that do
+ * The Lab: smaller experiments, prototypes and technical explorations that do
  * not warrant a full case study.
  *
  * DELIBERATELY EMPTY. Nothing on this machine qualified without stretching the
@@ -934,7 +934,7 @@ export const archive = [
  *   { title: 'Name', kind: 'Prototype', summary: 'One or two sentences.',
  *     tech: ['…'], href: null, when: 'August 2026' }
  *
- * `kind` is free text — Prototype, Experiment, Concept, Exploration, whatever
+ * `kind` is free text: Prototype, Experiment, Concept, Exploration, whatever
  * fits. `href` may be null; the card simply will not be a link.
  */
 export const lab = [];

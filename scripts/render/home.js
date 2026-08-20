@@ -105,7 +105,7 @@ function building() {
         <p class="section-number">01</p>
         <h2 id="building-title">Currently<br /><em>building.</em></h2>
         <p class="section-head__note">
-          What is open on this machine right now. Status is where each one honestly stands — not a
+          What is open on this machine right now. Status is where each one honestly stands, not a
           percentage.
         </p>
       </header>
@@ -395,7 +395,7 @@ function perspective() {
             type="button"
             aria-pressed="false"
             data-venn="computing"
-            data-venn-detail="The systems behind an experience — from structure to interaction — and the work of building them."
+            data-venn-detail="The systems behind an experience, from structure to interaction, and the work of building them."
           >
             <span class="venn__key-title">Computer science</span>
             <span class="venn__key-note">Systems &amp; building</span>

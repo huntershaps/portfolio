@@ -12,7 +12,7 @@ import { profile } from '../../content/profile.js';
 import { projects, lab } from '../../content/projects.js';
 
 const DESCRIPTION =
-  'Hunter Shapiro — UI/UX and interaction design, with a background in computer science and psychology.';
+  'Hunter Shapiro: UI/UX and interaction design, with a background in computer science and psychology.';
 
 /**
  * The palette's index. Built from the same content as the pages, so a project
@@ -102,7 +102,7 @@ function commands({ onHome }) {
 
 function homePage() {
   return page({
-    title: 'Hunter Shapiro — UI/UX & Interaction Design',
+    title: 'Hunter Shapiro · UI/UX & Interaction Design',
     description: DESCRIPTION,
     canonical: '/',
     styles: ['tokens.css', 'base.css', 'components.css', 'chrome.css', 'home.css'],
@@ -116,7 +116,7 @@ function homePage() {
 
 function workPage(project) {
   return page({
-    title: `${project.name} — Hunter Shapiro`,
+    title: `${project.name} · Hunter Shapiro`,
     description: project.tagline,
     canonical: `/work/${project.slug}`,
     styles: ['tokens.css', 'base.css', 'components.css', 'chrome.css', 'work.css'],

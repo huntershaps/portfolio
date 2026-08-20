@@ -174,7 +174,7 @@ export function initPalette() {
         flash('Email address copied');
       } catch {
         // Clipboard access can be refused; the address is still on the page.
-        flash(`Copy failed — the address is ${email}`);
+        flash(`Copy failed. The address is ${email}`);
       }
       close();
       return;

@@ -135,7 +135,7 @@ async function resolveFile(pathname) {
 function notFound(res, method) {
   const body = `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Not found — Hunter Shapiro</title>
+<title>Not found · Hunter Shapiro</title>
 <style>body{margin:0;display:grid;place-items:center;min-height:100vh;background:#15172a;color:#f7f1e6;
 font:400 16px/1.5 system-ui,sans-serif;text-align:center;padding:2rem}h1{font-size:clamp(3rem,12vw,6rem);
 margin:0;letter-spacing:-.06em}a{color:#d8ff59}</style></head>

@@ -7,7 +7,7 @@
  * inferred, rounded up, or written to sound better than the source.
  *
  * Where a fact does not exist, the field is `null` and carries a TODO. The
- * renderer omits null fields entirely — an empty field never reaches the page,
+ * renderer omits null fields entirely, so an empty field never reaches the page,
  * so leaving one unanswered is always safe.
  * =======================================================================
  */
@@ -27,10 +27,10 @@ export const profile = {
     'apply skills in user research, interaction design, and problem solving.',
 
   /**
-   * The line under the name. Kept factual — degrees and institution only, both
+   * The line under the name. Kept factual: degrees and institution only, both
    * straight from the résumé.
    */
-  credential: 'B.S. Computer Science · B.S. Psychology — University of Central Florida',
+  credential: 'B.S. Computer Science · B.S. Psychology, University of Central Florida',
 
   // TODO(hunter): add a city if you want one shown. Not on the résumé, so it
   // is omitted rather than guessed.
@@ -46,7 +46,7 @@ export const profile = {
   },
 
   /**
-   * Education — from the EDUCATION block of the résumé.
+   * Education, from the EDUCATION block of the résumé.
    * The résumé now reads "Graduated: Summer 2026" (it previously said
    * "Expected"), so the site says graduated too.
    */
@@ -65,12 +65,12 @@ export const profile = {
       detail: null,
       start: '2024-01',
       end: '2026-08',
-      when: 'Spring 2024 — Summer 2026',
+      when: 'Spring 2024 to Summer 2026',
     },
   ],
 
   /**
-   * Experience — from the EXPERIENCE block of the résumé, plus the LocalFiber
+   * Experience, from the EXPERIENCE block of the résumé, plus the LocalFiber
    * internship Hunter supplied directly.
    *
    * The résumé does not name an employer for the Research Assistant or
@@ -83,7 +83,7 @@ export const profile = {
       organization: 'LocalFiber',
       start: '2026-06',
       end: null, // ongoing
-      when: 'Jun 2026 — Present',
+      when: 'Jun 2026 to Present',
       current: true,
       points: [
         'Collaborated with a team to iterate on, create, and implement user interfaces and designs',
@@ -95,7 +95,7 @@ export const profile = {
       organization: 'University of Central Florida',
       start: '2025-02',
       end: '2026-02',
-      when: 'Feb 2025 — Feb 2026',
+      when: 'Feb 2025 to Feb 2026',
       points: ['Administered cognitive, memory, and response time tests on senior drivers'],
     },
     {
@@ -103,7 +103,7 @@ export const profile = {
       organization: 'University of Central Florida',
       start: '2025-05',
       end: '2025-12',
-      when: 'May 2025 — Dec 2025',
+      when: 'May 2025 to Dec 2025',
       points: [
         'Worked in collaboration grading and reviewing student assignments, providing thorough feedback',
       ],
@@ -113,7 +113,7 @@ export const profile = {
       organization: 'JD Sports',
       start: '2024-05',
       end: '2026-01',
-      when: 'May 2024 — Jan 2026',
+      when: 'May 2024 to Jan 2026',
       points: [
         'Assisted customers by identifying needs and recommending solutions',
         'Improved in-store worker experience by organizing layouts based on worker behavior',
@@ -126,7 +126,7 @@ export const profile = {
    * it. `projects` holds project slugs from projects.js.
    *
    * A skill with an empty `projects` array is listed on the résumé but has no
-   * project on this site demonstrating it — the UI shows it plainly, with no
+   * project on this site demonstrating it. The UI shows it plainly, with no
    * links, rather than inventing a connection.
    */
   skillGroups: [
@@ -188,25 +188,25 @@ export const profile = {
   ],
 
   /**
-   * The questions section — existing site copy, carried over unchanged.
+   * The questions section, existing site copy carried over unchanged.
    */
   questions: [
     {
       question: 'What makes a learning interface actually engaging?',
       answer:
-        'Mahou Learning sits inside this question — the difference between a lesson someone ' +
+        'Mahou Learning sits inside this question: the difference between a lesson someone ' +
         'finishes and one they come back to.',
     },
     {
       question: 'How do people build mental models of complex systems?',
       answer:
         'I am interested in the exact moment a system stops feeling arbitrary and starts making ' +
-        'sense — and what an interface did to get someone there.',
+        'sense, and in what an interface did to get someone there.',
     },
     {
       question: 'How should AI adapt to the way humans think?',
       answer:
-        'A question about technology, behaviour, and responsibility — and about who is expected ' +
+        'A question about technology, behaviour, and responsibility, and about who is expected ' +
         'to do the adapting.',
     },
     {

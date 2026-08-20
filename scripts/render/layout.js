@@ -96,7 +96,7 @@ function rail(sections, { current } = {}) {
     <div class="system-scrim" aria-hidden="true"></div>
 
     <aside class="system-nav" id="system-nav" aria-label="Site index">
-      <a class="system-nav__identity" href="/" aria-label="Hunter Shapiro — home">
+      <a class="system-nav__identity" href="/" aria-label="Hunter Shapiro, home">
         <span>H<span class="system-nav__thin">S</span></span>
       </a>
       <div class="system-nav__rule" aria-hidden="true"></div>

@@ -83,8 +83,8 @@ export const resume = {
       where: 'Orlando, FL',
       points: [
         'Tested 100 adults aged 65+ in an NIH study asking whether in-car sensors and cameras can catch cognitive decline early',
-        'Ran 4+ hour sessions per participant, administering standardised cognitive, memory and reaction-time batteries to protocol',
-        'Analysed the results and entered them into the study database used to track decline in cognitive aptitude over time',
+        'Ran 4+ hour sessions administering the Benson figure, LASSI-L and Craft Story batteries and reaction-time tasks',
+        'Analyzed the results and entered them into the study database used to track decline in cognitive aptitude over time',
         'Guided older adults through timed, computer-administered tasks, where instruction clarity and pacing decided if the data was usable',
       ],
     },

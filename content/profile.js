@@ -86,8 +86,10 @@ export const profile = {
       when: 'Jun 2026 to Present',
       current: true,
       points: [
-        'Collaborated with a team to iterate on, create, and implement user interfaces and designs',
-        'Maintained accessible and usable interfaces',
+        'Design interfaces used site-wide at LocalFiber and by multiple leading internet service providers and partner companies',
+        'Ship consumer and partner-level pages serving hundreds of users, working across product, engineering and partner teams',
+        'Deliver designs that LocalFiber’s internal development teams build from, as the reference for new and existing pages',
+        'Keep shipped screens accessible: contrast, focus order, keyboard navigation and touch targets, working from shared design tokens',
       ],
     },
     {
@@ -96,7 +98,12 @@ export const profile = {
       start: '2025-02',
       end: '2026-02',
       when: 'Feb 2025 to Feb 2026',
-      points: ['Administered cognitive, memory, and response time tests on senior drivers'],
+      points: [
+        'Tested 100 adults aged 65+ in an NIH study asking whether in-car sensors and cameras can catch cognitive decline early',
+        'Ran 4+ hour sessions administering the Benson figure, LASSI-L and Craft Story batteries and reaction-time tasks',
+        'Analyzed the results and entered them into the study database used to track decline in cognitive aptitude over time',
+        'Guided older adults through timed, computer-administered tasks, where instruction clarity and pacing decided if the data was usable',
+      ],
     },
     {
       role: 'Teaching Assistant',
@@ -105,7 +112,7 @@ export const profile = {
       end: '2025-12',
       when: 'May 2025 to Dec 2025',
       points: [
-        'Worked in collaboration grading and reviewing student assignments, providing thorough feedback',
+        'Graded and reviewed hundreds of assignments across two semesters for Health Psychology, a course of 300+ students',
       ],
     },
     {

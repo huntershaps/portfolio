@@ -217,6 +217,227 @@ export const projects = [
   },
 
   /* ====================================================================
+     Wishwell
+     Source: the application itself, in claude_projects/wishwell, and its
+     README. The screenshots are captured from the running app rather than
+     mocked up. There is deliberately no "What I Learned" section — that one
+     is Hunter's to write.
+     ==================================================================== */
+  {
+    slug: 'wishwell',
+    name: 'Wishwell',
+    shortName: 'Wishwell',
+    tagline:
+      'A wishlist that says why, and a claim system that stops duplicate gifts without spoiling the surprise.',
+    status: 'In development',
+    statusNote: 'Source on GitHub · runs locally, not deployed yet',
+    building: true,
+    featured: true,
+    role: 'Solo — design and build',
+    team: null,
+    stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind v4', 'SQLite', 'Playwright'],
+    links: [
+      {
+        label: 'Read the source',
+        href: 'https://github.com/huntershaps/wishingwell',
+        primary: true,
+        external: true,
+      },
+    ],
+    timeline: {
+      start: '2026-08',
+      when: 'August 2026',
+      current: true,
+      points: ['A claim that reads differently depending on who is asking'],
+    },
+    media: { type: 'door', label: 'Source', enter: 'Open on GitHub' },
+    accent: 'madder',
+
+    caseStudy: [
+      {
+        id: 'problem',
+        title: 'The Problem',
+        blocks: [
+          {
+            type: 'prose',
+            lead: true,
+            paragraphs: [
+              'Everyone has had both of these conversations: the one where two people turn up with the same present, and the one where somebody asks what you want and you cannot think of a single thing. A wishlist fixes the second and causes the first.',
+            ],
+          },
+          {
+            type: 'prose',
+            paragraphs: [
+              'The awkward part is that a claim has to be two contradictory things at once. Public enough that nobody buys the same gift twice, and private enough that the surprise survives. So Wishwell answers the question differently depending on who is asking, and enforces the difference on the server rather than in the interface.',
+              'The other half of the problem is the list itself. A row of links is not something anyone enjoys shopping from, so every item has room for photographs, a short video, and the reason it is on the list at all, which turns out to be the part people actually read.',
+            ],
+          },
+        ],
+      },
+      {
+        id: 'design',
+        title: 'The Design',
+        intro: 'Two grounds and two voices, so the same component is right in either place.',
+        blocks: [
+          {
+            type: 'tenets',
+            items: [
+              {
+                title: 'The gallery and the studio',
+                text: 'Looking at somebody else’s list puts you in the gallery: lights down, photographs lit. Managing your own puts you in the studio: paper, hairlines, everything legible at a glance. Both read the same semantic tokens, so no component needs a conditional to be correct on either.',
+                why: 'Which mode you are in is the first thing you need to know, and it is answered before you read a word.',
+              },
+              {
+                title: 'The interface speaks; people speak differently',
+                text: 'Product chrome is set in Instrument Sans. Anything a person wrote is set in Newsreader instead: a description, a bio, the reason something is on the list.',
+                why: 'A list ends up reading like a letter inside a precise interface, which is what a wishlist actually is.',
+              },
+              {
+                title: 'The hold tag',
+                text: 'A claimed item gets a paper tag tied onto it, turned a degree off true so it reads as an object set down on the photograph rather than a badge stamped into the layout.',
+                why: null,
+              },
+              {
+                title: 'The veil',
+                text: 'Its opposite, and the only thing an owner sees where a spoiler would otherwise be: the shape of the news, and none of the content.',
+                why: null,
+              },
+            ],
+          },
+          {
+            type: 'gallery',
+            images: [
+              {
+                src: '/assets/images/wishwell/wishwell_list',
+                alt: 'A shared wishlist on a dark ground, items at different sizes, with a paper tag on one that has been claimed',
+                caption: 'A list, seen by somebody shopping from it. One item is already spoken for.',
+                width: 1200,
+                height: 750,
+              },
+              {
+                src: '/assets/images/wishwell/wishwell_item',
+                alt: 'An item opened in place, showing a video note beside the reason it is on the list',
+                caption: 'An item opens over the list it came from. The video note and the reason lead; specifications follow.',
+                width: 1200,
+                height: 750,
+              },
+              {
+                src: '/assets/images/wishwell/wishwell_owner',
+                alt: 'The owner’s view of the same list on a light ground, with the claimed items redacted behind a hatched panel',
+                caption: 'The same list, owned rather than shopped. Two items are spoken for; which two is redacted.',
+                width: 1200,
+                height: 750,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'build',
+        title: 'The Build',
+        intro: 'One claim, and the five states it can be in.',
+        blocks: [
+          {
+            type: 'flow',
+            steps: [
+              { title: 'Available', text: 'Anyone with the link can open the list and read why each thing is on it. No account required to look.' },
+              { title: 'Claimed', text: 'One tap. A guest gets a durable cookie identity rather than a sign-up wall, so they can still manage it afterwards.' },
+              { title: 'Held', text: 'The item locks for everyone else. The database allows exactly one live claim, so a race between two buyers has one winner and one honest answer.' },
+              { title: 'Bought', text: 'The buyer confirms. The item stays locked and moves into their own list of gifts, still invisible to the person receiving it.' },
+              { title: 'Released or expired', text: 'A hold nobody follows through on returns the item to the list on its own, after a window the owner sets.' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'decisions',
+        title: 'Technical Decisions',
+        intro: 'Four decisions carry most of the product.',
+        blocks: [
+          {
+            type: 'tenets',
+            items: [
+              {
+                title: 'The guarantee is a constraint, not a code path',
+                text: 'A partial unique index over the item id, covering only live claims, is what prevents duplicate gifts. Two people tapping in the same instant both reach the insert; one commits, and the other is told the truth.',
+                why: 'Application logic that checks and then writes has a gap between the two steps. An index does not have one.',
+              },
+              {
+                title: 'Surprise mode is resolved in exactly one function',
+                text: 'Every read of an item passes through a single resolver, which returns nothing at all for the owner while surprise mode is on.',
+                why: 'The answer is never placed in the payload, so it cannot be recovered from the page source or a network response by an owner who goes looking.',
+              },
+              {
+                title: 'Vague when written, not filtered when read',
+                text: 'Notifications to an owner are composed without the item name in them, rather than having it stripped out on the way to the screen.',
+                why: 'A row that never contained the answer cannot leak it later, however it is queried.',
+              },
+              {
+                title: 'The layout is derived from the item',
+                text: 'How much room something gets on the wall comes from the item itself: whether the owner pinned it, how badly they want it, whether they filmed a note, how much there is to look at.',
+                why: 'Every list composes differently without anybody arranging one, and the page never becomes a grid of identical cards.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'challenges',
+        title: 'Challenges',
+        blocks: [
+          {
+            type: 'prose',
+            paragraphs: [
+              'The two bugs that mattered most were only found by driving the application, not by reading it.',
+              'The first was visible. Claiming a gift from inside an item view opened a second dialog on top of the first, and two translucent scrims stacked into something close to black. The screen appeared to go blank at the exact moment somebody was trying to give a present. The fix was to stop nesting: the item view now claims in place, inside the surface that is already open.',
+              'The second was worse, and quiet. A two-step delete button switched itself from a plain button into a submit button inside its own click handler. The browser reads that attribute after the handler has run, so the first press submitted the form. One click removed an item, or an entire list along with every claim on it. It is never a submit button now, and asks the form to submit explicitly on the second press.',
+            ],
+            note: 'Both are covered by tests now, which is the only reason they stay fixed.',
+          },
+        ],
+      },
+      {
+        id: 'outcome',
+        title: 'Where it is now',
+        blocks: [
+          {
+            type: 'prose',
+            paragraphs: [
+              'The application is complete and runs locally: accounts, list and item management with real uploads, the shared list, the whole claim lifecycle, a buyer’s dashboard, notifications, and the privacy and gifting settings that govern all of it. It is not deployed. The data layer is a local SQLite file kept behind one module, so a hosted database can replace it without the rest of the app noticing.',
+            ],
+            note:
+              'The demo content is written the way a person would write it, and every photograph is credited. None of it is presented as a live service.',
+          },
+          {
+            type: 'spec',
+            rows: [
+              { label: 'Framework', value: 'Next.js 16 · React 19 · TypeScript' },
+              { label: 'Styling', value: 'Tailwind v4, on a two-ground token system' },
+              { label: 'Data', value: 'SQLite via better-sqlite3, reached only through server actions' },
+              { label: 'Media', value: 'Local uploads, plus short video notes generated with ffmpeg' },
+              { label: 'Verification', value: 'Four Playwright suites: reservation guarantees, the gift flow, a whole-application sweep, and axe' },
+              { label: 'Accessibility', value: 'No axe violations at 1440 or 390, with focus trapping, escape and focus return covered' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'learned',
+        title: 'What I Learned',
+        blocks: [
+          {
+            type: 'prose',
+            paragraphs: [
+              'Most of what I took from this was interface work on a product whose content is photographs and video rather than text. The media is taken from other websites too, off the product pages where the thing is actually sold, rather than shot for the app. Designing around images you did not make and do not control is a different problem from designing around copy you write. They turn up at every shape, quality and orientation, and the page has to hold together whatever arrives.',
+              'That is where most of the usability decisions came from. How much room an item gets is worked out from the item rather than set by hand, a video sits inside the item instead of hanging off it as an attachment, and on a phone the photographs run edge to edge so a list reads like something you look through rather than a form you fill in.',
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  /* ====================================================================
      Mahou Learning
      Source: the résumé, the project repository (elprogramadora/mahou-learning)
      and its commit history. This is a TEAM project — the repo has several

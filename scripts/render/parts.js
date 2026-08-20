@@ -37,8 +37,19 @@ export function mediaFigure(project, { context = 'card' } = {}) {
   }
 
   if (media.type === 'door') {
+    // The door leads wherever the project's first link goes — an app mounted on
+    // this domain, or a repository somewhere else. An off-site one opens in its
+    // own tab, the same as every other external link on the site.
+    const destination = project.links[0];
     return html`
-      <a class="museum-door" href="${project.links[0] ? project.links[0].href : '#'}">
+      <a
+        class="museum-door"
+        ${attrs({
+          href: destination ? destination.href : '#',
+          target: destination && destination.external ? '_blank' : null,
+          rel: destination && destination.external ? 'noopener noreferrer' : null,
+        })}
+      >
         <span class="museum-door__eyebrow">${media.label}</span>
         <span class="museum-door__title">${project.name}</span>
         <span class="museum-door__enter" aria-hidden="true">${media.enter} <span>↗</span></span>

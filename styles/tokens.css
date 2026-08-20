@@ -42,6 +42,7 @@
   --coral: #f1775d;
   --brass: #d8b25e;
   --violet: #8f7ce6;
+  --madder: #b0304f;             /* Wishwell's own accent */
 
   /* Surfaces. Cards sit a shade above the paper rather than being outlined
      twice; the sunken tone is for wells and inset panels. */
@@ -59,6 +60,7 @@
   --blue-ink: #3b4bd8;           /* blue, as text on paper          5.7:1 */
   --violet-ink: #5b46ba;         /* violet, as text on paper        5.9:1 */
   --brass-ink: #7a5a12;          /* brass, as text on paper         5.3:1 */
+  --madder-ink: #a12a46;         /* madder, as text on paper        6.3:1 */
   --on-ink: rgba(247, 241, 230, 0.82);
   --on-ink-strong: var(--paper);
   --on-blue: #dfe2f5;            /* on --blue-deep                 5.1:1 */
@@ -153,6 +155,7 @@
 [data-accent='violet'] { --accent: var(--violet); --accent-ink: var(--violet-ink); }
 [data-accent='brass']  { --accent: var(--brass);  --accent-ink: var(--brass-ink); }
 [data-accent='acid']   { --accent: var(--acid);   --accent-ink: #4d5a12; }
+[data-accent='madder'] { --accent: var(--madder); --accent-ink: var(--madder-ink); }
 
 /* Dark sections opt in by redefining these variables rather than restyling
    every control inside them: the focus ring needs a light colour, and the
@@ -176,6 +179,7 @@
 .on-dark[data-accent='violet'] { --accent-ink: #c3b6ff; }
 .on-dark[data-accent='brass']  { --accent-ink: #ecc978; }
 .on-dark[data-accent='acid']   { --accent-ink: var(--acid); }
+.on-dark[data-accent='madder'] { --accent-ink: #ef8ea3; }
 
 @media (max-width: 60rem) {
   :root {

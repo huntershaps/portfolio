@@ -229,8 +229,8 @@ export const projects = [
     shortName: 'Wishwell',
     tagline:
       'A wishlist that says why, and a claim system that stops duplicate gifts without spoiling the surprise.',
-    status: 'In development',
-    statusNote: 'Source on GitHub · runs locally, not deployed yet',
+    status: 'Live',
+    statusNote: 'Live at wishwell.huntermshaps.com · demo sign-in on the login page',
     building: true,
     featured: true,
     role: 'Solo, design and build',
@@ -238,9 +238,14 @@ export const projects = [
     stack: ['Next.js', 'React.js', 'TypeScript', 'Tailwind CSS', 'SQLite', 'Playwright'],
     links: [
       {
+        label: 'Open the live app',
+        href: 'https://wishwell.huntermshaps.com',
+        primary: true,
+        external: true,
+      },
+      {
         label: 'Read the source',
         href: 'https://github.com/huntershaps/wishingwell',
-        primary: true,
         external: true,
       },
     ],
@@ -250,7 +255,7 @@ export const projects = [
       current: true,
       points: ['A claim that reads differently depending on who is asking'],
     },
-    media: { type: 'door', label: 'Source', enter: 'Open on GitHub' },
+    media: { type: 'door', label: 'Live application', enter: 'Enter' },
     accent: 'madder',
 
     caseStudy: [
@@ -403,10 +408,10 @@ export const projects = [
           {
             type: 'prose',
             paragraphs: [
-              'The application is complete and runs locally: accounts, list and item management with real uploads, the shared list, the whole claim lifecycle, a buyer’s dashboard, notifications, and the privacy and gifting settings that govern all of it. It is not deployed. The data layer is a local SQLite file kept behind one module, so a hosted database can replace it without the rest of the app noticing.',
+              'The application is complete and deployed: accounts, list and item management with real uploads, the shared list, the whole claim lifecycle, a buyer’s dashboard, notifications, and the privacy and gifting settings that govern all of it. It runs as one container with SQLite on a persistent volume, which is the whole of the hosting story. The data layer is still kept behind a single module, so a hosted database can replace it without the rest of the app noticing.',
             ],
             note:
-              'The demo content is written the way a person would write it, and every photograph is credited. None of it is presented as a live service.',
+              'The demo content is written the way a person would write it, and every photograph is credited. The seeded accounts stay demo accounts, sitting alongside real ones rather than passing for them.',
           },
           {
             type: 'spec',
@@ -417,6 +422,7 @@ export const projects = [
               { label: 'Media', value: 'Local uploads, plus short video notes generated with ffmpeg' },
               { label: 'Verification', value: 'Four Playwright suites: reservation guarantees, the gift flow, a whole-application sweep, and axe' },
               { label: 'Accessibility', value: 'No axe violations at 1440 or 390, with focus trapping, escape and focus return covered' },
+              { label: 'Hosting', value: 'One container on Northflank, SQLite and uploads on a persistent volume' },
             ],
           },
         ],

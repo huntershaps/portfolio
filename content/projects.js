@@ -422,7 +422,7 @@ export const projects = [
               { label: 'Media', value: 'Local uploads, plus short video notes generated with ffmpeg' },
               { label: 'Verification', value: 'Four Playwright suites: reservation guarantees, the gift flow, a whole-application sweep, and axe' },
               { label: 'Accessibility', value: 'No axe violations at 1440 or 390, with focus trapping, escape and focus return covered' },
-              { label: 'Hosting', value: 'Netlify, with uploads in Netlify Blobs; a Dockerfile keeps a single-container deployment available as an alternative' },
+              { label: 'Hosting', value: 'Vercel, with uploads in Blob storage; the same code runs on Netlify or as a single container, which is the point of keeping the data layer behind one module' },
             ],
           },
         ],

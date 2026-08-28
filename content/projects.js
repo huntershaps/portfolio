@@ -235,7 +235,7 @@ export const projects = [
     featured: true,
     role: 'Solo, design and build',
     team: null,
-    stack: ['Next.js', 'React.js', 'TypeScript', 'Tailwind CSS', 'SQLite', 'Playwright'],
+    stack: ['Next.js', 'React.js', 'TypeScript', 'Tailwind CSS', 'SQLite', 'Turso', 'Playwright'],
     links: [
       {
         label: 'Open the live app',
@@ -408,7 +408,7 @@ export const projects = [
           {
             type: 'prose',
             paragraphs: [
-              'The application is complete and deployed: accounts, list and item management with real uploads, the shared list, the whole claim lifecycle, a buyer’s dashboard, notifications, and the privacy and gifting settings that govern all of it. It runs as one container with SQLite on a persistent volume, which is the whole of the hosting story. The data layer is still kept behind a single module, so a hosted database can replace it without the rest of the app noticing.',
+              'The application is complete and deployed: accounts, list and item management with real uploads, the shared list, the whole claim lifecycle, a buyer’s dashboard, notifications, and the privacy and gifting settings that govern all of it. Going live cost the data layer one property rather than a rewrite, because Turso is libSQL and libSQL is SQLite: the same client that opens a local file talks to the hosted database, so every query survived the move and only had to become asynchronous.',
             ],
             note:
               'The demo content is written the way a person would write it, and every photograph is credited. The seeded accounts stay demo accounts, sitting alongside real ones rather than passing for them.',
@@ -418,11 +418,11 @@ export const projects = [
             rows: [
               { label: 'Framework', value: 'Next.js · React.js · TypeScript' },
               { label: 'Styling', value: 'Tailwind CSS, on a two-ground token system' },
-              { label: 'Data', value: 'SQLite via better-sqlite3, reached only through server actions' },
+              { label: 'Data', value: 'SQLite through libSQL, a local file in development and Turso in production, reached only through server actions' },
               { label: 'Media', value: 'Local uploads, plus short video notes generated with ffmpeg' },
               { label: 'Verification', value: 'Four Playwright suites: reservation guarantees, the gift flow, a whole-application sweep, and axe' },
               { label: 'Accessibility', value: 'No axe violations at 1440 or 390, with focus trapping, escape and focus return covered' },
-              { label: 'Hosting', value: 'One container on Northflank, SQLite and uploads on a persistent volume' },
+              { label: 'Hosting', value: 'Vercel, with uploads in Blob storage; a Dockerfile keeps a single-container deployment available as an alternative' },
             ],
           },
         ],

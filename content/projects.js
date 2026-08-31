@@ -230,7 +230,7 @@ export const projects = [
     tagline:
       'A wishlist that says why, and a claim system that stops duplicate gifts without spoiling the surprise.',
     status: 'Live',
-    statusNote: 'Live at wishwell.huntermshaps.com · demo sign-in on the login page',
+    statusNote: 'Live at huntershapiro.com · demo sign-in on the login page',
     building: true,
     featured: true,
     role: 'Solo, design and build',
@@ -239,7 +239,7 @@ export const projects = [
     links: [
       {
         label: 'Open the live app',
-        href: 'https://wishwell.huntermshaps.com',
+        href: 'https://huntershapiro.com',
         primary: true,
         external: true,
       },

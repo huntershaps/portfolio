@@ -20,9 +20,9 @@ export const profile = {
    * Source: the OBJECTIVE line of the résumé, kept close to his own wording.
    * The headline is the first clause; `objective` is the full sentence.
    */
-  headline: 'Aspiring UI/UX designer with a background in computer science and psychology',
+  headline: 'UI/UX designer with a background in computer science and psychology',
   objective:
-    'Aspiring UI/UX designer with a background in computer science and psychology, focused ' +
+    'UI/UX designer with a background in computer science and psychology, focused ' +
     'on creating intuitive, human-centered digital experiences. Seeking an internship to ' +
     'apply skills in user research, interaction design, and problem solving.',
 
@@ -61,7 +61,7 @@ export const profile = {
     },
     {
       institution: 'UCF Psi Chi',
-      qualifications: ['National Psychology Honors Society'],
+      qualifications: ['International Honor Society in Psychology'],
       detail: null,
       start: '2024-01',
       end: '2026-08',
@@ -79,7 +79,7 @@ export const profile = {
    */
   experience: [
     {
-      role: 'UI/UX Intern',
+      role: 'UI/UX Design Intern',
       organization: 'LocalFiber',
       start: '2026-06',
       end: null, // ongoing
@@ -116,7 +116,7 @@ export const profile = {
       ],
     },
     {
-      role: 'JD Sports Associate',
+      role: 'Stock Associate',
       organization: 'JD Sports',
       start: '2024-05',
       end: '2026-01',
@@ -141,7 +141,7 @@ export const profile = {
       id: 'languages',
       title: 'Languages',
       skills: [
-        { name: 'TypeScript', projects: ['recrd-top', 'mahou-learning', 'museum-of-fantasy-sports', 'cardhouse'] },
+        { name: 'TypeScript', projects: ['recrd-top', 'mahou-learning', 'museum-of-fantasy-sports', 'wishwell', 'cardhouse'] },
         { name: 'JavaScript', projects: ['portfolio'] },
         { name: 'SQL', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'HTML & CSS', projects: ['portfolio'] },
@@ -154,8 +154,8 @@ export const profile = {
       id: 'frameworks',
       title: 'Frameworks',
       skills: [
-        { name: 'React', projects: ['recrd-top', 'mahou-learning', 'museum-of-fantasy-sports', 'cardhouse'] },
-        { name: 'Next.js', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
+        { name: 'React', projects: ['recrd-top', 'mahou-learning', 'museum-of-fantasy-sports', 'wishwell', 'cardhouse'] },
+        { name: 'Next.js', projects: ['museum-of-fantasy-sports', 'wishwell', 'cardhouse'] },
         { name: 'React Native · Expo', projects: ['mahou-learning'] },
         { name: 'Node.js', projects: ['recrd-top', 'portfolio'] },
         { name: 'Express', projects: ['recrd-top'] },
@@ -167,7 +167,7 @@ export const profile = {
       skills: [
         { name: 'PostgreSQL', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'Prisma', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
-        { name: 'SQLite', projects: ['mahou-learning'] },
+        { name: 'SQLite', projects: ['mahou-learning', 'wishwell'] },
         { name: 'MongoDB', projects: ['recrd-top'] },
       ],
     },
@@ -188,7 +188,8 @@ export const profile = {
       title: 'Tools',
       skills: [
         { name: 'Git', projects: [] },
-        { name: 'Tailwind CSS', projects: ['recrd-top', 'museum-of-fantasy-sports', 'cardhouse'] },
+        { name: 'Tailwind CSS', projects: ['recrd-top', 'museum-of-fantasy-sports', 'wishwell', 'cardhouse'] },
+        { name: 'Playwright', projects: ['wishwell'] },
         { name: 'Auth.js', projects: ['museum-of-fantasy-sports', 'cardhouse'] },
         { name: 'Netlify', projects: ['portfolio', 'museum-of-fantasy-sports'] },
         { name: 'Microsoft Office Suite', projects: [] },

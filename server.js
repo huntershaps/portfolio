@@ -39,6 +39,8 @@ const REDIRECTS = {
   '/museum': '/work/museum-of-fantasy-sports',
   '/museum.html': '/work/museum-of-fantasy-sports',
   '/index.html': '/',
+  // Older résumés print huntermshaps.com/work, which is a section, not a page.
+  '/work': '/#work',
 };
 
 /* Files browsers request whether or not the HTML asks for them. */

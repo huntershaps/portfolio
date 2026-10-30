@@ -46,7 +46,7 @@ export const resume = {
       qualification: 'B.S. Computer Science · B.S. Psychology',
       when: 'Graduated August 2026',
       where: 'Orlando, FL',
-      note: 'Psi Chi, International Honor Society in Psychology (Spring 2024 – Summer 2026)',
+      note: 'Psi Chi, International Honor Society in Psychology (Spring 2024 to Summer 2026)',
     },
   ],
 
@@ -67,8 +67,8 @@ export const resume = {
     {
       organization: 'LocalFiber',
       title: 'UI/UX Design Intern',
-      when: when('UI/UX Intern'),
-      where: 'Orlando, FL',
+      when: when('UI/UX Design Intern'),
+      where: 'Remote',
       points: [
         'Design interfaces used site-wide at LocalFiber and by multiple leading internet service providers and partner companies',
         'Ship consumer and partner-level pages serving hundreds of users, working across product, engineering and partner teams',
@@ -78,7 +78,7 @@ export const resume = {
     },
     {
       organization: 'University of Central Florida',
-      title: 'Research Assistant — NIH-funded cognitive aging and driving study',
+      title: 'Research Assistant, NIH-funded cognitive aging and driving study',
       when: when('Research Assistant'),
       where: 'Orlando, FL',
       points: [

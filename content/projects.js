@@ -605,13 +605,13 @@ export const projects = [
     shortName: 'RECRD',
     tagline: 'A social space for rating and ranking albums: designed in Figma, then built by the five of us.',
     status: 'Live',
-    statusNote: null,
+    statusNote: 'Live at recrd.top',
     building: false,
     featured: true,
     role: 'Team lead, design and build',
     team: 'Five-person team, led by me',
     stack: ['Figma', 'React.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB', 'Spotify Web API'],
-    links: [{ label: 'Visit the project', href: 'https://recrd.top', external: true, primary: true }],
+    links: [{ label: 'Open recrd.top', href: 'https://recrd.top', external: true, primary: true }],
     // No start date exists for this project, so it is deliberately absent from
     // the timeline rather than given a guessed one.
     timeline: null,

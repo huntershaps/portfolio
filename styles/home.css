@@ -548,14 +548,19 @@
 /* ==========================================================================
    04 — Toolkit
    ========================================================================== */
+/* Columns, not a grid: five groups of uneven length never fill a grid's last
+   row, which left one group stranded beside a wide empty band. Columns
+   balance the groups so every column ends at about the same height. */
 .skill-groups {
-  display: grid;
-  gap: var(--space-lg);
-  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+  /* 12rem lets all five sit in one row from laptop widths up. */
+  columns: 12rem auto;
+  column-gap: var(--space-lg);
 }
 
 .skill-group {
   display: grid;
+  break-inside: avoid;
+  margin-bottom: var(--space-lg);
   align-content: start;
   gap: 0.15rem;
   border-top: 2px solid var(--ink);
